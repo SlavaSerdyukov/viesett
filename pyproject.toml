@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "viesett"
+version = "0.1.0"
+description = "Privacy-first buyer-side property due diligence for Flanders"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.128,<1", "pydantic>=2.12,<3", "pydantic-settings>=2.12,<3",
+  "sqlalchemy[asyncio]>=2.0.45,<2.1", "asyncpg>=0.30,<1",
+  "alembic>=1.17,<2", "uvicorn>=0.38,<1", "httpx>=0.28,<1",
+]
+
+[dependency-groups]
+dev = ["pytest>=9,<10", "pytest-asyncio>=1.3,<2", "pytest-cov>=7,<8", "ruff>=0.14,<1", "mypy>=1.19,<2"]
+
+[project.scripts]
+viesett = "viesett.cli:main"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = [".bootstrap", ".local", ".uv-cache"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests", "alembic"]
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--basetemp=.local/pytest --cov=viesett --cov-branch --cov-report=term-missing --cov-report=xml --cov-fail-under=85"
+
+[tool.coverage.run]
+source = ["viesett"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/viesett"]

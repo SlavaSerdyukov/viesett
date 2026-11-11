@@ -1,0 +1,25 @@
+# Preliminary record of processing activities
+
+**DRAFT - requires Belgian legal/privacy review before public beta.** Controller/contact, representative/DPO where relevant, hosting and operational owners must be completed before beta. Candidate bases are cross-referenced to the [matrix](legal-basis-matrix.md); these records do not establish legal certainty.
+
+Local-only baseline: no external processor is enabled and no international transfer is configured. Every future processor/recipient and its actual location must be recorded; do not assume hosting or support is automatically local.
+
+| Activity / purpose | Subjects | Data categories | Candidate basis | Processors / recipients | Transfer status | Retention criterion | Security controls |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Account management: private access | Buyer | UUID, token digest/expiry | Requested contract service | App/local DB; hosting TBD | None configured | Account deletion; token expiry/revocation | Random tokens, digest-only storage, router auth |
+| Policy acknowledgement: version evidence | Buyer | UUID, policy version, time | Service / assessed legitimate interest | Local DB | None configured | Account life; no invented post-deletion term | Immutable version reference, per-user export/cascade |
+| Property workspaces: organise dossiers | Buyer, associated third parties | Address, status, times | Service for buyer / assessed legitimate interest | Local DB | None configured | Delete or configured archive expiry | Owner filter, UUID, write locks |
+| Document upload: relevant ingestion | Buyer and named third parties | PDF bytes, filename, MIME, size, hash | Service / assessed legitimate interest | Local app/storage; scanner TBD | None configured | Until deletion; rejected bytes immediate removal | Attestation, body/type limits, opaque keys |
+| Document storage: private access | Named people | Necessary property files | Same scoped analysis basis | Local private storage | None configured | Delete/workspace/account purge; backups TBD | No public URLs, 0700 directory, 0600 files |
+| Safety scanning: prevent harmful/unnecessary content | Named people | Bounded file content, safety result | Assessed legitimate interest | Local doubles; reviewed adapter before production | None configured | Result with file; rejected bytes removed | Fail closed, quarantine, time bound, no error text |
+| Document interpretation: structured facts | Relevant people | Typed property values, provenance | Service / assessed legitimate interest | Internal service; future parser TBD | None configured | Delete source dependencies / dossier | Ready-file gate, composite workspace FK |
+| Future AI explanation: limited interpretation | People in selected sections | Selected content, inferred proposals | Assessment required before enablement | None enabled; reviewed registry only | Review required for every future location | No training; bounded task use; provider retention to review | AI disabled, selected chunks, inferred-only authority |
+| Findings / future correlation: highlight gaps | Buyer, relevant third parties | Source references, rule provenance | Service / assessed legitimate interest | Internal app | None configured | Delete linked findings on source removal | Typed references; no legal sign-off |
+| Generated request text: user copy/paste | Buyer | Workspace UUID, document kinds, text | Service necessity | Buyer only | None configured | Workspace/account deletion; invalidate on document removal | No recipient, sender, delivery or sending fields |
+| Security/audit logging: incident detection | API caller | Random correlation ID, method, status; ephemeral hashed rate-limit buckets | Assessed legitimate interest | Stdout; reviewed sink TBD | None configured | Separate short operational criterion to be approved; no archival sink by default | Content/PII exclusion, safe errors, sink access review |
+| User export: provide requested copy | Buyer, relevant third parties in dossier | Caller-scoped metadata | Service / applicable established rights obligation | Authenticated caller | User-controlled destination; no server transfer provider | Response only; no persisted export archive | Ownership joins, response allowlist, no keys/tokens |
+| Deletion: minimise and honour requests | Buyer and named third parties | Scoped rows/files; opaque cleanup key | Service / applicable established rights obligation | DB/storage and operator where failure | None configured | Hide immediately, remove bytes and tasks after success | Transactional cleanup outbox, idempotent purge |
+
+Rights and incident casework are manual operational processes, not an email integration. Any exceptional preservation requires a separately documented purpose, basis, minimal scope, access owner and expiry. There is no built-in legal hold or invented mandatory dossier retention.
+
+The operator must inventory deployment processors, locations, backup life cycles and security-log sinks and confirm review outcomes before public beta. Future public-data enrichment, correlation and external AI require updates to this record and the DPIA draft.

@@ -1,0 +1,26 @@
+# Viesett preliminary DPIA / risk assessment
+
+**DRAFT - requires Belgian legal/privacy review before public beta.** Not a formal approved DPIA. Scope: local foundation and planned property-document interpretation, with no production AI, OCR or public-data integrations. Risk labels are qualitative engineering judgements; validate against actual scale, users, sources, processor contracts and deployment before beta.
+
+Assets: private property PDFs, third-party personal information, property evidence integrity, credentials, policy records and deletion/export state. Actors: buyer, incidental third parties, operator, attackers and future infrastructure/AI processors. Data flows and controls: [architecture](../architecture.md). Necessity and basis remain purpose-specific: [matrix](legal-basis-matrix.md).
+
+| Risk | Likelihood before controls | Impact | Mitigation | Residual risk | Open legal question |
+| --- | --- | --- | --- | --- | --- |
+| AI/new technology expands processing | Medium, future | High | AI disabled; explicit processor review; selected sections only; no training | Medium until actual provider assessed | Is a full DPIA required at intended scale and use? |
+| Property documents reveal personal context | High | High | Buyer-selected relevant files, private storage and content-free logs | Medium: some necessary third-party data remains | Which categories are necessary for each purpose? |
+| Third-party personal data lacks transparency | High | High | Provenance, no assumed consent, Article 14 assessment and rights process | High pending counsel/operating process | Who informs whom, by which channel, and are any exceptions supportable? |
+| Cross-document correlation reveals unnecessary identity | Medium, future | High | No identity domain; workspace scope; append-only source facts | Medium: implementation review needed at each expansion | Proportionate correlation scope and bases? |
+| Incorrect AI conclusions mislead buyer | High, future | High | Inferred-only rows; authoritative evidence preserved; no legal decisions | Medium: future UX must visibly show uncertainty | Required consumer explanations and remedies? |
+| Over-collection through convenient upload | High | High | Upload-layer guidance, bounded PDFs, no correspondence ingestion | Medium: buyer may upload irrelevant material | Necessity, lawful incidental handling, notice wording? |
+| Identity/eID/passport or unrelated special-category upload | Medium | Very high | Conservative pluggable sensitive gate; quarantine; no identity document kind | High: raw marker detection misses scans/compression | Handling of unavoidable incidental high-risk data and appropriate rejection process? |
+| Malicious or active file | Medium | High | Type checks, size/time bounds, scanner fail-closed, no inline render | High for dev doubles; production blocked | Processor/scanner roles and residual-risk acceptance? |
+| Private document breach | Medium | Very high | Opaque objects, authentication, no public URL, private permissions, no body logs | Medium pending hosting encryption/access review | Controller/processor responsibilities and reportability? |
+| Future LLM subprocessor retains/reuses data | Medium | Very high | No provider now; DB no-training constraint, registry and runtime check | Medium until DPA/provider retention verified | Contractual no-training/retention guarantees and subprocessors? |
+| International transfer or foreign support access | Medium, deployment dependent | High | No external transfer now; explicit region/transfer field and production guard | Medium: record alone is not legal transfer validation | Adequacy, safeguards, transfer-impact analysis and support locations? |
+| Authorization failure crosses users/workspaces | Medium | Very high | Uniform 404, owner-scoped queries, compound FKs, integration tests | Low/medium: regressions remain possible | Appropriate operational controls and assurance? |
+| Account takeover via stolen bearer token | Medium | Very high | 384-bit tokens, hashes, expiry, no URL secrets, revocation/account deletion | Medium: no MFA or recovery in foundation | Production identity and incident-response obligations? |
+| Deletion incomplete after storage/DB crash | Medium | High | Durable reservations/outbox, hide before purge, retry, no false success | Medium until scheduler/backups monitored | Final erasure timeline and backup/recovery policy? |
+
+The current local prototype is suitable for controlled development with synthetic documents. Public beta needs reviewed production malware/sensitive-content adapters, hosting security and backups, operational rights/restriction handling, controller identity, final notices/bases, processor inventory and acceptance of residual risks. Reassess when official sources, OCR, external AI or correlation are added.
+
+Counsel should assess the Article 35 threshold and any need for prior consultation under Article 36 using the [official GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). No exemption, supervisory approval, lawful basis or completed balancing test is claimed here.

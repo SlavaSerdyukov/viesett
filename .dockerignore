@@ -1,0 +1,13 @@
+.git
+.env
+.venv
+.bootstrap
+.uv-cache
+.local
+.mypy_cache
+.pytest_cache
+.ruff_cache
+**/__pycache__
+.coverage*
+coverage.xml
+tests
