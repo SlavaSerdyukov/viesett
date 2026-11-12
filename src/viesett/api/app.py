@@ -9,6 +9,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.responses import JSONResponse
 
 from viesett.ai.boundary import validate_production_processors
+from viesett.api.coownership_routes import router as coownership_router
 from viesett.api.dependencies import Runtime
 from viesett.api.intelligence_routes import router as intelligence_router
 from viesett.api.property_routes import router as property_router
@@ -67,7 +68,7 @@ def create_app(
     production = config.environment == "production"
     app = FastAPI(
         title="Viesett",
-        version="0.3.0",
+        version="0.4.0",
         debug=False,
         lifespan=lifespan,
         docs_url=None if production else "/docs",
@@ -79,6 +80,7 @@ def create_app(
     app.include_router(router)
     app.include_router(property_router)
     app.include_router(intelligence_router)
+    app.include_router(coownership_router)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.allowed_hosts)
     app.add_middleware(SecurityMiddleware, settings=config, limiter=limits)
 
@@ -98,6 +100,7 @@ def create_app(
                 await db.execute(text("SELECT id FROM policy_versions LIMIT 1"))
                 await db.execute(text("SELECT id FROM property_resolutions LIMIT 1"))
                 await db.execute(text("SELECT id FROM document_analyses LIMIT 1"))
+                await db.execute(text("SELECT id FROM co_ownership_evaluations LIMIT 1"))
                 if production:
                     await validate_production_processors(db)
         except Exception:

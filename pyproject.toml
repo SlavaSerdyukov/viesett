@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "viesett"
-version = "0.3.0"
+version = "0.4.0"
 description = "Privacy-first buyer-side property due diligence for Flanders"
 requires-python = ">=3.12"
 dependencies = [

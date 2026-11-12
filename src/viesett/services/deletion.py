@@ -6,6 +6,7 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from viesett.db.coownership_models import CoOwnershipEvaluation
 from viesett.db.intelligence_models import (
     DocumentAnalysis,
     DocumentTextArtifact,
@@ -122,7 +123,7 @@ async def delete_document(
             )
         )
     ).all():
-        if finding.provenance.get("source") == "viesett.rules":
+        if finding.provenance.get("source") in {"viesett.rules", "viesett.coownership"}:
             finding.resolved_at = utcnow()
     # Evaluation inputs contain private derived facts. Erase these snapshots on
     # source deletion; findings linked to the source are already removed below.
@@ -130,6 +131,9 @@ async def delete_document(
         delete(DueDiligenceEvaluation).where(
             DueDiligenceEvaluation.workspace_id == workspace_id,
         )
+    )
+    await db.execute(
+        delete(CoOwnershipEvaluation).where(CoOwnershipEvaluation.workspace_id == workspace_id)
     )
     evidence_ids = select(EvidenceItem.id).where(EvidenceItem.document_id == document_id)
     finding_ids = select(FindingEvidence.finding_id).where(
@@ -153,6 +157,10 @@ async def delete_document(
     )
     await db.execute(delete(PropertyDocument).where(PropertyDocument.id == document_id))
     await finish_deletion(db, storage, keys)
+
+    from viesett.services.coownership import refresh_if_present
+
+    await refresh_if_present(db, user_id, workspace_id)
 
 
 async def delete_workspace(

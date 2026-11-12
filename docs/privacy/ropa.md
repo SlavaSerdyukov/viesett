@@ -25,3 +25,7 @@ Document/AI baseline remains local with no external AI processor. Milestone 2 ad
 Rights and incident casework are manual operational processes, not an email integration. Any exceptional preservation requires a separately documented purpose, basis, minimal scope, access owner and expiry. There is no built-in legal hold or invented mandatory dossier retention.
 
 The operator must inventory deployment processors, locations, backup life cycles and security-log sinks and confirm review outcomes before public beta. Future public-data enrichment, correlation and external AI require updates to this record and the DPIA draft.
+
+## M4 scoped addition — 2026-11-12
+
+M4 adds local apartment/co-ownership due diligence within the requested private dossier purpose. Data: organization/lot identity, rational shares, dated amounts, controlled decisions/works/calls/litigation categories, cited findings and questions. Data subjects include buyer, seller and incidental co-owners/organizational representatives. No attendance/social graph, personal-party profile, contacts or individual banking fields are derived. Recognized M4 artifacts contain normalized facts; original and legacy text stay private. Recipients remain the authenticated owner/internal service; no new processor or transfer is configured. Contract necessity for the buyer and any third-party legitimate-interest candidate remain separate assessments. Retention follows source/dossier; deleting a source removes affected snapshots/history and derived objects. Existing rights/backup/hosting questions remain open.

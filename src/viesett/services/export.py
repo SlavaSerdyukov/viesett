@@ -4,6 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from viesett.db.coownership_models import CoOwnershipEvaluation
 from viesett.db.intelligence_models import DocumentAnalysis, DueDiligenceEvaluation
 from viesett.db.models import (
     Account,
@@ -13,6 +14,7 @@ from viesett.db.models import (
     PropertyWorkspace,
 )
 from viesett.db.property_models import PropertyResolution, PublicEnrichmentRun
+from viesett.domain.coownership import CoSnapshot
 from viesett.domain.intelligence import AnalysisOut, EvaluationOut
 from viesett.domain.property import SourceRunOut
 from viesett.domain.schemas import (
@@ -66,6 +68,16 @@ async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
         )
     ).all()
     return ExportOut(
+        co_ownership_evaluations=[
+            CoSnapshot.model_validate(row.result)
+            for row in (
+                await db.scalars(
+                    select(CoOwnershipEvaluation)
+                    .where(CoOwnershipEvaluation.workspace_id.in_(ids))
+                    .order_by(CoOwnershipEvaluation.created_at)
+                )
+            ).all()
+        ],
         document_analyses=[
             AnalysisOut.model_validate(row)
             for row in (

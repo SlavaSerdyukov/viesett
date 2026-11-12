@@ -14,6 +14,17 @@ class AnalysisKind(StrEnum):
     ASBESTOS_CERTIFICATE = "ASBESTOS_CERTIFICATE"
     ELECTRICAL_INSPECTION = "ELECTRICAL_INSPECTION"
     SOIL_CERTIFICATE = "SOIL_CERTIFICATE"
+    SYNDIC_INFORMATION = "SYNDIC_INFORMATION"
+    AGM_MINUTES = "AGM_MINUTES"
+    EXTRAORDINARY_AGM_MINUTES = "EXTRAORDINARY_AGM_MINUTES"
+    BASIS_DEED = "BASIS_DEED"
+    CO_OWNERSHIP_REGULATIONS = "CO_OWNERSHIP_REGULATIONS"
+    INTERNAL_RULES = "INTERNAL_RULES"
+    PERIODIC_CHARGE_STATEMENT = "PERIODIC_CHARGE_STATEMENT"
+    BALANCE_SHEET = "BALANCE_SHEET"
+    CAPITAL_CALL = "CAPITAL_CALL"
+    RESERVE_FUND_STATEMENT = "RESERVE_FUND_STATEMENT"
+    OTHER_CO_OWNERSHIP_DOCUMENT = "OTHER_CO_OWNERSHIP_DOCUMENT"
 
 
 class ExtractionStatus(StrEnum):
@@ -66,13 +77,27 @@ class PageText(Schema):
 
 class ExtractedField(Schema):
     key: str = Field(pattern=r"^[a-z][a-z0-9_.]*$", max_length=120)
-    value_kind: Literal["text", "integer", "decimal", "boolean", "date", "epc_label"] = "text"
+    value_kind: Literal["text", "integer", "decimal", "boolean", "date", "epc_label", "money"] = (
+        "text"
+    )
     value: str | int | float | bool
     page: int = Field(ge=1)
     start: int = Field(ge=0)
     end: int = Field(gt=0)
     confidence: float = Field(default=1, ge=0, le=1)
     parser_version: str
+    effective_date: date | None = None
+    currency: Literal["EUR", "USD", "GBP"] | None = None
+    context: str | None = Field(default=None, max_length=120)
+    group: str = Field(default="root", max_length=80)
+
+
+class CoMetadata(Schema):
+    detected_language: Literal["nl", "fr", "unknown"]
+    detector_version: str = "co-language:1.0.0"
+    confidence: float = Field(ge=0, le=1)
+    parse_status: Literal["PARSED", "PARTIALLY_PARSED", "UNSUPPORTED_LAYOUT", "UNPARSEABLE"]
+    extractor_version: str = "co-ownership:1.0.0"
 
 
 class AnalyzeRequest(Schema):
@@ -91,6 +116,7 @@ class AnalysisOut(Schema):
     correction_recorded: bool
     effective_classification: AnalysisKind
     asbestos_variant: AsbestosVariant = AsbestosVariant.UNSPECIFIED
+    co_metadata: CoMetadata | None = None
     association: Association
     fields: list[ExtractedField]
     evidence_ids: list[UUID]

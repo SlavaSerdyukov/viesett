@@ -37,6 +37,7 @@ class DocumentAnalysis(Identity, Base):
     generation: Mapped[int]
     status: Mapped[ExtractionStatus] = mapped_column(enum_column(ExtractionStatus))
     automated_classification: Mapped[dict[str, JsonValue]] = mapped_column(JSON)
+    co_metadata: Mapped[dict[str, JsonValue] | None] = mapped_column(JSON)
     manual_classification: Mapped[AnalysisKind | None] = mapped_column(
         Enum(AnalysisKind, name="manualclassification", native_enum=False, create_constraint=True)
     )

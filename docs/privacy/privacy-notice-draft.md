@@ -1,6 +1,6 @@
 # Viesett Privacy Notice — working draft
 
-**DRAFT - requires Belgian legal review before public launch.** Requires Belgian legal/privacy review before public beta. Version: 2026-11-12-m3. Prior notice versions and acknowledgement records remain preserved. This document is not approved by Belgian counsel and is not a claim of GDPR compliance.
+**DRAFT - requires Belgian legal review before public launch.** Requires Belgian legal/privacy review before public beta. Version: 2026-11-12-m4. Prior notice versions and acknowledgement records remain preserved. This document is not approved by Belgian counsel and is not a claim of GDPR compliance.
 
 Controller: **[legal entity and registered address to be designated]**. Privacy contact: **[contact channel to be designated before beta]**. Representative/DPO details, if applicable: **[assessment pending]**. Do not publish this placeholder as a completed notice.
 
@@ -29,3 +29,5 @@ Access, correction, erasure, restriction, objection and applicable portability r
 Automated safety decisions and deterministic drafts assist dossier preparation. Viesett makes no binding purchase, credit, brokerage or legal decisions. There is no negotiation, offer submission, signing or automatic third-party communication. Review legally significant decisions and documents with a Belgian notary or other qualified professional.
 
 Legal reference for counsel: [GDPR official text](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). Controller roles, exact bases, Article 14 handling, retention/backups, processors/transfers, rights handling and DPIA scope remain unresolved; no public beta should rely on this unfinished notice.
+
+M4 apartment review additionally derives VME/ACP organization identity, documented lot shares, separate working/reserve amounts, charge periods, meeting decisions, works, capital calls and property-related litigation categories. Versioned checks, proportional estimates and buyer questions remain private dossier data and do not decide legal payment responsibility. No new external processor or automatic communication is used. Recognized M4 derived artifacts retain normalized cited facts instead of full page text; the original PDF and earlier/M3/UNKNOWN artifacts remain private under the source retention criterion. Attendance lists, unrelated personal disputes, private contacts and individual banking details are not structured into M4 models. Incidental personal material in original or legacy text still requires the existing minimisation, rights and retention review. Prior notices and acknowledgements are preserved; upload attestations are unchanged.

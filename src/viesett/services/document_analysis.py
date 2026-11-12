@@ -1,4 +1,5 @@
 import hashlib
+import json
 from datetime import timedelta
 from uuid import UUID
 
@@ -10,7 +11,7 @@ from viesett.core.config import Settings
 from viesett.db.intelligence_models import DocumentAnalysis, DocumentTextArtifact
 from viesett.db.models import EvidenceItem, ObjectDeletionTask, utcnow
 from viesett.document_intelligence.association import associate
-from viesett.document_intelligence.classification import classify
+from viesett.document_intelligence.classification import CLASSIFIER_VERSION, classify
 from viesett.document_intelligence.extractors import VERSIONS, extract_fields
 from viesett.document_intelligence.pdf import ExtractionFailure, PdfLimits, extract_isolated
 from viesett.domain.intelligence import (
@@ -75,6 +76,8 @@ async def analyze_document(
     config: Settings,
     storage: PrivateObjectStorage,
 ) -> AnalysisOut:
+    from viesett.domain.coownership import CO_KINDS
+    from viesett.services.coownership import refresh_if_present
     from viesett.services.due_diligence import refresh_due_diligence
 
     workspace = await owned_workspace(db, user, workspace_id, lock=True)
@@ -94,8 +97,10 @@ async def analyze_document(
         and latest.source_sha256 == document.sha256
         and latest.manual_classification == manual
         and latest.parser_version == VERSIONS[latest.effective_classification]
+        and latest.automated_classification.get("classifier_version") == CLASSIFIER_VERSION
     ):
         await refresh_due_diligence(db, user, workspace_id, request.evaluation_date)
+        await refresh_if_present(db, user, workspace_id, request.evaluation_date)
         return AnalysisOut.model_validate(latest)
     key = storage.new_key()
     reservation = ObjectDeletionTask(storage_key=key, not_before=utcnow() + timedelta(minutes=10))
@@ -151,7 +156,13 @@ async def analyze_document(
         )
         prediction = classify(pages)
         kind = manual if manual is not None else prediction.predicted_kind
-        fields = extract_fields(pages, kind)
+        if kind in CO_KINDS:
+            from viesett.coownership.extraction import extract_co
+
+            fields, metadata = extract_co(pages, kind)
+            run.co_metadata = metadata.model_dump(mode="json")
+        else:
+            fields = extract_fields(pages, kind)
         association = associate(fields, await snapshot(db, workspace_id, user))
         run.automated_classification = prediction.model_dump(mode="json")
         run.effective_classification = kind
@@ -159,7 +170,21 @@ async def analyze_document(
         run.association = association.model_dump(mode="json")
         run.page_count = len(pages.pages)
         run.fields = [f.model_dump(mode="json") for f in fields]
-        artifact = pages.model_dump_json().encode()
+        # M4 keeps normalized cited facts instead of a second full-text copy of
+        # attendance lists or disputes. Offsets refer to the original PDF parse.
+        artifact = (
+            json.dumps(
+                {
+                    "format": "co-ownership-facts:1.0.0",
+                    "parser_version": pages.parser_version,
+                    "page_count": len(pages.pages),
+                    "fields": [f.model_dump(mode="json") for f in fields],
+                },
+                ensure_ascii=False,
+            ).encode()
+            if kind in CO_KINDS
+            else pages.model_dump_json().encode()
+        )
         db.add(
             DocumentTextArtifact(
                 document_id=document_id,
@@ -215,6 +240,9 @@ async def analyze_document(
                         start_offset=field.start,
                         end_offset=field.end,
                         parser_version=field.parser_version,
+                        effective_date=field.effective_date,
+                        currency=field.currency,
+                        context=field.context,
                     ),
                     confidence=field.confidence,
                     observed_at=utcnow(),
@@ -246,4 +274,5 @@ async def analyze_document(
     run.completed_at = utcnow()
     await db.flush()
     await refresh_due_diligence(db, user, workspace_id, request.evaluation_date)
+    await refresh_if_present(db, user, workspace_id, request.evaluation_date)
     return AnalysisOut.model_validate(run)

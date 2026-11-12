@@ -33,7 +33,7 @@ from viesett.domain.schemas import (
 from viesett.domain.types import DocumentKind, DocumentStatus, WorkspaceStatus
 from viesett.services import deletion
 from viesett.services.documents import upload_document
-from viesett.services.drafts import generate_request
+from viesett.services.drafts import CO_COMPONENT_LABELS, generate_request
 from viesett.services.evidence import list_findings
 from viesett.services.export import export_user
 from viesett.services.ownership import owned_document, owned_workspace
@@ -226,6 +226,9 @@ async def get_findings(
         from viesett.services.due_diligence import refresh_due_diligence
 
         await refresh_due_diligence(db, user, workspace_id, evaluation_date)
+    from viesett.services.coownership import refresh_if_present
+
+    await refresh_if_present(db, user, workspace_id, evaluation_date)
     return await list_findings(db, [workspace_id])
 
 
@@ -240,6 +243,32 @@ async def create_draft(
 ) -> DocumentRequestDraft:
     await owned_workspace(db, user, workspace_id, lock=True)
     kinds, text = generate_request(data)
+    from viesett.domain.coownership import CO_KINDS
+
+    if any(kind in CO_KINDS for kind in kinds):
+        from viesett.services.coownership import refresh_coownership
+
+        co = await refresh_coownership(db, user, workspace_id)
+        lines = []
+        for component in co.article_3_94_completeness:
+            if component.status in {"MISSING", "PARTIAL", "UNPARSEABLE"}:
+                label = CO_COMPONENT_LABELS[data.language][component.code]
+                if component.coverage:
+                    label += ": " + ", ".join(
+                        g.start.isoformat() + "–" + g.end.isoformat()
+                        for g in component.coverage.gaps
+                    )
+                lines.append("- " + label)
+        if lines:
+            text += (
+                "\n\n"
+                + (
+                    "Missing information / periods:\n"
+                    if data.language == "en"
+                    else "Ontbrekende informatie / periodes:\n"
+                )
+                + "\n".join(lines)
+            )
     draft = DocumentRequestDraft(
         workspace_id=workspace_id,
         requested_document_types=kinds,

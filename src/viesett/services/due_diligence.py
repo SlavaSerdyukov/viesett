@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from viesett.db.intelligence_models import DocumentAnalysis, DueDiligenceEvaluation
 from viesett.db.models import EvidenceItem, Finding, PropertyDocument, utcnow
 from viesett.document_intelligence.association import associate
+from viesett.domain.coownership import CO_KINDS
 from viesett.domain.intelligence import (
     AnalysisKind,
     AssociationStatus,
@@ -50,7 +51,9 @@ async def refresh_due_diligence(
         ).all()
     )
     superseded = {d.supersedes_document_id for d in documents if d.supersedes_document_id}
-    documents = [d for d in documents if d.id not in superseded]
+    documents = [
+        d for d in documents if d.id not in superseded and d.document_kind.value not in CO_KINDS
+    ]
     runs = list(
         (
             await db.scalars(

@@ -24,3 +24,7 @@
 Consent may be selected for a genuinely separate future purpose after product/legal design; it is not the current default for all processing. Legal obligation must be attached to an identified obligation rather than asserted as a convenient catch-all. Legitimate-interest candidates require a recorded balancing assessment, not this table alone.
 
 Review against the [official GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng), in particular purpose, basis, transparency, security and rights requirements. Confirm Belgian property-document and consumer-law interactions with counsel. No final legal bases have been approved.
+
+## M4 scoped addition — 2026-11-12
+
+Apartment review/cross-document comparisons process relevant VME/lot/accounting facts, controlled works and litigation categories for the buyer's requested dossier. Buyer service necessity and any third-party legitimate-interest basis require separate necessity/balancing and Article 14 review; a public statute or upload attestation supplies no blanket third-party consent. No attendance list, contacts, individual bank details or named dispute-party profile is structured. No new recipient, training, communication or processor purpose is introduced. Proportional estimates assist human review and make no binding purchase/payment decision.

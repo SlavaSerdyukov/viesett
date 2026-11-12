@@ -54,14 +54,14 @@ async def db(settings: Settings) -> AsyncIterator[AsyncSession]:
         await connection.execute(
             text(
                 "DELETE FROM policy_versions WHERE version NOT IN "
-                "('2026-11-11', '2026-11-11-m2', '2026-11-12-m3')"
+                "('2026-11-11', '2026-11-11-m2', '2026-11-12-m3', '2026-11-12-m4')"
             )
         )
         await connection.execute(text("UPDATE policy_versions SET current = false"))
         await connection.execute(
             text(
                 "UPDATE policy_versions SET current = true WHERE "
-                "(policy_type = 'PRIVACY_NOTICE' AND version = '2026-11-12-m3') OR "
+                "(policy_type = 'PRIVACY_NOTICE' AND version = '2026-11-12-m4') OR "
                 "(policy_type != 'PRIVACY_NOTICE' AND version = '2026-11-11')"
             )
         )

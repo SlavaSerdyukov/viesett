@@ -1,10 +1,12 @@
 from datetime import date, datetime
+from decimal import Decimal, InvalidOperation
 from typing import Literal, Self
 from uuid import UUID
 
 from pydantic import Field, model_validator
 
 from viesett.domain.base import Schema as Schema
+from viesett.domain.coownership import CoSnapshot
 from viesett.domain.intelligence import AnalysisOut, EvaluationOut
 from viesett.domain.property import PropertySnapshot, ResolutionOut, SourceRunOut
 from viesett.domain.types import (
@@ -63,6 +65,9 @@ class SourceLocator(Schema):
     start_offset: int | None = Field(default=None, ge=0)
     end_offset: int | None = Field(default=None, gt=0)
     parser_version: str | None = Field(default=None, max_length=80)
+    effective_date: date | None = None
+    currency: str | None = Field(default=None, max_length=3)
+    context: str | None = Field(default=None, max_length=120)
 
     @model_validator(mode="after")
     def nonempty(self) -> Self:
@@ -76,7 +81,7 @@ class SourceLocator(Schema):
 
 
 class TypedValue(Schema):
-    kind: Literal["text", "integer", "decimal", "boolean", "date", "epc_label"]
+    kind: Literal["text", "integer", "decimal", "boolean", "date", "epc_label", "money"]
     value: str | int | float | bool
 
     @model_validator(mode="after")
@@ -88,6 +93,7 @@ class TypedValue(Schema):
             "boolean": (bool,),
             "date": (str,),
             "epc_label": (str,),
+            "money": (str,),
         }
         if type(self.value) not in expected[self.kind]:
             raise ValueError("Value must match its declared type")
@@ -95,6 +101,17 @@ class TypedValue(Schema):
             date.fromisoformat(str(self.value))
         if self.kind == "epc_label":
             EpcLabel(str(self.value))
+        if self.kind == "money":
+            try:
+                amount = Decimal(str(self.value))
+            except InvalidOperation:
+                raise ValueError("Invalid monetary value") from None
+            if (
+                not amount.is_finite()
+                or amount.as_tuple().exponent != -2
+                or abs(amount) > Decimal("999999999999.99")
+            ):
+                raise ValueError("Money requires finite bounded exact cents")
         if isinstance(self.value, str) and len(self.value) > 2000:
             raise ValueError("Evidence values must be bounded")
         return self
@@ -151,6 +168,11 @@ class FindingProvenance(Schema):
     reviewed_at: date | None = None
     official_source_name: str | None = None
     official_source_reference: str | None = None
+    category: Literal["REGULATORY_RULE", "CROSS_DOCUMENT_CHECK", "FINANCIAL_DERIVATION"] | None = (
+        None
+    )
+    check_description: str | None = None
+    severity_policy: str | None = None
 
 
 class FindingCreate(Schema):
@@ -170,7 +192,7 @@ class FindingOut(FindingCreate):
 
 
 class DraftCreate(Schema):
-    requested_document_types: list[DocumentKind] = Field(min_length=1, max_length=11)
+    requested_document_types: list[DocumentKind] = Field(min_length=1, max_length=22)
     language: Literal["en", "nl"] = "en"
 
 
@@ -219,3 +241,4 @@ class ExportOut(Schema):
     public_enrichment_runs: list[SourceRunOut] = Field(default_factory=list)
     document_analyses: list[AnalysisOut] = Field(default_factory=list)
     due_diligence_evaluations: list[EvaluationOut] = Field(default_factory=list)
+    co_ownership_evaluations: list[CoSnapshot] = Field(default_factory=list)

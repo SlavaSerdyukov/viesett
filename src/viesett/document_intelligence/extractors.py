@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 
 from viesett.document_intelligence.pdf import ExtractionFailure
+from viesett.domain.coownership import CO_KINDS
 from viesett.domain.intelligence import AnalysisKind, AsbestosVariant, ExtractedField, PageText
 from viesett.domain.types import EpcLabel
 
@@ -14,6 +15,8 @@ VERSIONS = {
     AnalysisKind.SOIL_CERTIFICATE: "soil:1.0.0",
     AnalysisKind.UNKNOWN: "unknown:1.0.0",
 }
+
+VERSIONS.update({kind: "co-ownership:1.0.0" for kind in CO_KINDS})
 CAPAKEY = r"\b[0-9]{5}[A-Z][0-9]{4}[/\-][0-9]{2}[A-Z_0][0-9]{3}\b"
 DATE = r"(?:\d{4}-\d{2}-\d{2}|\d{1,2}[./-]\d{1,2}[./-]\d{4})"
 
@@ -28,6 +31,10 @@ def parse_date(value: str) -> str | None:
 
 
 def extract_fields(pages: PageText, kind: AnalysisKind) -> list[ExtractedField]:
+    if kind in CO_KINDS:
+        from viesett.coownership.extraction import extract_co
+
+        return extract_co(pages, kind)[0]
     if kind == AnalysisKind.UNKNOWN:
         return []
     prefix = {
