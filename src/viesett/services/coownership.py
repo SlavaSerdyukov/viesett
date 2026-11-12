@@ -242,7 +242,7 @@ async def refresh_coownership(
 
 async def refresh_if_present(
     db: AsyncSession, user: UUID, workspace_id: UUID, evaluation_date: date | None = None
-) -> None:
+) -> CoSnapshot | None:
     exists = await db.scalar(
         select(DocumentAnalysis.id)
         .where(
@@ -258,4 +258,5 @@ async def refresh_if_present(
             .limit(1)
         )
     if exists is not None:
-        await refresh_coownership(db, user, workspace_id, evaluation_date)
+        return await refresh_coownership(db, user, workspace_id, evaluation_date)
+    return None

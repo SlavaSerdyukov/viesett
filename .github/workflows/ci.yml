@@ -1,4 +1,4 @@
-name: Viesett backend gates
+name: Viesett product gates
 on: [push, pull_request]
 permissions:
   contents: read
@@ -39,18 +39,42 @@ jobs:
       - run: uv run python scripts/verify_m3_upgrade.py verify
       - run: uv run python scripts/verify_m3_upgrade.py guard
       - run: uv run python scripts/verify_m4_upgrade.py seed
-      - run: uv run alembic upgrade head
+      - run: uv run alembic upgrade d64802d3610f
       - run: uv run python scripts/verify_m4_upgrade.py verify
       - run: uv run python scripts/verify_m4_upgrade.py guard
-      - run: uv run alembic check
       - run: uv run alembic downgrade 192e0442ffc8
       - run: uv run python scripts/verify_m4_upgrade.py verify-m3
-      - run: uv run alembic upgrade head
+      - run: uv run alembic upgrade d64802d3610f
       - run: uv run python scripts/verify_m4_upgrade.py verify
       - run: uv run python scripts/verify_m4_upgrade.py cleanup
+      - run: uv run python scripts/verify_m5_upgrade.py seed
+      - run: uv run alembic upgrade head
+      - run: uv run python scripts/verify_m5_upgrade.py verify
+      - run: uv run python scripts/verify_m5_upgrade.py guard
+      - run: uv run alembic check
+      - run: uv run alembic downgrade d64802d3610f
+      - run: uv run python scripts/verify_m5_upgrade.py verify
+      - run: uv run alembic upgrade head
+      - run: uv run python scripts/verify_m5_upgrade.py verify
+      - run: uv run python scripts/verify_m5_upgrade.py cleanup
       - run: uv run alembic downgrade da321bc669fb
       - run: uv run alembic upgrade head
       - run: uv run alembic downgrade base
       - run: uv run alembic upgrade head
       - run: uv run alembic check
       - run: uv run pytest
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci --prefix web
+      - run: uv run python scripts/generate_web_contract.py --check
+      - run: npm --prefix web run lint
+      - run: npm --prefix web run typecheck
+      - run: npm --prefix web run format:check
+      - run: npm --prefix web test
+      - run: npm --prefix web run build
+      - run: npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npm --prefix web run e2e

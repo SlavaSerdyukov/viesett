@@ -28,3 +28,9 @@ Review against the [official GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj
 ## M4 scoped addition — 2026-11-12
 
 Apartment review/cross-document comparisons process relevant VME/lot/accounting facts, controlled works and litigation categories for the buyer's requested dossier. Buyer service necessity and any third-party legitimate-interest basis require separate necessity/balancing and Article 14 review; a public statute or upload attestation supplies no blanket third-party consent. No attendance list, contacts, individual bank details or named dispute-party profile is structured. No new recipient, training, communication or processor purpose is introduced. Proportional estimates assist human review and make no binding purchase/payment decision.
+
+## M5 scoped addition — 2026-11-12
+
+Requested pre-auth preview processes only the submitted address/official choices and ephemeral anti-abuse network metadata. The appropriate requested-service basis and proportionate security legitimate-interest candidate require review before hosted availability; absence of an account/acknowledgement is not a basis. Public availability of a property record is not blanket permission to repurpose personal data. Government-source role, transparency and provider retention remain open.
+
+Browser presentation, private PDF access and user-directed print/copy remain within the requested dossier purpose; they create no automatic external recipient. The development session bridge supplies technical access, not GDPR consent. M5 changes no training policy, upload representation or third-party consent semantics and introduces no new processor or final approved basis. Persisted notice remains M4 pending reviewed public-preview/browser-auth documentation before beta.

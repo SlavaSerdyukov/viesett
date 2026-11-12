@@ -4,7 +4,8 @@ from contextlib import asynccontextmanager
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from sqlalchemy import text
+from sqlalchemy import select, text
+from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.responses import JSONResponse
 
@@ -12,10 +13,12 @@ from viesett.ai.boundary import validate_production_processors
 from viesett.api.coownership_routes import router as coownership_router
 from viesett.api.dependencies import Runtime
 from viesett.api.intelligence_routes import router as intelligence_router
+from viesett.api.product_routes import router as product_router
 from viesett.api.property_routes import router as property_router
 from viesett.api.routes import router
 from viesett.core.config import Settings
 from viesett.core.security import MemoryRateLimiter, RateLimiter, SecurityMiddleware
+from viesett.db.product_models import DemoWorkspace
 from viesett.db.session import create_engine, session_factory
 from viesett.document_safety.pipeline import (
     ConservativeSensitiveGate,
@@ -36,6 +39,10 @@ def create_app(
     source_transport: httpx.AsyncBaseTransport | None = None,
 ) -> FastAPI:
     config = settings or Settings()
+    if config.demo_mode and source_transport is None:
+        from viesett.demo_data import DemoOfficialService
+
+        source_transport = httpx.MockTransport(DemoOfficialService().handler)
     engine = create_engine(config)
     safety = pipeline or SafetyPipeline(
         DevelopmentScanner() if config.allow_development_safety else UnavailableScanner(),
@@ -59,6 +66,8 @@ def create_app(
                 if not safety.scanner.production_ready or not safety.gate.production_ready:
                     raise RuntimeError("Reviewed production document safety adapters are required")
                 async with context.sessions() as db:
+                    if await db.scalar(select(DemoWorkspace.workspace_id).limit(1)) is not None:
+                        raise RuntimeError("Use a separate database for demo workspaces")
                     await validate_production_processors(db)
             yield
         finally:
@@ -68,20 +77,31 @@ def create_app(
     production = config.environment == "production"
     app = FastAPI(
         title="Viesett",
-        version="0.4.0",
+        version="0.5.0",
         debug=False,
         lifespan=lifespan,
         docs_url=None if production else "/docs",
         redoc_url=None,
         openapi_url=None if production else "/openapi.json",
     )
+    app.state.preview_limiter = MemoryRateLimiter(config.preview_rate_limit_per_minute, 1000)
+    app.state.session_limiter = MemoryRateLimiter(5, 100)
     app.state.runtime = context
     app.state.engine = engine
+    app.include_router(product_router)
     app.include_router(router)
     app.include_router(property_router)
     app.include_router(intelligence_router)
     app.include_router(coownership_router)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.allowed_hosts)
+    if config.web_origins:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=config.web_origins,
+            allow_credentials=False,
+            allow_methods=["GET", "POST", "PATCH", "DELETE"],
+            allow_headers=["Authorization", "Content-Type", "X-Filename"],
+        )
     app.add_middleware(SecurityMiddleware, settings=config, limiter=limits)
 
     @app.exception_handler(RequestValidationError)
@@ -101,6 +121,7 @@ def create_app(
                 await db.execute(text("SELECT id FROM property_resolutions LIMIT 1"))
                 await db.execute(text("SELECT id FROM document_analyses LIMIT 1"))
                 await db.execute(text("SELECT id FROM co_ownership_evaluations LIMIT 1"))
+                await db.execute(text("SELECT workspace_id FROM demo_workspaces LIMIT 1"))
                 if production:
                     await validate_production_processors(db)
         except Exception:

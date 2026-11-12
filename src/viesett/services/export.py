@@ -23,12 +23,12 @@ from viesett.domain.schemas import (
     DraftOut,
     EvidenceOut,
     ExportOut,
-    WorkspaceOut,
 )
 from viesett.domain.types import DocumentStatus
 from viesett.services.evidence import list_findings
 from viesett.services.policies import acknowledgements
 from viesett.services.property_snapshot import resolution_out, snapshot
+from viesett.services.workspace_labels import label_workspaces
 
 
 async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
@@ -100,7 +100,7 @@ async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
         ],
         account=AccountOut.model_validate(account),
         policy_acknowledgements=await acknowledgements(db, user_id),
-        workspaces=[WorkspaceOut.model_validate(w) for w in workspaces],
+        workspaces=await label_workspaces(db, workspaces),
         documents=[DocumentOut.model_validate(d) for d in documents],
         evidence=[EvidenceOut.model_validate(e) for e in evidence],
         findings=await list_findings(db, ids),

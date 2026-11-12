@@ -27,6 +27,7 @@ class WorkspaceCreate(Schema):
 
 
 class WorkspaceOut(Schema):
+    is_demo: bool = False
     id: UUID
     owner_user_id: UUID
     status: WorkspaceStatus

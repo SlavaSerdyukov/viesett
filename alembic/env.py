@@ -7,6 +7,7 @@ from alembic import context
 from viesett.core.config import Settings
 from viesett.db import coownership_models as coownership_models
 from viesett.db import intelligence_models as intelligence_models
+from viesett.db import product_models as product_models
 from viesett.db import property_models as property_models
 from viesett.db.models import Base
 

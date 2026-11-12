@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     allowed_hosts: list[str] = ["localhost", "127.0.0.1", "testserver"]
     allow_development_safety: bool = False
     archived_retention_days: int | None = Field(default=None, ge=1)
+    web_origins: list[str] = []
+    allow_development_web_sessions: bool = False
+    demo_mode: bool = False
+    preview_rate_limit_per_minute: int = Field(default=5, ge=1, le=30)
     token_lifetime_hours: int = Field(default=24, ge=1, le=168)
     grar_api_key: SecretStr | None = Field(
         default=None,
@@ -54,7 +58,18 @@ class Settings(BaseSettings):
             raise ValueError("PostgreSQL with asyncpg is required")
         if self.max_request_bytes < self.max_upload_bytes:
             raise ValueError("Request limit must cover the upload limit")
+        if any(
+            origin == "*"
+            or not origin.startswith(("http://", "https://"))
+            or origin.rstrip("/") != origin
+            for origin in self.web_origins
+        ):
+            raise ValueError("Explicit web origins without a trailing slash are required")
         if self.environment == "production":
+            if self.allow_development_web_sessions or self.demo_mode:
+                raise ValueError(
+                    "Development web sessions and demo mode are forbidden in production"
+                )
             if self.allow_development_safety:
                 raise ValueError("Development safety adapters are forbidden in production")
             if "*" in self.allowed_hosts:

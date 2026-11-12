@@ -16,6 +16,7 @@ from viesett.db.models import (
     PropertyWorkspace,
     utcnow,
 )
+from viesett.db.product_models import DemoWorkspace
 from viesett.domain.schemas import (
     AcknowledgementCreate,
     AcknowledgementOut,
@@ -38,16 +39,22 @@ from viesett.services.evidence import list_findings
 from viesett.services.export import export_user
 from viesett.services.ownership import owned_document, owned_workspace
 from viesett.services.policies import acknowledge, acknowledgements
+from viesett.services.workspace_labels import label_workspaces
 
 router = APIRouter(prefix="/api/v1", dependencies=[Depends(require_user)])
 
 
 @router.post("/workspaces", status_code=201, response_model=WorkspaceOut)
-async def create_workspace(data: WorkspaceCreate, db: Db, user: UserId) -> PropertyWorkspace:
+async def create_workspace(
+    data: WorkspaceCreate, db: Db, user: UserId, request: Request
+) -> WorkspaceOut:
     workspace = PropertyWorkspace(owner_user_id=user, canonical_address=data.canonical_address)
     db.add(workspace)
+    await db.flush()
+    if runtime(request).settings.demo_mode:
+        db.add(DemoWorkspace(workspace_id=workspace.id))
     await db.commit()
-    return workspace
+    return (await label_workspaces(db, [workspace]))[0]
 
 
 @router.get("/workspaces", response_model=list[WorkspaceOut])
@@ -56,8 +63,8 @@ async def get_workspaces(
     user: UserId,
     limit: Annotated[int, Query(ge=1, le=200)] = 50,
     offset: Annotated[int, Query(ge=0)] = 0,
-) -> list[PropertyWorkspace]:
-    return list(
+) -> list[WorkspaceOut]:
+    rows = list(
         (
             await db.scalars(
                 select(PropertyWorkspace)
@@ -70,11 +77,13 @@ async def get_workspaces(
             )
         ).all()
     )
+    return await label_workspaces(db, rows)
 
 
 @router.get("/workspaces/{workspace_id}", response_model=WorkspaceOut)
-async def get_workspace(workspace_id: UUID, db: Db, user: UserId) -> PropertyWorkspace:
-    return await owned_workspace(db, user, workspace_id)
+async def get_workspace(workspace_id: UUID, db: Db, user: UserId) -> WorkspaceOut:
+    row = await owned_workspace(db, user, workspace_id)
+    return (await label_workspaces(db, [row]))[0]
 
 
 @router.patch("/workspaces/{workspace_id}", response_model=WorkspaceOut)
@@ -83,12 +92,12 @@ async def archive_workspace(
     data: WorkspaceUpdate,
     db: Db,
     user: UserId,
-) -> PropertyWorkspace:
+) -> WorkspaceOut:
     workspace = await owned_workspace(db, user, workspace_id, lock=True)
     workspace.status = data.status
     workspace.archived_at = utcnow() if data.status == WorkspaceStatus.ARCHIVED else None
     await db.commit()
-    return workspace
+    return (await label_workspaces(db, [workspace]))[0]
 
 
 @router.delete("/workspaces/{workspace_id}", status_code=204)

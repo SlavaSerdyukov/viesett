@@ -72,20 +72,25 @@ async def record_finding(
     return finding
 
 
-async def list_findings(db: AsyncSession, workspace_ids: list[UUID]) -> list[FindingOut]:
-    findings = (
-        await db.scalars(
-            select(Finding)
-            .where(
-                Finding.workspace_id.in_(workspace_ids),
-            )
-            .order_by(Finding.created_at, Finding.id)
-        )
-    ).all()
+async def list_findings(
+    db: AsyncSession,
+    workspace_ids: list[UUID],
+    *,
+    current_only: bool = False,
+    limit: int | None = None,
+) -> list[FindingOut]:
+    query = select(Finding).where(Finding.workspace_id.in_(workspace_ids))
+    if current_only:
+        query = query.where(Finding.resolved_at.is_(None))
+    query = query.order_by(Finding.created_at, Finding.id)
+    if limit is not None:
+        query = query.limit(limit)
+    findings = (await db.scalars(query)).all()
     links = (
         await db.execute(
             select(FindingEvidence.finding_id, FindingEvidence.evidence_id).where(
                 FindingEvidence.workspace_id.in_(workspace_ids),
+                FindingEvidence.finding_id.in_([f.id for f in findings]),
             )
         )
     ).all()
