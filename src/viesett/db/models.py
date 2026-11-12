@@ -128,6 +128,38 @@ class EvidenceItem(Identity, Base):
             "confidence IS NULL OR (confidence >= 0 AND confidence <= 1)", name="confidence_range"
         ),
         CheckConstraint("source_type != 'AI' OR authority = 'INFERRED'", name="ai_inferred"),
+        ForeignKeyConstraint(
+            ["supersedes_evidence_id", "workspace_id"],
+            ["evidence_items.id", "evidence_items.workspace_id"],
+            ondelete="CASCADE",
+        ),
+        Index(
+            "uq_current_official_fact",
+            "workspace_id",
+            "provider",
+            "fact_identifier",
+            unique=True,
+            postgresql_where=text("provider IS NOT NULL AND superseded_at IS NULL"),
+        ),
+        CheckConstraint(
+            "provider IS NULL OR (authority = 'OFFICIAL' AND source_type = 'PUBLIC_REGISTRY')",
+            name="provider_authority",
+        ),
+        CheckConstraint(
+            "provider IS NULL OR (provider IN ('GRAR', 'HERITAGE') "
+            "AND fact_identifier IS NOT NULL AND source_uri IS NOT NULL "
+            "AND source_retrieved_at IS NOT NULL AND last_seen_at IS NOT NULL)",
+            name="official_provenance_complete",
+        ),
+        CheckConstraint(
+            "source_version IS NULL OR source_version NOT LIKE 'document-extractor:%' OR "
+            "(authority = 'DOCUMENTED' AND source_type = 'DOCUMENT' AND document_id IS NOT NULL "
+            "AND source_locator ->> 'document_id' IS NOT NULL "
+            "AND source_locator ->> 'document_id' = document_id::text "
+            "AND source_locator ->> 'page' IS NOT NULL "
+            "AND source_locator ->> 'parser_version' IS NOT NULL)",
+            name="document_extractor_provenance",
+        ),
     )
     workspace_id: Mapped[UUID] = mapped_column(
         ForeignKey("property_workspaces.id", ondelete="CASCADE"), index=True
@@ -140,6 +172,14 @@ class EvidenceItem(Identity, Base):
     authority: Mapped[Authority] = mapped_column(enum_column(Authority))
     confidence: Mapped[float | None]
     observed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    provider: Mapped[str | None] = mapped_column(String(40))
+    fact_identifier: Mapped[str | None] = mapped_column(String(250))
+    source_uri: Mapped[str | None] = mapped_column(String(500))
+    source_version: Mapped[str | None] = mapped_column(String(100))
+    source_retrieved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    superseded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    supersedes_evidence_id: Mapped[UUID | None] = mapped_column()
 
 
 class Finding(Identity, Base):

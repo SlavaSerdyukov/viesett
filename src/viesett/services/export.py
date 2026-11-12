@@ -4,6 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from viesett.db.intelligence_models import DocumentAnalysis, DueDiligenceEvaluation
 from viesett.db.models import (
     Account,
     DocumentRequestDraft,
@@ -11,6 +12,9 @@ from viesett.db.models import (
     PropertyDocument,
     PropertyWorkspace,
 )
+from viesett.db.property_models import PropertyResolution, PublicEnrichmentRun
+from viesett.domain.intelligence import AnalysisOut, EvaluationOut
+from viesett.domain.property import SourceRunOut
 from viesett.domain.schemas import (
     AccountOut,
     DocumentOut,
@@ -22,6 +26,7 @@ from viesett.domain.schemas import (
 from viesett.domain.types import DocumentStatus
 from viesett.services.evidence import list_findings
 from viesett.services.policies import acknowledgements
+from viesett.services.property_snapshot import resolution_out, snapshot
 
 
 async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
@@ -61,6 +66,26 @@ async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
         )
     ).all()
     return ExportOut(
+        document_analyses=[
+            AnalysisOut.model_validate(row)
+            for row in (
+                await db.scalars(
+                    select(DocumentAnalysis)
+                    .where(DocumentAnalysis.workspace_id.in_(ids))
+                    .order_by(DocumentAnalysis.created_at)
+                )
+            ).all()
+        ],
+        due_diligence_evaluations=[
+            EvaluationOut.model_validate(row)
+            for row in (
+                await db.scalars(
+                    select(DueDiligenceEvaluation)
+                    .where(DueDiligenceEvaluation.workspace_id.in_(ids))
+                    .order_by(DueDiligenceEvaluation.created_at)
+                )
+            ).all()
+        ],
         account=AccountOut.model_validate(account),
         policy_acknowledgements=await acknowledgements(db, user_id),
         workspaces=[WorkspaceOut.model_validate(w) for w in workspaces],
@@ -68,4 +93,30 @@ async def export_user(db: AsyncSession, user_id: UUID) -> ExportOut:
         evidence=[EvidenceOut.model_validate(e) for e in evidence],
         findings=await list_findings(db, ids),
         document_request_drafts=[DraftOut.model_validate(d) for d in drafts],
+        property_resolutions=[
+            resolution_out(row)
+            for row in (
+                await db.scalars(
+                    select(PropertyResolution)
+                    .where(PropertyResolution.workspace_id.in_(ids))
+                    .order_by(
+                        PropertyResolution.workspace_id,
+                        PropertyResolution.generation,
+                    )
+                )
+            ).all()
+        ],
+        property_snapshots=[await snapshot(db, workspace_id, user_id) for workspace_id in ids],
+        public_enrichment_runs=[
+            SourceRunOut.model_validate(row)
+            for row in (
+                await db.scalars(
+                    select(PublicEnrichmentRun)
+                    .where(PublicEnrichmentRun.workspace_id.in_(ids))
+                    .order_by(
+                        PublicEnrichmentRun.attempted_at,
+                    )
+                )
+            ).all()
+        ],
     )

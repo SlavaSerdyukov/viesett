@@ -1,5 +1,7 @@
 # Viesett verification — 2026-11-11
 
+Historical Milestone 1 verification. For the current implementation see [Milestone 2 verification](verification-m2.md).
+
 All seven required local gates passed on the final implementation. **78 tests passed; branch-aware combined coverage: 91.85%** (minimum enforced: 85%). Full run: 44.58 seconds. Ruff checked/formatted 53 Python files; strict mypy checked 42 source/test/migration files.
 
 Environment: macOS, Python 3.12.14, uv 0.13.7, PostgreSQL 15.15. PostgreSQL data and its Unix socket were created exclusively in this project's gitignored `.local/` directory. The temporary test server was stopped after verification. CI/Compose use PostgreSQL 16, not SQLite.

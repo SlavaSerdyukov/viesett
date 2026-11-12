@@ -1,5 +1,7 @@
 # Viesett Milestone 1 implementation report
 
+Historical foundation report. Current changes: [Milestone 2 report](implementation-report-m2.md).
+
 Prepared 2026-11-11. Local backend foundation; not a public production service. Verification results and exact commands: [verification](verification.md).
 
 1. **Directory/repository:** standalone `./viesett`, its own Git repository, human name Viesett and Python/project slug `viesett`. Source, tests, migration, Docker/Compose, lockfile, workflow and documentation are here. No existing application source or configuration was edited.

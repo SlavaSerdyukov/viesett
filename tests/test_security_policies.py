@@ -38,7 +38,11 @@ async def test_versioned_acknowledgements_are_not_consent(
     await attest(client)  # Repeat acknowledgement is idempotent.
     rows = (await client.get("/api/v1/me/policy-acknowledgements")).json()
     assert len(rows) == 3
-    assert all(row["policy_version"] == "2026-11-11" and row["acknowledged_at"] for row in rows)
+    current_versions = {policy["policy_type"]: policy["version"] for policy in policies}
+    assert all(
+        row["policy_version"] == current_versions[row["policy_type"]] and row["acknowledged_at"]
+        for row in rows
+    )
     assert not {"gdpr_consent", "marketing_consent"} & rows[0].keys()
     old = await db.scalar(
         select(PolicyVersion).where(PolicyVersion.policy_type == PolicyType.UPLOAD_ATTESTATION)

@@ -6,6 +6,11 @@ from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from viesett.db.intelligence_models import (
+    DocumentAnalysis,
+    DocumentTextArtifact,
+    DueDiligenceEvaluation,
+)
 from viesett.db.models import (
     Account,
     DocumentRequestDraft,
@@ -22,15 +27,37 @@ from viesett.services.ownership import owned_document, owned_workspace
 from viesett.storage.private import PrivateObjectStorage
 
 
-async def queue_objects(db: AsyncSession, documents: list[PropertyDocument]) -> None:
-    for document in documents:
+async def queue_objects(db: AsyncSession, documents: list[PropertyDocument]) -> set[str]:
+    keys = {document.storage_key for document in documents}
+    keys.update(
+        key
+        for key in (
+            await db.scalars(
+                select(DocumentAnalysis.artifact_storage_key).where(
+                    DocumentAnalysis.document_id.in_([d.id for d in documents]),
+                )
+            )
+        ).all()
+        if key is not None
+    )
+    keys.update(
+        (
+            await db.scalars(
+                select(DocumentTextArtifact.storage_key).where(
+                    DocumentTextArtifact.document_id.in_([d.id for d in documents]),
+                )
+            )
+        ).all()
+    )
+    for key in keys:
         await db.execute(
             insert(ObjectDeletionTask)
             .values(
-                storage_key=document.storage_key,
+                storage_key=key,
             )
-            .on_conflict_do_nothing(index_elements=["storage_key"])
+            .on_conflict_do_update(index_elements=["storage_key"], set_={"not_before": utcnow()})
         )
+    return keys
 
 
 async def purge_objects(db: AsyncSession, storage: PrivateObjectStorage) -> int:
@@ -83,7 +110,27 @@ async def delete_document(
 ) -> None:
     await owned_workspace(db, user_id, workspace_id, lock=True)
     document = await owned_document(db, user_id, workspace_id, document_id)
-    await queue_objects(db, [document])
+    keys = await queue_objects(db, [document])
+    # Shared rule predicates can depend indirectly on a removed source. Resolve
+    # all managed current conclusions before erasing their private input snapshots;
+    # the next findings/requirements read recomputes against remaining sources.
+    for finding in (
+        await db.scalars(
+            select(Finding).where(
+                Finding.workspace_id == workspace_id,
+                Finding.resolved_at.is_(None),
+            )
+        )
+    ).all():
+        if finding.provenance.get("source") == "viesett.rules":
+            finding.resolved_at = utcnow()
+    # Evaluation inputs contain private derived facts. Erase these snapshots on
+    # source deletion; findings linked to the source are already removed below.
+    await db.execute(
+        delete(DueDiligenceEvaluation).where(
+            DueDiligenceEvaluation.workspace_id == workspace_id,
+        )
+    )
     evidence_ids = select(EvidenceItem.id).where(EvidenceItem.document_id == document_id)
     finding_ids = select(FindingEvidence.finding_id).where(
         FindingEvidence.evidence_id.in_(evidence_ids),
@@ -105,7 +152,7 @@ async def delete_document(
         .values(supersedes_document_id=None)
     )
     await db.execute(delete(PropertyDocument).where(PropertyDocument.id == document_id))
-    await finish_deletion(db, storage, {document.storage_key})
+    await finish_deletion(db, storage, keys)
 
 
 async def delete_workspace(
@@ -134,9 +181,9 @@ async def delete_workspace(
             )
         ).all()
     )
-    await queue_objects(db, documents)
+    keys = await queue_objects(db, documents)
     await db.delete(workspace)
-    await finish_deletion(db, storage, {d.storage_key for d in documents})
+    await finish_deletion(db, storage, keys)
     return True
 
 
@@ -159,9 +206,9 @@ async def delete_account(
             )
         ).all()
     )
-    await queue_objects(db, documents)
+    keys = await queue_objects(db, documents)
     await db.delete(account)
-    await finish_deletion(db, storage, {d.storage_key for d in documents})
+    await finish_deletion(db, storage, keys)
 
 
 async def purge_archived(

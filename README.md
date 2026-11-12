@@ -1,6 +1,6 @@
 # Viesett
 
-Viesett is Flanders-first, privacy-first, buyer-side residential property due-diligence software. This repository is Milestone 1: a backend foundation, **not yet a public production service**.
+Viesett is Flanders-first, privacy-first, buyer-side residential property due-diligence software. This repository implements Milestone 2: official property resolution and public enrichment on the Milestone 1 privacy foundation, **not yet a public production service**.
 
 Viesett is not a real-estate brokerage, Belgian notary or mortgage intermediary. It does not negotiate, provide legal advice or submit binding offers. Users upload only relevant property documents. There is no mailbox access or automatic communication: generated seller/agent/notary request text is copied and sent by the user. Customer documents and dossiers are not used to train AI models.
 
@@ -57,13 +57,13 @@ uv run alembic check
 uv run pytest
 ```
 
-The last migration commands operate on `VIESETT_DATABASE_URL`; `pytest` operates on `VIESETT_TEST_DATABASE_URL`. CI uses fresh PostgreSQL, strict mypy and branch-aware coverage >=85%. Migration `5e1e917449ce` creates all tables and seeds initial draft policies; the application never calls `create_all`.
+The last migration commands operate on `VIESETT_DATABASE_URL`; `pytest` operates on `VIESETT_TEST_DATABASE_URL`. CI uses fresh PostgreSQL, strict mypy and branch-aware coverage >=85%, including SQLAlchemy greenlet switches. Migration `5e1e917449ce` is the preserved foundation; `da321bc669fb` adds official identity/enrichment and a new draft notice version while retaining acknowledgement history. The application never calls `create_all`. CI also verifies an upgrade with synthetic M1 data, then a fresh empty-database migration.
 
 ## Deletion, export and retention
 
 `DELETE …/documents/{id}`, `DELETE …/workspaces/{id}` and `DELETE /api/v1/me` remove private content and dependencies. File deletion removes linked evidence/findings and invalidates workspace request drafts. Account deletion also revokes tokens. Successful deletion verifies physical cleanup. If storage fails, data remains inaccessible and a durable task survives; the API reports 503 pending cleanup rather than claiming complete erasure.
 
-`GET /api/v1/me/export` returns caller-only account, versioned acknowledgements, workspaces, document metadata, structured evidence, findings with references, and request drafts. It excludes tokens, storage keys, private binaries and external processor administration. Download ready files separately before deleting them. Quarantined files are not downloadable through ordinary APIs; rejected bytes are removed immediately.
+`GET /api/v1/me/export` returns caller-only account, versioned acknowledgements, workspaces, document metadata, structured evidence/history, findings with references, request drafts, property resolutions/snapshots and source runs. It excludes tokens, storage keys, private binaries and external processor administration. Download ready files separately before deleting them. Quarantined files are not downloadable through ordinary APIs; rejected bytes are removed immediately.
 
 Archive/unarchive with `PATCH …/workspaces/{id}` and `{"status":"ARCHIVED"}` / `{"status":"ACTIVE"}`. Archive purge is disabled unless `VIESETT_ARCHIVED_RETENTION_DAYS` is explicitly set. Run `uv run viesett purge` from a scheduler to process expired archives and durable cleanup tasks. Schedule at least every ten minutes when running the service. No statutory retention period is invented.
 
@@ -71,4 +71,31 @@ Archive/unarchive with `PATCH …/workspaces/{id}` and `{"status":"ARCHIVED"}` /
 
 `src/viesett/` contains `api`, `core`, `domain`, `db`, `storage`, `document_safety`, `services` and `ai`. See [architecture](docs/architecture.md), [boundaries](docs/product-boundaries.md), [document handling](docs/security/document-handling.md) and [verification report](docs/verification.md). All [privacy drafts](docs/privacy/privacy-notice-draft.md), the Terms and third-party-data design require Belgian legal/privacy review before public beta.
 
-Next milestone: Flemish property resolution and explicitly approved official/public data enrichment. No public-data integration, portal scraping, OCR, paid LLM, rule engine or frontend is implemented here.
+## Official property resolution and enrichment
+
+```text
+POST /api/v1/workspaces/{id}/property-resolution
+GET  /api/v1/workspaces/{id}/property-resolution
+POST /api/v1/workspaces/{id}/public-enrichment/refresh
+GET  /api/v1/workspaces/{id}/property-snapshot
+```
+
+Resolve with `{"query":"Mechelsesteenweg 123 bus 4, Antwerpen"}`. GRAR's documented v2 free-text search handles fuzzy input and box numbers. A unique usable identity is automatic; ambiguity returns NEEDS_SELECTION with normalized choices. Submit the same query with `selected_address_object_id` and, when necessary, `selected_building_unit_object_id`. Each choice and relationship is independently revalidated. A common/shared unit is never automatically selected. Property type, risk, ownership and legal conclusions are not guessed.
+
+Repeat property-resolution to refresh GRAR identity. Public-enrichment refresh queries heritage for the selected building area and records the flood verification path. These are separate operations so one source outage cannot erase another's facts. The snapshot exposes current status, last successful retrieval, per-source freshness/attribution, native geometry/CRS and all parcels. If a refresh fails, prior observations remain explicitly stale. Upstream failure is distinct from NOT_FOUND. Workspace `canonical_address` is a legacy display hint until resolved; official identity is established by the property snapshot and OFFICIAL evidence, never by raw input.
+
+Evidence keys use `property.address.*`, `property.building_unit.*`, `property.building.*`, `property.parcel.*` and `property.heritage.*`. `/evidence` returns current observations; `?include_history=true` includes superseded observations with provenance, versions, retrieval/last-seen time and predecessor references. Unchanged observations are confirmed without duplicate evidence rows.
+
+GRAR's optional key uses `VIESETT_GRAR_API_KEY` or `GRAR_API_KEY`. Anonymous reads work where allowed. See [source configuration, limits and contracts](docs/integrations/README.md). Production public lookup is off until explicitly reviewed; this is independent of the existing production document-safety gate. No external AI or customer document processing is introduced by lookup.
+
+Heritage preserves separate published designations and inventory categories. It currently queries the building footprint, not an invented parcel boundary. Without precise geometry it reports NOT_APPLICABLE, not “no heritage.” No clearly supported authoritative automatic P/G-score contract was confirmed, so flood returns MANUAL_OFFICIAL_LOOKUP_REQUIRED with official Waterinfo/Capakey links and null scores. There is no WMS/color/geometry-based score calculation.
+
+An optional smoke check uses a fixed address from the official documentation, never user data:
+
+```sh
+VIESETT_RUN_LIVE_SOURCE_TESTS=1 uv run viesett live-sources
+```
+
+It is disabled by default and excluded from CI. [Source review](docs/integrations/source-review-2026-11-11.md) distinguishes documented/fixture-tested behavior from live verification. The attempted live call in this environment returned transport-unavailable; deployed compatibility is not claimed.
+
+Next milestone: **Document Intelligence + Deterministic Flemish Due-Diligence Rules**. No portal scraping, OCR, paid LLM, rule engine or frontend is implemented here.

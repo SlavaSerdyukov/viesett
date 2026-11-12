@@ -39,6 +39,16 @@ class Authority(StrEnum):
     INFERRED = "INFERRED"
 
 
+class EpcLabel(StrEnum):
+    A_PLUS = "A+"
+    A = "A"
+    B = "B"
+    C = "C"
+    D = "D"
+    E = "E"
+    F = "F"
+
+
 class SourceType(StrEnum):
     DOCUMENT = "DOCUMENT"
     PUBLIC_REGISTRY = "PUBLIC_REGISTRY"

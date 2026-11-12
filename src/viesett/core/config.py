@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field, SecretStr, model_validator
+from pydantic import AliasChoices, Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -26,6 +26,27 @@ class Settings(BaseSettings):
     allow_development_safety: bool = False
     archived_retention_days: int | None = Field(default=None, ge=1)
     token_lifetime_hours: int = Field(default=24, ge=1, le=168)
+    grar_api_key: SecretStr | None = Field(
+        default=None,
+        repr=False,
+        exclude=True,
+        validation_alias=AliasChoices("VIESETT_GRAR_API_KEY", "GRAR_API_KEY", "grar_api_key"),
+    )
+    official_sources_enabled: bool = True
+    official_sources_reviewed: bool = False
+    source_connect_timeout: float = Field(default=2, gt=0, le=10)
+    source_read_timeout: float = Field(default=4, gt=0, le=15)
+    source_write_timeout: float = Field(default=2, gt=0, le=10)
+    source_pool_timeout: float = Field(default=1, gt=0, le=10)
+    source_operation_timeout: float = Field(default=20, gt=0, le=25)
+    source_attempts: int = Field(default=2, ge=1, le=3)
+    source_min_interval: float = Field(default=0.35, ge=0, le=2)
+    source_retry_base: float = Field(default=0.3, ge=0, le=1)
+    run_live_source_tests: bool = False
+    pdf_max_pages: int = Field(default=150, ge=1, le=500)
+    pdf_max_characters: int = Field(default=500_000, ge=100, le=2_000_000)
+    pdf_max_stream_bytes: int = Field(default=4 * 1024 * 1024, ge=1024, le=16 * 1024 * 1024)
+    pdf_timeout_seconds: float = Field(default=8, gt=0, le=15)
 
     @model_validator(mode="after")
     def validate_safety(self) -> "Settings":

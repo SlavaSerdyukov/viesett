@@ -1,11 +1,12 @@
 # Viesett preliminary DPIA / risk assessment
 
-**DRAFT - requires Belgian legal/privacy review before public beta.** Not a formal approved DPIA. Scope: local foundation and planned property-document interpretation, with no production AI, OCR or public-data integrations. Risk labels are qualitative engineering judgements; validate against actual scale, users, sources, processor contracts and deployment before beta.
+**DRAFT - requires Belgian legal/privacy review before public beta.** Not a formal approved DPIA. Scope: local foundation, M2 owner-requested public-source lookups and M3 local PDF text/field extraction with deterministic regulatory evaluation. No OCR or external AI is required. Risk labels are qualitative engineering judgements; validate against actual scale, users, sources, processor contracts and deployment before beta.
 
 Assets: private property PDFs, third-party personal information, property evidence integrity, credentials, policy records and deletion/export state. Actors: buyer, incidental third parties, operator, attackers and future infrastructure/AI processors. Data flows and controls: [architecture](../architecture.md). Necessity and basis remain purpose-specific: [matrix](legal-basis-matrix.md).
 
 | Risk | Likelihood before controls | Impact | Mitigation | Residual risk | Open legal question |
 | --- | --- | --- | --- | --- | --- |
+| Official lookup reveals buyer interest/location or combines public facts with a private dossier | Medium | High | Owner-triggered queries only; no account/document data forwarded; precise source provenance; separate workspace scope; bounded clients and no URL/body logging | Medium pending source-role, hosting and rights review | Controller/recipient roles, necessity, transparency, legitimate-interest balancing and any transfer safeguards? |
 | AI/new technology expands processing | Medium, future | High | AI disabled; explicit processor review; selected sections only; no training | Medium until actual provider assessed | Is a full DPIA required at intended scale and use? |
 | Property documents reveal personal context | High | High | Buyer-selected relevant files, private storage and content-free logs | Medium: some necessary third-party data remains | Which categories are necessary for each purpose? |
 | Third-party personal data lacks transparency | High | High | Provenance, no assumed consent, Article 14 assessment and rights process | High pending counsel/operating process | Who informs whom, by which channel, and are any exceptions supportable? |
@@ -20,6 +21,7 @@ Assets: private property PDFs, third-party personal information, property eviden
 | Authorization failure crosses users/workspaces | Medium | Very high | Uniform 404, owner-scoped queries, compound FKs, integration tests | Low/medium: regressions remain possible | Appropriate operational controls and assurance? |
 | Account takeover via stolen bearer token | Medium | Very high | 384-bit tokens, hashes, expiry, no URL secrets, revocation/account deletion | Medium: no MFA or recovery in foundation | Production identity and incident-response obligations? |
 | Deletion incomplete after storage/DB crash | Medium | High | Durable reservations/outbox, hide before purge, retry, no false success | Medium until scheduler/backups monitored | Final erasure timeline and backup/recovery policy? |
+| Derived PDF text increases private-data footprint; parser output or association errors mislead review | Medium | High | Private page artifacts; input/page/stream/character/process-time limits; no extracted text logs; exact identity comparison; DOCUMENTED authority; conditional versioned rules; source-linked deletion and rollback guard | Medium: limited synthetic corpus, no full OS parser sandbox, local production deployment still requires hardening | Accuracy/correction process, proportionality of derived retention, Article 14 handling, legal rule scope and human review need assessment |
 
 The current local prototype is suitable for controlled development with synthetic documents. Public beta needs reviewed production malware/sensitive-content adapters, hosting security and backups, operational rights/restriction handling, controller identity, final notices/bases, processor inventory and acceptance of residual risks. Reassess when official sources, OCR, external AI or correlation are added.
 

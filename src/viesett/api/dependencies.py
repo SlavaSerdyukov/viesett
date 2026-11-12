@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 from viesett.core.config import Settings
 from viesett.core.security import RateLimiter
 from viesett.document_safety.pipeline import SafetyPipeline
+from viesett.integrations.sources import PublicSources
 from viesett.services.auth import authenticate
 from viesett.storage.private import PrivateObjectStorage
 
@@ -23,6 +24,7 @@ class Runtime:
     storage: PrivateObjectStorage
     pipeline: SafetyPipeline
     limiter: RateLimiter
+    sources: PublicSources
 
 
 def runtime(request: Request) -> Runtime:

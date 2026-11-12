@@ -4,12 +4,16 @@ import json
 
 from viesett.core.config import Settings
 from viesett.db.session import create_engine, session_factory
+from viesett.integrations.smoke import live_source_smoke
 from viesett.services.auth import provision_account
 from viesett.services.deletion import purge_archived, purge_objects
 from viesett.storage.private import LocalPrivateStorage
 
 
 async def run(command: str, settings: Settings) -> None:
+    if command == "live-sources":
+        print(json.dumps(await live_source_smoke(settings)))
+        return
     engine = create_engine(settings)
     try:
         async with session_factory(engine)() as db:
@@ -32,7 +36,7 @@ async def run(command: str, settings: Settings) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="viesett")
-    parser.add_argument("command", choices=["create-account", "purge"])
+    parser.add_argument("command", choices=["create-account", "purge", "live-sources"])
     args = parser.parse_args()
     asyncio.run(run(args.command, Settings()))
 

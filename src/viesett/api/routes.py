@@ -1,3 +1,4 @@
+from datetime import date
 from typing import Annotated
 from uuid import UUID
 
@@ -5,9 +6,11 @@ from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, R
 from sqlalchemy import select
 
 from viesett.api.dependencies import Db, UserId, require_user, runtime
+from viesett.db.intelligence_models import DueDiligenceEvaluation
 from viesett.db.models import (
     DocumentRequestDraft,
     EvidenceItem,
+    Finding,
     PolicyVersion,
     PropertyDocument,
     PropertyWorkspace,
@@ -183,24 +186,46 @@ async def remove_document(
 
 
 @router.get("/workspaces/{workspace_id}/evidence", response_model=list[EvidenceOut])
-async def get_evidence(workspace_id: UUID, db: Db, user: UserId) -> list[EvidenceItem]:
+async def get_evidence(
+    workspace_id: UUID,
+    db: Db,
+    user: UserId,
+    include_history: bool = False,
+) -> list[EvidenceItem]:
     await owned_workspace(db, user, workspace_id)
-    return list(
-        (
-            await db.scalars(
-                select(EvidenceItem)
-                .where(
-                    EvidenceItem.workspace_id == workspace_id,
-                )
-                .order_by(EvidenceItem.created_at, EvidenceItem.id)
-            )
-        ).all()
-    )
+    query = select(EvidenceItem).where(EvidenceItem.workspace_id == workspace_id)
+    if not include_history:
+        query = query.where(EvidenceItem.superseded_at.is_(None))
+    return list((await db.scalars(query.order_by(EvidenceItem.created_at, EvidenceItem.id))).all())
 
 
 @router.get("/workspaces/{workspace_id}/findings", response_model=list[FindingOut])
-async def get_findings(workspace_id: UUID, db: Db, user: UserId) -> list[FindingOut]:
+async def get_findings(
+    workspace_id: UUID, db: Db, user: UserId, evaluation_date: date | None = None
+) -> list[FindingOut]:
     await owned_workspace(db, user, workspace_id)
+    if (
+        await db.scalar(
+            select(DueDiligenceEvaluation.id)
+            .where(
+                DueDiligenceEvaluation.workspace_id == workspace_id,
+            )
+            .limit(1)
+        )
+        is not None
+        or await db.scalar(
+            select(Finding.id)
+            .where(
+                Finding.workspace_id == workspace_id,
+                Finding.provenance["source"].as_string() == "viesett.rules",
+            )
+            .limit(1)
+        )
+        is not None
+    ):
+        from viesett.services.due_diligence import refresh_due_diligence
+
+        await refresh_due_diligence(db, user, workspace_id, evaluation_date)
     return await list_findings(db, [workspace_id])
 
 

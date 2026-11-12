@@ -5,6 +5,8 @@ from sqlalchemy.ext.asyncio import create_async_engine
 
 from alembic import context
 from viesett.core.config import Settings
+from viesett.db import intelligence_models as intelligence_models
+from viesett.db import property_models as property_models
 from viesett.db.models import Base
 
 config = context.config

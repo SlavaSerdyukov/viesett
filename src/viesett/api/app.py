@@ -1,6 +1,7 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
+import httpx
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from sqlalchemy import text
@@ -9,6 +10,8 @@ from starlette.responses import JSONResponse
 
 from viesett.ai.boundary import validate_production_processors
 from viesett.api.dependencies import Runtime
+from viesett.api.intelligence_routes import router as intelligence_router
+from viesett.api.property_routes import router as property_router
 from viesett.api.routes import router
 from viesett.core.config import Settings
 from viesett.core.security import MemoryRateLimiter, RateLimiter, SecurityMiddleware
@@ -19,6 +22,7 @@ from viesett.document_safety.pipeline import (
     SafetyPipeline,
     UnavailableScanner,
 )
+from viesett.integrations.sources import PublicSources
 from viesett.storage.private import LocalPrivateStorage, PrivateObjectStorage
 
 
@@ -28,6 +32,7 @@ def create_app(
     storage: PrivateObjectStorage | None = None,
     pipeline: SafetyPipeline | None = None,
     limiter: RateLimiter | None = None,
+    source_transport: httpx.AsyncBaseTransport | None = None,
 ) -> FastAPI:
     config = settings or Settings()
     engine = create_engine(config)
@@ -43,6 +48,7 @@ def create_app(
         storage or LocalPrivateStorage(config.storage_root),
         safety,
         limits,
+        PublicSources(config, source_transport),
     )
 
     @asynccontextmanager
@@ -55,12 +61,13 @@ def create_app(
                     await validate_production_processors(db)
             yield
         finally:
+            await context.sources.aclose()
             await engine.dispose()
 
     production = config.environment == "production"
     app = FastAPI(
         title="Viesett",
-        version="0.1.0",
+        version="0.3.0",
         debug=False,
         lifespan=lifespan,
         docs_url=None if production else "/docs",
@@ -70,6 +77,8 @@ def create_app(
     app.state.runtime = context
     app.state.engine = engine
     app.include_router(router)
+    app.include_router(property_router)
+    app.include_router(intelligence_router)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.allowed_hosts)
     app.add_middleware(SecurityMiddleware, settings=config, limiter=limits)
 
@@ -87,6 +96,8 @@ def create_app(
             async with context.sessions() as db:
                 # Checks schema presence as well as connectivity; never creates tables.
                 await db.execute(text("SELECT id FROM policy_versions LIMIT 1"))
+                await db.execute(text("SELECT id FROM property_resolutions LIMIT 1"))
+                await db.execute(text("SELECT id FROM document_analyses LIMIT 1"))
                 if production:
                     await validate_production_processors(db)
         except Exception:
