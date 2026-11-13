@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Completeness, PropertyFacts } from "../components";
 import { Exposure } from "./CoOwnership";
+import { TransactionContext } from "../TransactionContext";
 import type { DossierSnapshotResponse as Dossier } from "../contracts";
 import { kind, label, safeUri, componentLabel } from "../copy";
 export function Overview({ data }: { data: Dossier }) {
@@ -19,6 +20,7 @@ export function Overview({ data }: { data: Dossier }) {
         <span>Review before a binding offer</span>
       </div>
       <Completeness value={data.completeness} />
+      <TransactionContext data={data} />
       <div className="overview-columns">
         <section className="panel">
           <div className="section-heading">

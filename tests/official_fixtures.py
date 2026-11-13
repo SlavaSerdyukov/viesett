@@ -132,7 +132,7 @@ class OfficialFixtureService:
             return httpx.Response(200, json=self.heritage_matches)
         assert request.url.host == "api.basisregisters.vlaanderen.be"
         if path == "/v2/adressen/zoeken":
-            assert request.url.params["resultType"] == "Address"
+            assert request.url.params["resultaatType"] == "adressen"
             assert request.url.params["status"] == "inGebruik"
             return httpx.Response(
                 200,
@@ -142,7 +142,7 @@ class OfficialFixtureService:
                             "objectId": i,
                             "id": f"https://data.vlaanderen.be/id/adres/{i}",
                             "detail": HOST + f"/v2/adressen/{i}",
-                            "resultaat": f"Synthetic address {i}",
+                            "result": f"Synthetic address {i}",
                         }
                         for i in self.search_ids
                     ]

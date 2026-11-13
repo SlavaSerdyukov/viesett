@@ -26,7 +26,7 @@ async def test_older_resolution_completion_cannot_replace_newer_selection(
 
     async def handler(request: httpx.Request) -> httpx.Response:
         if request.url.path == "/v2/adressen/zoeken":
-            query = request.url.params["query"]
+            query = request.url.params["q"]
             if query == "first address query":
                 entered.set()
                 await release.wait()

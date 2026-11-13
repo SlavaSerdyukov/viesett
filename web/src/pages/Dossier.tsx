@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -26,6 +26,7 @@ import { Evidence } from "./Evidence";
 import { PreviewCard } from "./Start";
 import type { PreviewResponse } from "../contracts";
 import { PrintDossier } from "./Print";
+import { processingInterval } from "../polling";
 const sections = [
   ["overview", "Overview", House],
   ["documents", "Documents", FileText],
@@ -39,18 +40,31 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
   const { id = "", section = "overview" } = useParams(),
     client = useQueryClient(),
     access = useAccess();
+  const failures = useRef(0);
   const q = useQuery({
     queryKey: ["dossier", id],
-    queryFn: () => api.dossier(id),
+    queryFn: async () => {
+      try {
+        const result = await api.dossier(id);
+        failures.current = 0;
+        return result;
+      } catch (e) {
+        failures.current += 1;
+        throw e;
+      }
+    },
+    refetchIntervalInBackground: false,
     refetchInterval: (query) =>
-      query.state.data?.documents.some(
-        (d) =>
-          ["PENDING", "IN_PROGRESS"].includes(d.status) &&
-          Date.now() - new Date(d.created_at).getTime() < 120000,
-      )
-        ? 3000
-        : false,
+      processingInterval(query.state.data, failures.current),
   });
+  useLayoutEffect(() => {
+    if (!q.data?.workspace.id) return;
+    const heading = document.querySelector<HTMLElement>("main h1");
+    if (heading) {
+      heading.tabIndex = -1;
+      heading.focus();
+    }
+  }, [q.data?.workspace.id]);
   const [error, setError] = useState<unknown>(null),
     [refreshing, setRefreshing] = useState(false);
   const [confirming, setConfirming] = useState(false);
@@ -98,7 +112,7 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
         <Busy />
       </main>
     );
-  if (q.isError || !q.data)
+  if (!q.data)
     return (
       <main id="main" className="start">
         <Brand />
@@ -134,7 +148,7 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
             All dossiers <ArrowUpRight size={14} />
           </Link>
           <button className="text-button muted" onClick={access.disconnect}>
-            Disconnect
+            Log out
           </button>
         </div>
       </aside>
@@ -149,13 +163,25 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
             <Printer size={16} />
             Prepare for notary
           </Link>
+          <button
+            className="text-button mobile-logout"
+            onClick={access.disconnect}
+          >
+            Log out
+          </button>
         </header>
         <main id="main" className="dossier-content">
+          {q.isError && (
+            <div role="status">
+              <p>Refresh is unavailable. Showing the last retrieved dossier.</p>
+              <ErrorMessage error={q.error} />
+            </div>
+          )}
           <div className="property-header">
             <div>
               <div className="eyebrow">
                 {data.is_demo
-                  ? "Demo data · Fictional buyer dossier"
+                  ? `Demo data · Fictional buyer dossier · As of ${date(data.evaluation_date)}`
                   : "Your property dossier"}
               </div>
               <h1>{data.property.address ?? "Property to be resolved"}</h1>

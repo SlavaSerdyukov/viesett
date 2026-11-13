@@ -1,4 +1,10 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -47,6 +53,7 @@ async function page(section: string, d = data()) {
 beforeEach(() => {
   vi.spyOn(api, "config").mockResolvedValue({
     development_session: false,
+    browser_sessions: false,
     demo: false,
     max_upload_bytes: 10 * 1024 * 1024,
   });
@@ -255,7 +262,7 @@ it("renders required and conditional checklist states without declaring all cond
   expect(
     screen.getByRole("heading", { name: "Document checklist" }),
   ).toBeVisible();
-  expect(screen.getAllByText("Conditional").length).toBeGreaterThan(0);
+  expect(screen.getAllByText("May apply").length).toBeGreaterThan(0);
   expect(screen.getByText("Soil certificate", { exact: true })).toBeVisible();
 });
 it("represents OCR required honestly and retains keep/delete choice", async () => {
@@ -279,6 +286,11 @@ it("uses the existing manual classification path for an unknown document", async
     d.workspace.id,
     d.documents[0].id,
     "EPC",
+  );
+  await waitFor(() =>
+    expect(
+      screen.getByRole("heading", { name: /Uploaded documents/ }),
+    ).toHaveFocus(),
   );
 });
 it("shows upload work while the real orchestration request is pending", async () => {
@@ -383,6 +395,7 @@ it("requires document deletion confirmation", async () => {
   expect(api.remove).not.toHaveBeenCalled();
   await userEvent.click(screen.getByRole("button", { name: "Keep document" }));
   expect(api.remove).not.toHaveBeenCalled();
+  expect(screen.getAllByRole("button", { name: "Delete" })[0]).toHaveFocus();
 });
 it("prepares an honest print dossier and a browser print action", () => {
   mount(<PrintDossier data={fixture} />);
@@ -390,6 +403,7 @@ it("prepares an honest print dossier and a browser print action", () => {
     screen.getByRole("button", { name: "Print / Save as PDF" }),
   ).toBeVisible();
   expect(screen.getByRole("heading", { name: "Source list" })).toBeVisible();
+  expect(screen.getByText(new RegExp(fixture.findings[0].code))).toBeVisible();
   expect(screen.getByText(/Legally significant decisions/)).toBeVisible();
 });
 it("maps missing data to information language rather than a blocked purchase", () => {

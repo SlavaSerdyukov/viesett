@@ -143,7 +143,7 @@ export function CoOwnership({
         </dl>
         <CoSources ids={co.identity?.evidence_ids ?? []} data={data} />
       </section>
-      <section className="panel">
+      <section className="panel co-package">
         <h2>Article 3.94 information</h2>
         {co.article_3_94_completeness.map((c) => (
           <div className="checklist-row" key={c.code}>

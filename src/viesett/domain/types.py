@@ -48,6 +48,7 @@ class Authority(StrEnum):
     OFFICIAL = "OFFICIAL"
     DOCUMENTED = "DOCUMENTED"
     INFERRED = "INFERRED"
+    UNVERIFIED = "UNVERIFIED"
 
 
 class EpcLabel(StrEnum):

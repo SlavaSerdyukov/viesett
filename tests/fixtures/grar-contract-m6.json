@@ -1,0 +1,610 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "version": "2026-10-29"
+  },
+  "paths": {
+    "/v2/adressen/zoeken": {
+      "get": {
+        "tags": [
+          "Adressen"
+        ],
+        "summary": "Zoeken naar adressen of straatnamen via een query.",
+        "description": "Zoek naar een straatnaam of adres met/zonder busnummer(s) binnen een gemeente of heel Vlaanderen.<br/>Om te voorkomen dat de server reageert met een 429 Too Many Requests-fout bij een te hoge frequentie van verzoeken, gelden de volgende richtlijnen voor afnemers:<ul><li>Wacht minimaal 300 milliseconden na de laatste toetsaanslag voordat een verzoek naar het endpoint wordt gestuurd. Deze zogeheten debounce-periode sluit aan bij de gemiddelde menselijke reactietijd en wordt algemeen aanbevolen voor zoekinterfaces.</li><li>Pas lokale filters toe (zoals gemeente of postcode) om de omvang van de zoekopdracht te beperken en de belasting van het systeem te verlagen.</li></ul>",
+        "operationId": "SearchAddresses",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "De zoek query.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gemeenteNaam",
+            "in": "query",
+            "description": "Filter op de gemeentenaam van de zoek query (exact) (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "niscode",
+            "in": "query",
+            "description": "Filter op de NIS-code van de zoek query (exact) (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Aantal instanties dat teruggegeven wordt. Maximaal kunnen er 50 worden teruggegeven. Wanneer limit niet wordt meegegeven dan default 10 instanties (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter op de status van het adres of de straatnaam (exact) (optioneel). \\\n`\"voorgesteld\"` `\"inGebruik\"` `\"gehistoreerd\"` `\"afgekeurd\"`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resultaatType",
+            "in": "query",
+            "description": "Specifieer de gewenste resultaten (exact) (optioneel). \\\n`\"adressen\"` `\"straatnamen\"`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "x-api-key header met verkregen API key (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Als de opvraging van de zoekopdracht gelukt is.",
+            "headers": {
+              "ETag": {
+                "description": "De ETag van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "De ETag van de response.",
+                  "format": ""
+                }
+              },
+              "x-correlation-id": {
+                "description": "Correlatie identificator van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "Correlatie identificator van de response.",
+                  "format": ""
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Als uw verzoek foutieve data bevat.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Als u niet beschikt over de correcte rechten om deze actie uit te voeren.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Als het aantal requests per seconde de limiet overschreven heeft.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Als er een interne fout is opgetreden.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Als het gevraagde formaat niet beschikbaar is."
+          }
+        }
+      }
+    },
+    "/v2/adressen/{objectId}": {
+      "get": {
+        "tags": [
+          "Adressen"
+        ],
+        "summary": "Vraag een adres op (v2).",
+        "operationId": "GetAddressV2",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Objectidentificator van het adres.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "if-None-Match",
+            "in": "header",
+            "description": "If-None-Match header met ETag van een vorig verzoek (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "x-api-key header met verkregen API key (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Als het adres gevonden is.",
+            "headers": {
+              "ETag": {
+                "description": "De ETag van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "De ETag van de response.",
+                  "format": ""
+                }
+              },
+              "x-correlation-id": {
+                "description": "Correlatie identificator van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "Correlatie identificator van de response.",
+                  "format": ""
+                }
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDetailOsloResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Als het adres niet gewijzigd is ten opzicht van uw verzoek."
+          },
+          "400": {
+            "description": "Als uw verzoek foutieve data bevat.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Als u niet beschikt over de correcte rechten om deze actie uit te voeren.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Als het adres niet gevonden kan worden.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Als het adres verwijderd is.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Als het aantal requests per seconde de limiet overschreven heeft.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Als er een interne fout is opgetreden.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Als het gevraagde formaat niet beschikbaar is."
+          }
+        }
+      }
+    },
+    "/v2/gebouweenheden": {
+      "get": {
+        "tags": [
+          "Gebouweenheden"
+        ],
+        "summary": "Vraag een lijst met gebouweenheden op (v2).",
+        "operationId": "ListBuildingUnitsV2",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Nulgebaseerde index van de eerste instantie die teruggegeven wordt. De offset is echter beperkt tot 1000000, indien meer data dient ingelezen te worden is het gebruik van extra filters aangewezen op de service of verwijzen we naar de <a href=\"https://vlaamseoverheid.atlassian.net/wiki/x/LYay3QE\" target=\"_blank\">downloadproducten van het gebouwen- en adressenregister</a> (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Aantal instanties dat teruggegeven wordt. Maximaal kunnen er 500 worden teruggegeven. Wanneer limit niet wordt meegegeven dan default 100 instanties (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "gebouwObjectId",
+            "in": "query",
+            "description": "Filter op de objectidentificator van het gekoppelde gebouw (exact) (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "adresObjectId",
+            "in": "query",
+            "description": "Filter op de objectidentificator van het gekoppelde adres (exact) (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter op de status van de gebouweenheid (exact). \\\n`\"gepland\"` `\"gerealiseerd\"` `\"gehistoreerd\"` `\"nietGerealiseerd\"`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "functie",
+            "in": "query",
+            "description": "Filter op de functie van een gebouweenheid (exact) (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "if-None-Match",
+            "in": "header",
+            "description": "If-None-Match header met ETag van een vorig verzoek (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "x-api-key header met verkregen API key (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Als de opvraging van een lijst met gebouweenheden gelukt is.",
+            "headers": {
+              "ETag": {
+                "description": "De ETag van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "De ETag van de response.",
+                  "format": ""
+                }
+              },
+              "x-correlation-id": {
+                "description": "Correlatie identificator van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "Correlatie identificator van de response.",
+                  "format": ""
+                }
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuildingUnitListOsloResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Als uw verzoek foutieve data bevat.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Als u niet beschikt over de correcte rechten om deze actie uit te voeren.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Als het aantal requests per seconde de limiet overschreven heeft.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Als er een interne fout is opgetreden.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Als het gevraagde formaat niet beschikbaar is."
+          }
+        }
+      }
+    },
+    "/v2/percelen": {
+      "get": {
+        "tags": [
+          "Percelen"
+        ],
+        "summary": "Vraag een lijst met percelen op (v2).",
+        "operationId": "ListParcelsV2",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Nulgebaseerde index van de eerste instantie die teruggegeven wordt. De offset is echter beperkt tot 1000000, indien meer data dient ingelezen te worden is het gebruik van extra filters aangewezen op de service of verwijzen we naar de <a href=\"https://vlaamseoverheid.atlassian.net/wiki/x/LYay3QE\" target=\"_blank\">downloadproducten van het gebouwen- en adressenregister</a> (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Aantal instanties dat teruggegeven wordt. Maximaal kunnen er 500 worden teruggegeven. Wanneer limit niet wordt meegegeven dan default 100 instanties (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter op de status van het perceel (exact) (optioneel). \\\n`\"gerealiseerd\"` `\"gehistoreerd\"`",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adresObjectId",
+            "in": "query",
+            "description": "Filter op de objectidentificator van het gekoppelde adres (exact) (optioneel).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "if-None-Match",
+            "in": "header",
+            "description": "If-None-Match header met ETag van een vorig verzoek (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "x-api-key header met verkregen API key (optioneel).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Als de opvraging van een lijst met percelen gelukt is.",
+            "headers": {
+              "ETag": {
+                "description": "De ETag van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "De ETag van de response.",
+                  "format": ""
+                }
+              },
+              "x-correlation-id": {
+                "description": "Correlatie identificator van de response.",
+                "schema": {
+                  "type": "string",
+                  "description": "Correlatie identificator van de response.",
+                  "format": ""
+                }
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParcelListOsloResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Als uw verzoek foutieve data bevat.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Als u niet beschikt over de correcte rechten om deze actie uit te voeren.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Als het aantal requests per seconde de limiet overschreven heeft.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Als er een interne fout is opgetreden.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Als het gevraagde formaat niet beschikbaar is."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressSearchResponse": {
+        "type": "object",
+        "properties": {
+          "resultaten": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressSearchItem"
+            },
+            "description": "De linked-data context van het adres."
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddressSearchItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "De unieke en persistente identificator van het object (volgt de Vlaamse URI-standaard)."
+          },
+          "objectId": {
+            "type": "string",
+            "description": "De objectidentificator (enkel uniek binnen naamruimte)."
+          },
+          "detail": {
+            "type": "string",
+            "description": "De URL die naar de details van de meeste recente versie van een enkel adres leidt.",
+            "format": "uri"
+          },
+          "result": {
+            "type": "string",
+            "description": "Textueel resultaat van de zoekopdracht (straatnaam of volledig adres)."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

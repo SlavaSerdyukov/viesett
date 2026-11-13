@@ -1,5 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Check,
   FileText,
@@ -15,6 +21,21 @@ import type {
   DossierSnapshotResponse as Dossier,
 } from "./contracts";
 import { label, date, safeUri } from "./copy";
+export function RouteFocus() {
+  const { pathname } = useLocation();
+  const previous = useRef(pathname);
+  useLayoutEffect(() => {
+    if (previous.current === pathname) return;
+    previous.current = pathname;
+    if (document.querySelector("dialog[open]")) return;
+    const heading = document.querySelector<HTMLElement>("main h1, main h2");
+    if (heading) {
+      heading.tabIndex = -1;
+      heading.focus();
+    }
+  }, [pathname]);
+  return null;
+}
 export function ErrorMessage({ error }: { error: unknown }) {
   return error ? (
     <p className="error" role="alert">
@@ -75,7 +96,14 @@ export function Modal({
     el?.showModal();
     return () => {
       el?.close();
-      previous?.focus();
+      if (previous?.isConnected) previous.focus();
+      else {
+        const heading = document.querySelector<HTMLElement>("main h1, main h2");
+        if (heading) {
+          heading.tabIndex = -1;
+          heading.focus();
+        }
+      }
     };
   }, []);
   return (
@@ -131,12 +159,18 @@ export function CopyButton({
     <>
       <button
         className="button secondary small-button"
-        onClick={() =>
-          void navigator.clipboard
-            .writeText(text)
-            .then(() => setDone(true))
-            .catch(() => setFailed(true))
-        }
+        onClick={() => {
+          void (async () => {
+            try {
+              if (!navigator.clipboard)
+                throw new Error("Clipboard unavailable");
+              await navigator.clipboard.writeText(text);
+              setDone(true);
+            } catch {
+              setFailed(true);
+            }
+          })();
+        }}
       >
         {done ? (
           <>

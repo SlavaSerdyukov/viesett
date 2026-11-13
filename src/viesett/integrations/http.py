@@ -1,6 +1,8 @@
 import asyncio
 import logging
 import re
+import socket
+import ssl
 import time
 from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime
@@ -16,6 +18,24 @@ from viesett.core.config import Settings
 
 GRAR_HOST = "api.basisregisters.vlaanderen.be"
 HERITAGE_HOST = "geo.onroerenderfgoed.be"
+
+
+def transport_diagnostic(error: BaseException) -> str:
+    """Content-free tooling categories; never inspect/return exception text."""
+    if isinstance(error, httpx.ConnectTimeout):
+        return "CONNECT_TIMEOUT"
+    if isinstance(error, httpx.ReadTimeout):
+        return "READ_TIMEOUT"
+    current: BaseException | None = error
+    for _ in range(8):
+        if isinstance(current, ssl.SSLError):
+            return "TLS_FAILURE"
+        if isinstance(current, socket.gaierror):
+            return "DNS_FAILURE"
+        if current is None:
+            break
+        current = current.__cause__ or current.__context__
+    return "NETWORK_FAILURE"
 
 
 class JsonDocument(RootModel[JsonValue]):
@@ -58,19 +78,21 @@ class OfficialHttpClient:
         *,
         transport: httpx.AsyncBaseTransport | None = None,
         sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
+        diagnostic: Callable[[str, str], None] | None = None,
     ) -> None:
         if host not in {GRAR_HOST, HERITAGE_HOST}:
             raise ValueError("Unsupported official source")
         self.host = host
         self.settings = settings
         self._sleep = sleep
+        self._diagnostic = diagnostic
         self._lock = asyncio.Lock()
         self._next_request = 0.0
         # Third-party DEBUG/INFO logs include URLs or headers. Neither is safe here.
         logging.getLogger("httpx").setLevel(logging.WARNING)
         logging.getLogger("httpcore").setLevel(logging.WARNING)
         headers = {
-            "User-Agent": "Viesett/0.2.0 official-property-lookup",
+            "User-Agent": "Viesett/0.6.0 official-property-lookup",
             "Accept": "application/json",
         }
         if host == GRAR_HOST and settings.grar_api_key:
@@ -97,8 +119,15 @@ class OfficialHttpClient:
         *,
         transport: httpx.AsyncBaseTransport | None = None,
         sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
+        diagnostic: Callable[[str, str], None] | None = None,
     ) -> "OfficialHttpClient":
-        return cls(GRAR_HOST, settings or Settings(), transport=transport, sleep=sleep)
+        return cls(
+            GRAR_HOST,
+            settings or Settings(),
+            transport=transport,
+            sleep=sleep,
+            diagnostic=diagnostic,
+        )
 
     def safe_path(self, link: str) -> str:
         if "\\" in link or any(ord(c) < 32 for c in link) or link.startswith("//"):
@@ -152,6 +181,15 @@ class OfficialHttpClient:
         params: dict[str, str] | None = None,
     ) -> JsonValue:
         path = self.safe_path(link)
+        clean_path = path.partition("?")[0]
+        stage = (
+            "SEARCH" if clean_path == "/v2/adressen/zoeken" else clean_path.split("/")[2].upper()
+        )
+
+        def report(category: str) -> None:
+            if self._diagnostic is not None:
+                self._diagnostic(stage, category)
+
         async with self._lock:
             for attempt in range(self.settings.source_attempts):
                 gap = self._next_request - time.monotonic()
@@ -161,8 +199,10 @@ class OfficialHttpClient:
                 try:
                     async with self.client.stream("GET", path, params=params) as response:
                         if response.status_code in {404, 410}:
+                            report("HTTP_4XX")
                             raise SourceError("object_not_found", not_found=True)
                         if response.status_code == 429 or response.status_code >= 500:
+                            report("HTTP_429" if response.status_code == 429 else "HTTP_5XX")
                             if attempt + 1 >= self.settings.source_attempts:
                                 raise SourceError(
                                     "rate_limited"
@@ -171,6 +211,11 @@ class OfficialHttpClient:
                                 )
                             delay = self._retry_delay(response.headers.get("Retry-After"), attempt)
                         elif response.status_code != 200:
+                            report(
+                                "HTTP_4XX"
+                                if 400 <= response.status_code < 500
+                                else "INVALID_CONTRACT"
+                            )
                             raise SourceError(
                                 "unexpected_http_status", invalid=300 <= response.status_code < 400
                             )
@@ -181,17 +226,23 @@ class OfficialHttpClient:
                                 "application/ld+json",
                                 "application/geo+json",
                             }:
+                                report("INVALID_RESPONSE")
                                 raise SourceError("unexpected_media_type", invalid=True)
                             body = bytearray()
                             async for chunk in response.aiter_bytes(chunk_size=65536):
                                 body.extend(chunk)
                                 if len(body) > 2 * 1024 * 1024:
+                                    report("INVALID_RESPONSE")
                                     raise SourceError("response_too_large", invalid=True)
                             try:
-                                return JsonDocument.model_validate_json(bytes(body)).root
+                                value = JsonDocument.model_validate_json(bytes(body)).root
+                                report("SUCCESS")
+                                return value
                             except (ValidationError, RecursionError):
+                                report("INVALID_RESPONSE")
                                 raise SourceError("invalid_json", invalid=True) from None
-                except httpx.RequestError:
+                except httpx.RequestError as error:
+                    report(transport_diagnostic(error))
                     if attempt + 1 >= self.settings.source_attempts:
                         raise SourceError("transport_unavailable") from None
                     delay = self._retry_delay(None, attempt)

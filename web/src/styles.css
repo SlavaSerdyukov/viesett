@@ -444,6 +444,21 @@ input[type="radio"] {
 .saved-row span {
   flex: 1;
 }
+.mobile-logout {
+  display: none;
+}
+.upload-zone:focus-within {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+.context-panel input[type="date"] {
+  width: 250px;
+  max-width: 100%;
+  margin: 8px 12px 12px 0;
+}
+.context-panel h2 {
+  margin-bottom: 16px;
+}
 .app-shell {
   display: grid;
   grid-template-columns: 221px minmax(0, 1fr);
@@ -1263,6 +1278,12 @@ dialog label {
   .workspace-header > .text-button {
     font-size: 11px;
   }
+  .workspace-header > span {
+    display: none;
+  }
+  .workspace-header .mobile-logout {
+    display: inline-flex;
+  }
   .dossier-content {
     padding: 25px 18px 12px;
   }
@@ -1447,6 +1468,19 @@ dialog label {
   }
 }
 @media print {
+  *:focus {
+    outline: none !important;
+  }
+  .print-dossier .co-package {
+    break-inside: auto;
+  }
+  .print-dossier .checklist-row {
+    break-inside: avoid-page;
+  }
+  .print-dossier .citations > span {
+    display: inline-block;
+    margin-right: 10px;
+  }
   @page {
     size: A4;
     margin: 16mm;
@@ -1454,6 +1488,25 @@ dialog label {
   body {
     background: white;
     font-size: 11px;
+  }
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+  .print-dossier h2,
+  .print-dossier h3 {
+    break-after: avoid-page;
+  }
+  .print-dossier .citations {
+    overflow-wrap: anywhere;
+    line-height: 1.6;
+  }
+  .print-dossier thead {
+    display: table-header-group;
+  }
+  .print-dossier tr {
+    break-inside: avoid;
   }
   .demo-banner {
     font-size: 9px;
@@ -1513,6 +1566,11 @@ dialog label {
   }
   .print-dossier details > summary {
     display: none;
+  }
+  .print-dossier .requirements-deferred > summary {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
   }
   .print-dossier details > *:not(summary) {
     display: block !important;

@@ -1,17 +1,24 @@
 import { ConnectScreen } from "./ConnectScreen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { X, ShieldCheck, LoaderCircle } from "lucide-react";
-import { api, setToken } from "./api";
+import {
+  api,
+  ApiError,
+  configureBrowserSessions,
+  setCsrf,
+  setToken,
+} from "./api";
 import { AccessContext, type Access } from "./access";
-import { Brand, ErrorMessage, Modal } from "./components";
+import { Brand, Busy, ErrorMessage, Modal, RouteFocus } from "./components";
 import type { PolicyOut } from "./contracts";
 import { Start } from "./pages/Start";
 import { PdfViewer } from "./pages/PdfViewer";
 import { DossierPage } from "./pages/Dossier";
 
 export function App() {
+  const [sessionChecked, setSessionChecked] = useState(false);
   const [connected, setConnected] = useState(false),
     [pending, setPending] = useState<(() => Promise<void>) | null>(null);
   const [policies, setPolicies] = useState<PolicyOut[] | null>(null),
@@ -25,16 +32,72 @@ export function App() {
   const config = useQuery({ queryKey: ["web-config"], queryFn: api.config });
   const client = useQueryClient(),
     navigate = useNavigate();
-  function connect(token: string) {
+  useEffect(() => {
+    const enabled = config.data?.browser_sessions ?? false;
+    configureBrowserSessions(enabled);
+    let active = true;
+    if (enabled) {
+      setSessionChecked(false);
+      void api
+        .restore()
+        .then((s) => {
+          if (active) {
+            setCsrf(s.csrf_token);
+            setConnected(true);
+          }
+        })
+        .catch((e) => {
+          if (active && !(e instanceof ApiError && e.status === 401))
+            setError(e);
+        })
+        .finally(() => {
+          if (active) setSessionChecked(true);
+        });
+    }
+    return () => {
+      active = false;
+    };
+  }, [config.data?.browser_sessions]);
+  useEffect(() => {
+    function expired() {
+      setConnected(false);
+      setCsrf(null);
+      setToken(null);
+      setPolicies(null);
+      setPending(null);
+      setAfterPolicy(null);
+      client.removeQueries({
+        predicate: (q) => q.queryKey[0] !== "web-config",
+      });
+    }
+    window.addEventListener("viesett-session-expired", expired);
+    return () => window.removeEventListener("viesett-session-expired", expired);
+  }, [client]);
+  async function connect(token: string) {
     client.removeQueries({
       predicate: (query) => query.queryKey[0] !== "web-config",
     });
-    setToken(token.trim());
+    if (config.data?.browser_sessions) {
+      const session = await api.exchange(token.trim());
+      setCsrf(session.csrf_token);
+      setToken(null);
+    } else setToken(token.trim());
     setConnected(true);
     setTokenInput("");
   }
-  function disconnect() {
+  async function disconnect() {
+    if (config.data?.browser_sessions) {
+      try {
+        await api.logout();
+      } catch (e) {
+        if (!(e instanceof ApiError && e.status === 401)) {
+          setError(e);
+          return;
+        }
+      }
+    }
     setToken(null);
+    setCsrf(null);
     setConnected(false);
     client.clear();
     navigate("/");
@@ -51,7 +114,7 @@ export function App() {
     }
   }
   async function completeConnection(token: string) {
-    connect(token);
+    await connect(token);
     const action = pending;
     setPending(null);
     if (action) await run(action);
@@ -79,6 +142,7 @@ export function App() {
   };
   return (
     <AccessContext.Provider value={access}>
+      <RouteFocus />
       <a className="skip" href="#main">
         Skip to content
       </a>
@@ -88,35 +152,45 @@ export function App() {
           · No live register
         </div>
       )}
-      <Routes>
-        <Route path="/" element={<Start demo={config.data?.demo ?? false} />} />
-        <Route
-          path="/workspaces/:id/documents/:documentId"
-          element={connected ? <PdfViewer /> : <ConnectScreen />}
-        />
-        <Route
-          path="/workspaces/:id/:section?"
-          element={
-            connected ? (
-              <DossierPage
-                maxBytes={config.data?.max_upload_bytes ?? 10 * 1024 * 1024}
-              />
-            ) : (
-              <ConnectScreen />
-            )
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <main id="main" className="start">
-              <Brand />
-              <h1>Page not found.</h1>
-              <Link to="/">Return to Viesett</Link>
-            </main>
-          }
-        />
-      </Routes>
+      {config.data?.browser_sessions && !sessionChecked ? (
+        <main id="main" className="start">
+          <Brand />
+          <Busy>Restoring your private session…</Busy>
+        </main>
+      ) : (
+        <Routes>
+          <Route
+            path="/"
+            element={<Start demo={config.data?.demo ?? false} />}
+          />
+          <Route
+            path="/workspaces/:id/documents/:documentId"
+            element={connected ? <PdfViewer /> : <ConnectScreen />}
+          />
+          <Route
+            path="/workspaces/:id/:section?"
+            element={
+              connected ? (
+                <DossierPage
+                  maxBytes={config.data?.max_upload_bytes ?? 10 * 1024 * 1024}
+                />
+              ) : (
+                <ConnectScreen />
+              )
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <main id="main" className="start">
+                <Brand />
+                <h1>Page not found.</h1>
+                <Link to="/">Return to Viesett</Link>
+              </main>
+            }
+          />
+        </Routes>
+      )}
       {!!error && !pending && (
         <div className="toast">
           <ErrorMessage error={error} />
@@ -141,13 +215,14 @@ export function App() {
           close={() => setPending(null)}
         >
           <p>
-            Connect with your evaluation access token. It stays in this page's
-            memory and is forgotten when you reload or disconnect.
+            {config.data?.browser_sessions
+              ? "Enter your operator-provided private access token. It is exchanged for a short-lived HttpOnly browser session; reloads keep your dossier open."
+              : "Connect with your evaluation access token. It stays in this page's memory and is forgotten when you reload or disconnect."}
           </p>
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              void completeConnection(tokenInput);
+              void run(() => completeConnection(tokenInput));
             }}
           >
             <label htmlFor="access-token">Access token</label>
@@ -168,8 +243,9 @@ export function App() {
             <>
               <div className="divider">Local development access</div>
               <p className="muted">
-                Creates a new, one-hour evaluation session. To reopen an
-                existing dossier after a reload, use its original access token.
+                {config.data?.browser_sessions
+                  ? "Creates new fictional evaluation access. Your browser session survives reload until it expires or you disconnect."
+                  : "Creates a new, one-hour evaluation session. To reopen an existing dossier after a reload, use its original access token."}
               </p>
               <button
                 className="button secondary"

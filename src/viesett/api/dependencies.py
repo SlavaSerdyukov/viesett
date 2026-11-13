@@ -13,6 +13,7 @@ from viesett.core.security import RateLimiter
 from viesett.document_safety.pipeline import SafetyPipeline
 from viesett.integrations.sources import PublicSources
 from viesett.services.auth import authenticate
+from viesett.services.browser_sessions import current_session
 from viesett.storage.private import PrivateObjectStorage
 
 
@@ -46,6 +47,15 @@ async def require_user(
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)],
 ) -> UUID:
     token = credentials.credentials if credentials else None
+    if (
+        not token
+        and request.headers.get("authorization") is None
+        and runtime(request).settings.browser_sessions_enabled
+    ):
+        row = await current_session(db, request, runtime(request).settings)
+        if not runtime(request).limiter.allow("browser:" + row.secret_hash):
+            raise HTTPException(429, "Rate limit exceeded")
+        return row.user_id
     if token:
         key = "credential:" + hashlib.sha256(token.encode()).hexdigest()
         if not runtime(request).limiter.allow(key):

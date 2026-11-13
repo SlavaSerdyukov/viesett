@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -54,7 +54,7 @@ export function Start({ demo }: { demo: boolean }) {
         <span className="product-label">A clearer view before you buy</span>
         {access.connected ? (
           <button className="text-button" onClick={access.disconnect}>
-            Disconnect
+            Log out
           </button>
         ) : (
           <button
@@ -205,16 +205,32 @@ export function PreviewCard({
   actionLabel?: string;
   busy?: boolean;
 }) {
+  const result = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    result.current?.focus();
+  }, [preview]);
   return (
-    <section className="preview panel" aria-live="polite">
+    <section
+      ref={result}
+      tabIndex={-1}
+      aria-label="Property preview result"
+      className="preview panel"
+      aria-live="polite"
+    >
       <div className="eyebrow">
         {preview.is_demo ? "Demo property preview" : "Property preview"}
       </div>
       {preview.status === "UPSTREAM_UNAVAILABLE" ? (
         <>
-          <h2>Official source temporarily unavailable</h2>
+          <h2>
+            {preview.property.status === "INVALID_SOURCE_RESPONSE"
+              ? "Official source response could not be confirmed"
+              : "Official source temporarily unavailable"}
+          </h2>
           <p>
-            We couldn't reach the official property register right now. Your
+            {preview.property.status === "INVALID_SOURCE_RESPONSE"
+              ? "The official register returned information we could not validate. Your"
+              : "We couldn't reach the official property register right now. Your"}{" "}
             address has not been marked as invalid.
           </p>
           <button className="button secondary" onClick={check}>

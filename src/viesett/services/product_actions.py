@@ -76,6 +76,7 @@ async def seed_demo(db: AsyncSession, user: UUID, context: Runtime) -> UUID:
             text += (
                 "\nDEMO transaction context: qualifying transfer = true; "
                 "EPC exemption = false; ground transfer = true.\n"
+                "DEMO: renovation exemption = false; inherited renovation obligation = false.\n"
             )
         await intake(db, user, wid, text_pdf(text), filename, "application/pdf", context)
     # Fictional explicit transaction facts, never asserted as real official data.
@@ -89,6 +90,8 @@ async def seed_demo(db: AsyncSession, user: UUID, context: Runtime) -> UUID:
         ("transaction.qualifying_transfer", True, "boolean"),
         ("transaction.epc_exemption", False, "boolean"),
         ("transaction.ground_transfer", True, "boolean"),
+        ("transaction.renovation_exemption", False, "boolean"),
+        ("transaction.existing_renovation_obligation", False, "boolean"),
     ]:
         db.add(
             EvidenceItem(

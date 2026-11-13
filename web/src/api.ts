@@ -5,8 +5,18 @@ import type {
   SessionResponse,
   WebConfigResponse,
   WorkspaceOut,
+  BrowserSessionResponse,
 } from "./contracts";
 let token: string | null = null;
+let browserSessions = false;
+let csrf: string | null = null;
+export function configureBrowserSessions(enabled: boolean) {
+  browserSessions = enabled;
+  if (enabled) token = null;
+}
+export function setCsrf(value: string | null) {
+  csrf = value;
+}
 export function setToken(value: string | null) {
   token = value;
 }
@@ -18,7 +28,7 @@ export class ApiError extends Error {
         : status === 429
           ? "Too many requests. Please wait a minute before trying again."
           : status === 403
-            ? "This action is not available from this page."
+            ? "This action could not be verified. Reload your private session and try again."
             : status === 404
               ? "This dossier or document is not available to this session."
               : status === 413
@@ -40,13 +50,19 @@ export async function request<T>(
   try {
     response = await fetch("/api/v1" + path, {
       ...init,
-      credentials: "omit",
+      credentials: authenticated && browserSessions ? "same-origin" : "omit",
       cache: "no-store",
       headers: {
         ...(init.body instanceof Blob
           ? {}
           : { "Content-Type": "application/json" }),
         ...(authenticated && token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(authenticated &&
+        browserSessions &&
+        csrf &&
+        !["GET", "HEAD"].includes(init.method ?? "GET")
+          ? { "X-CSRF-Token": csrf }
+          : {}),
         ...init.headers,
       },
     });
@@ -55,7 +71,16 @@ export async function request<T>(
       "Connection interrupted. Your property has not been marked as invalid. Try again.",
     );
   }
-  if (!response.ok) throw new ApiError(response.status);
+  if (!response.ok) {
+    if (
+      response.status === 401 &&
+      authenticated &&
+      browserSessions &&
+      !["/browser-session", "/browser-session/exchange"].includes(path)
+    )
+      window.dispatchEvent(new Event("viesett-session-expired"));
+    throw new ApiError(response.status);
+  }
   return (response.status === 204 ? undefined : await response.json()) as T;
 }
 export type Selection = {
@@ -73,6 +98,13 @@ export const api = {
     ),
   session: () =>
     request<SessionResponse>("/development/session", { method: "POST" }, false),
+  exchange: (accessToken: string) =>
+    request<BrowserSessionResponse>("/browser-session/exchange", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }),
+  restore: () => request<BrowserSessionResponse>("/browser-session"),
+  logout: () => request<void>("/browser-session/logout", { method: "POST" }),
   workspaces: () => request<WorkspaceOut[]>("/workspaces"),
   create: (selection: Selection) =>
     request<Dossier>("/dossiers", {
@@ -81,6 +113,15 @@ export const api = {
     }),
   demo: () => request<Dossier>("/development/demo-dossier", { method: "POST" }),
   dossier: (id: string) => request<Dossier>(`/workspaces/${id}/dossier`),
+  answerContext: (id: string, value: string) =>
+    request<Dossier>(`/workspaces/${id}/context/KNOWN_DEED_DATE`, {
+      method: "POST",
+      body: JSON.stringify({ value }),
+    }),
+  clearContext: (id: string) =>
+    request<Dossier>(`/workspaces/${id}/context/KNOWN_DEED_DATE`, {
+      method: "DELETE",
+    }),
   refresh: (id: string) =>
     request<Dossier>(`/workspaces/${id}/refresh`, {
       method: "POST",
@@ -139,11 +180,15 @@ export async function privatePdf(
     `/api/v1/workspaces/${wid}/documents/${did}/content`,
     {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
-      credentials: "omit",
+      credentials: browserSessions ? "same-origin" : "omit",
       cache: "no-store",
       signal,
     },
   );
-  if (!response.ok) throw new ApiError(response.status);
+  if (!response.ok) {
+    if (response.status === 401 && browserSessions)
+      window.dispatchEvent(new Event("viesett-session-expired"));
+    throw new ApiError(response.status);
+  }
   return URL.createObjectURL(await response.blob());
 }

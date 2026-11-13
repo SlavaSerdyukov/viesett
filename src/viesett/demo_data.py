@@ -3,10 +3,13 @@
 from collections import Counter
 from copy import deepcopy
 from dataclasses import dataclass, field
+from datetime import date
 
 import httpx
 from pydantic import JsonValue
 
+# Date of the fictional document package, not the host's current calendar day.
+DEMO_EVALUATION_DATE = date(2026, 11, 12)
 HOST = "https://api.basisregisters.vlaanderen.be"
 VERSION = "2026-11-01T12:00:00+01:00"
 PARCEL_IDS = ["11001B0001-00S000", "11001B0009-00G004"]
@@ -121,7 +124,7 @@ class DemoOfficialService:
         path = request.url.path
         self.counts[path] += 1
         if path == "/v2/adressen/zoeken":
-            query = request.url.params.get("query", "").casefold()
+            query = request.url.params.get("q", "").casefold()
             if "unavailable" in query:
                 return httpx.Response(503)
             if "not found" in query:
@@ -131,7 +134,12 @@ class DemoOfficialService:
                     200,
                     json={
                         "resultaten": [
-                            {"objectId": i, "detail": HOST + "/v2/adressen/" + i}
+                            {
+                                "objectId": i,
+                                "id": f"https://data.vlaanderen.be/id/adres/{i}",
+                                "detail": HOST + "/v2/adressen/" + i,
+                                "result": f"Synthetic address {i}",
+                            }
                             for i in ["1", "2"]
                         ]
                     },
@@ -146,7 +154,7 @@ class DemoOfficialService:
             return httpx.Response(200, json=self.heritage_matches)
         assert request.url.host == "api.basisregisters.vlaanderen.be"
         if path == "/v2/adressen/zoeken":
-            assert request.url.params["resultType"] == "Address"
+            assert request.url.params["resultaatType"] == "adressen"
             assert request.url.params["status"] == "inGebruik"
             return httpx.Response(
                 200,
@@ -156,7 +164,7 @@ class DemoOfficialService:
                             "objectId": i,
                             "id": f"https://data.vlaanderen.be/id/adres/{i}",
                             "detail": HOST + f"/v2/adressen/{i}",
-                            "resultaat": f"Synthetic address {i}",
+                            "result": f"Synthetic address {i}",
                         }
                         for i in self.search_ids
                     ]

@@ -2,13 +2,13 @@
   "schema_version": "buyer-dossier:1.0.0",
   "workspace": {
     "is_demo": true,
-    "id": "17c118e2-4e81-4363-9a92-93e2dd1d30c8",
-    "owner_user_id": "065520ce-7b1d-411f-8016-a023d834203e",
+    "id": "2396d079-5c2b-4ce5-8d8d-1b94aa12f23a",
+    "owner_user_id": "9e9468bf-6dea-4389-91b1-d7b03d91e5ee",
     "status": "ACTIVE",
     "canonical_address": "Teststraat 42, 9000 Gent",
     "region": "FLANDERS",
-    "created_at": "2026-11-12T18:38:55.867545Z",
-    "updated_at": "2026-11-12T18:38:55.892508Z",
+    "created_at": "2026-11-12T23:58:32.018479Z",
+    "updated_at": "2026-11-12T23:58:32.045049Z",
     "archived_at": null
   },
   "is_demo": true,
@@ -20,7 +20,7 @@
     "unit_id": "10",
     "box": null,
     "parcels": ["11001B0001/00S000", "11001B0009/00G004"],
-    "last_refreshed": "2026-11-12T18:38:55.872398Z",
+    "last_refreshed": "2026-11-12T23:58:32.023514Z",
     "stale": false,
     "flood": {
       "status": "MANUAL_OFFICIAL_LOOKUP_REQUIRED",
@@ -43,7 +43,7 @@
         "classification": "DESIGNATION",
         "designation_status": null,
         "match_basis": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
-        "retrieved_at": "2026-11-12T18:38:55.908357Z"
+        "retrieved_at": "2026-11-12T23:58:32.061663Z"
       },
       {
         "official_id": "2",
@@ -55,7 +55,7 @@
         "classification": "DESIGNATION",
         "designation_status": null,
         "match_basis": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
-        "retrieved_at": "2026-11-12T18:38:55.908369Z"
+        "retrieved_at": "2026-11-12T23:58:32.061677Z"
       },
       {
         "official_id": "3",
@@ -67,7 +67,7 @@
         "classification": "INVENTORY_ONLY",
         "designation_status": null,
         "match_basis": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
-        "retrieved_at": "2026-11-12T18:38:55.908374Z"
+        "retrieved_at": "2026-11-12T23:58:32.061682Z"
       }
     ],
     "sources": [
@@ -77,7 +77,7 @@
         "attribution_text": "Bron: Digitaal Vlaanderen",
         "source_reference": "https://docs.basisregisters.vlaanderen.be/docs/api-documentation.html",
         "terms_reference": "https://www.vlaanderen.be/datavindplaats/catalogus/gebouwen-en-adressenregister",
-        "retrieved_at": "2026-11-12T18:38:55.892268Z"
+        "retrieved_at": "2026-11-12T23:58:32.044755Z"
       },
       {
         "provider": "HERITAGE",
@@ -85,30 +85,30 @@
         "attribution_text": "Onroerend Erfgoed",
         "source_reference": "https://geo.onroerenderfgoed.be/zoekdiensten/api_doc",
         "terms_reference": "https://inventaris.onroerenderfgoed.be/hergebruik",
-        "retrieved_at": "2026-11-12T18:38:55.909965Z"
+        "retrieved_at": "2026-11-12T23:58:32.063309Z"
       }
     ],
     "source_states": [
       {
         "provider": "GRAR",
         "current_refresh_status": "SUCCESS",
-        "last_attempt_at": "2026-11-12T18:38:55.871166Z",
-        "last_successful_retrieval": "2026-11-12T18:38:55.892268Z",
+        "last_attempt_at": "2026-11-12T23:58:32.022321Z",
+        "last_successful_retrieval": "2026-11-12T23:58:32.044755Z",
         "stale": false,
         "error_code": null
       },
       {
         "provider": "HERITAGE",
         "current_refresh_status": "SUCCESS",
-        "last_attempt_at": "2026-11-12T18:38:55.896587Z",
-        "last_successful_retrieval": "2026-11-12T18:38:55.909965Z",
+        "last_attempt_at": "2026-11-12T23:58:32.048701Z",
+        "last_successful_retrieval": "2026-11-12T23:58:32.063309Z",
         "stale": false,
         "error_code": null
       },
       {
         "provider": "FLOOD",
         "current_refresh_status": "MANUAL_OFFICIAL_LOOKUP_REQUIRED",
-        "last_attempt_at": "2026-11-12T18:38:55.924768Z",
+        "last_attempt_at": "2026-11-12T23:58:32.076734Z",
         "last_successful_retrieval": null,
         "stale": false,
         "error_code": null
@@ -142,15 +142,15 @@
       "validity_status": "EXPLICIT_CURRENT",
       "reason": "Residential transfer evidence, EPC Bouw availability and statutory exceptions must be established; presence is not signature/registry authentication.",
       "evidence_ids": [
-        "10446c67-4aaf-4cbd-b9e5-c4b4beacb4b4",
-        "4caa1b0c-3678-4929-afbe-19372b406d61",
-        "60233876-14e5-4139-b83a-ff81bedf8887",
-        "a66a30e6-2b31-41f8-ab43-24bb5721e89a",
-        "b53eb6dc-e49a-4e23-bf54-1e1fe46e22a1",
-        "c856a23b-eedd-42a8-9835-39d1f49e99de",
-        "f17c1538-1f35-4cad-baed-2f409babf20a"
+        "1a94ab5a-2312-4bb0-b51e-4ad494cded38",
+        "2d33f1b2-9d7f-454e-a1cd-b5086c6e071b",
+        "42261fe3-b86e-46a5-bfad-fccc94ec6912",
+        "6f40a593-ed1e-4029-8c76-f03464a77e40",
+        "98d94fdf-691e-4d0a-88b9-443048dc6e57",
+        "c266c530-03fe-4272-bec9-2e7b1f13a6c5",
+        "ece687ae-36d2-49e1-b1c7-462935e10bc5"
       ],
-      "document_ids": ["be047e07-af09-48f0-bed2-2c9c850378bf"],
+      "document_ids": ["1d15c85a-b974-4764-9a93-2f10997b928d"],
       "missing_parcels": [],
       "evaluation_date": "2026-11-12"
     },
@@ -238,17 +238,17 @@
       "validity_status": "UNVERIFIED",
       "reason": "Installation history, complete prior inspection, 25-year report period, significant modifications and documented demolition/renewal exception need review; a new report is not universally required.",
       "evidence_ids": [
-        "0e7241f2-e75e-4c04-83e6-2c811247cb0e",
-        "1078b810-e01d-4266-942e-15b7207d82bd",
-        "3065c2d3-ed5f-4840-ba68-eae343372f0f",
-        "77d4a397-00e9-4cbc-ad32-e63aabf1a1af",
-        "82fe5bc9-d1b0-4bc3-88ff-f899a31cd81f",
-        "a0f85a6b-fef6-43d6-aa36-c1089673043d",
-        "acf7a123-3c73-4199-8de2-c8fc7725e6a2",
-        "d9ea4cd8-d845-4d6f-a85b-9a6288288efe",
-        "f5609dd2-3b00-4a6a-9e91-a5fea6758792"
+        "1d5b6b67-5300-4cf4-a9f2-43bfb642ba04",
+        "325dade0-2274-435d-8da0-14d024c88562",
+        "3ec64cd5-496c-4ce1-b53b-c03475d73e8d",
+        "59a43ef6-a864-4d2c-bc94-88058aa0fed3",
+        "65e58e5b-b7c3-4f19-aae9-5031cdc6e20a",
+        "83cf17f6-08c5-432b-911c-b395e2891e64",
+        "9c18d259-fc6d-4484-8d0d-ed0771df6762",
+        "c730a586-48cc-4c7c-8534-a45452c50f3f",
+        "d33bc50b-6649-4d02-b2b2-062808285de2"
       ],
-      "document_ids": ["f9a47801-0f33-41df-a6a5-bf3e4fd54ea3"],
+      "document_ids": ["708c7510-12e2-47ad-bbe5-3abde3998bc6"],
       "missing_parcels": [],
       "evaluation_date": "2026-11-12"
     },
@@ -277,13 +277,14 @@
   ],
   "documents": [
     {
-      "id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+      "id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
       "filename": "Syndic demo.pdf",
       "kind": "SYNDIC_INFORMATION",
       "status": "ANALYZED",
       "association": "MATCHED",
-      "created_at": "2026-11-12T18:38:56.561747Z",
-      "analysis_id": "14540f9c-5933-4cf4-944a-4d3b5d4bae45",
+      "created_at": "2026-11-12T23:58:32.783947Z",
+      "processing_since": "2026-11-12T23:58:32.785136Z",
+      "analysis_id": "353b3646-bb5e-4c0a-bf1c-9b3b5862a1e3",
       "summary": [],
       "can_view": true,
       "can_retry": false,
@@ -307,13 +308,14 @@
       ]
     },
     {
-      "id": "2456c977-9491-4710-91da-023c44adb2c5",
+      "id": "23ea9085-ee61-4550-83dc-878916bc2118",
       "filename": "AGM 2026 demo.pdf",
       "kind": "AGM_MINUTES",
       "status": "ANALYZED",
       "association": "MATCHED",
-      "created_at": "2026-11-12T18:38:56.403406Z",
-      "analysis_id": "e7cc2dff-e6fd-4737-a8eb-ea5d73a36879",
+      "created_at": "2026-11-12T23:58:32.608364Z",
+      "processing_since": "2026-11-12T23:58:32.609583Z",
+      "analysis_id": "78e76b59-61f2-4621-a200-ee6f8e1fdbe2",
       "summary": [],
       "can_view": true,
       "can_retry": false,
@@ -337,13 +339,14 @@
       ]
     },
     {
-      "id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+      "id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
       "filename": "Basis deed demo.pdf",
       "kind": "BASIS_DEED",
       "status": "ANALYZED",
       "association": "MATCHED",
-      "created_at": "2026-11-12T18:38:56.246501Z",
-      "analysis_id": "d16256ef-a7c2-4af0-83fc-2eab95fdc4e7",
+      "created_at": "2026-11-12T23:58:32.427022Z",
+      "processing_since": "2026-11-12T23:58:32.428287Z",
+      "analysis_id": "9ba07bd3-17a8-4a88-99a7-61feee259c07",
       "summary": [],
       "can_view": true,
       "can_retry": false,
@@ -367,14 +370,15 @@
       ]
     },
     {
-      "id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+      "id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
       "filename": "Electrical demo.pdf",
       "kind": "ELECTRICAL_INSPECTION",
       "status": "ANALYZED",
       "association": "MATCHED",
-      "created_at": "2026-11-12T18:38:56.100805Z",
-      "analysis_id": "483d825f-a98e-4269-81ca-51c98a18ebd0",
-      "summary": ["electrical \u00b7 conclusion: niet-conform"],
+      "created_at": "2026-11-12T23:58:32.262464Z",
+      "processing_since": "2026-11-12T23:58:32.263795Z",
+      "analysis_id": "483f7c68-4631-44f3-9266-0e8a39098542",
+      "summary": ["electrical · conclusion: niet-conform"],
       "can_view": true,
       "can_retry": false,
       "supported_kinds": [
@@ -397,14 +401,15 @@
       ]
     },
     {
-      "id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+      "id": "1d15c85a-b974-4764-9a93-2f10997b928d",
       "filename": "EPC demo.pdf",
       "kind": "EPC",
       "status": "ANALYZED",
       "association": "MATCHED",
-      "created_at": "2026-11-12T18:38:55.932895Z",
-      "analysis_id": "5ffaef4d-e281-4aae-9fe4-ddb81d4e468c",
-      "summary": ["epc \u00b7 label: E"],
+      "created_at": "2026-11-12T23:58:32.084870Z",
+      "processing_since": "2026-11-12T23:58:32.088783Z",
+      "analysis_id": "af291258-ccab-4c4f-982d-fe6fa5aace28",
+      "summary": ["epc · label: E"],
       "can_view": true,
       "can_retry": false,
       "supported_kinds": [
@@ -429,129 +434,7 @@
   ],
   "findings": [
     {
-      "id": "225dc556-917a-4a5c-b7b5-5526cae28332",
-      "code": "ARTICLE_3_94_PACKAGE_COMPLETENESS",
-      "group": "Co-ownership",
-      "severity": "BLOCKING_DATA_GAP",
-      "title": "Missing or incomplete latest approved balance sheet",
-      "explanation": "Important information check cannot be completed. Applicability/scope must be confirmed; this does not prohibit the transaction.",
-      "next_step": "Please provide the missing property-specific co-ownership information: Missing or incomplete latest approved balance sheet",
-      "sources": [
-        {
-          "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.703411Z"
-        },
-        {
-          "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.702814Z"
-        },
-        {
-          "label": "Belgian Civil Code Book 3",
-          "document_id": null,
-          "page": null,
-          "uri": "https://www.ejustice.just.fgov.be/eli/loi/2020/02/04/2020A20347/justel",
-          "retrieved_at": null
-        }
-      ],
-      "rule_version": "1.0.0"
-    },
-    {
-      "id": "71d0ce77-a283-4a07-bf07-acb8eba11eb6",
-      "code": "CO_PLANNED_WORK_REVIEW",
-      "group": "Co-ownership",
-      "severity": "REVIEW",
-      "title": "Approved roof work needs allocation/payment review",
-      "explanation": "Budget, explicit project funding and expense key must be verified; estimated exposure never decides buyer/seller payment responsibility.",
-      "next_step": "Confirm the applicable expense key and which party bears this cost under the transfer agreement and Article 3.94 timing rules.",
-      "sources": [
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.538515Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539704Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540878Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537314Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537922Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539116Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.541474Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.536724Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.542108Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540290Z"
-        },
-        {
-          "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.383330Z"
-        }
-      ],
-      "rule_version": "1.0.0"
-    },
-    {
-      "id": "a14446e1-ddf6-4413-8a5b-b9a2a0841d99",
+      "id": "51fdbffc-d3b8-4b98-b217-e944c2f7fee2",
       "code": "FL_SOIL_REQUIRED",
       "group": "Soil",
       "severity": "BLOCKING_DATA_GAP",
@@ -563,78 +446,92 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "OVAM",
@@ -647,7 +544,7 @@
       "rule_version": "1.0.0"
     },
     {
-      "id": "b9a4506a-07da-4ce4-b095-ceaf8ce9e3cb",
+      "id": "dc3b0c4c-bccb-4b29-8ae1-4a188b04971e",
       "code": "FL_EPC_RENOVATION",
       "group": "Energy",
       "severity": "WARNING",
@@ -656,130 +553,144 @@
       "next_step": "Clarify with the seller: EPC E/F: renovation applicability requires attention",
       "sources": [
         {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.081678Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084385Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         },
         {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.082543Z"
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083152Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083821Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.080697Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084947Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.243606Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.241365Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.244862Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.242270Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.240394Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.242947Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.244238Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "Vlaanderen / VEKA",
@@ -792,7 +703,7 @@
       "rule_version": "1.0.0"
     },
     {
-      "id": "b4901f3c-f0eb-4f88-b14d-df8c6fbe191f",
+      "id": "f2bff8c0-bfe1-4442-8a7b-678008ba3212",
       "code": "BE_ELECTRICAL_NEGATIVE_SALE",
       "group": "Electrical",
       "severity": "WARNING",
@@ -804,141 +715,155 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.228485Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.227864Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231682Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232840Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229933Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         },
         {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.230545Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229271Z"
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231088Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232270Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.412859Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.413532Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.407761Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.409395Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.410200Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.410955Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.411627Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.408538Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.412247Z"
         },
         {
           "label": "FOD Economie / AREI",
@@ -951,7 +876,7 @@
       "rule_version": "1.0.0"
     },
     {
-      "id": "2d1d396d-7473-47e1-a77e-13d5aec99ae1",
+      "id": "7a929177-bfd9-4211-a3ab-39f1cc5c9fb0",
       "code": "FL_SOIL_PARCEL_COVERAGE",
       "group": "Soil",
       "severity": "BLOCKING_DATA_GAP",
@@ -963,78 +888,92 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "OVAM",
@@ -1045,12 +984,134 @@
         }
       ],
       "rule_version": "1.0.0"
+    },
+    {
+      "id": "9fb7ce83-8fed-4710-845f-179898fe83ff",
+      "code": "ARTICLE_3_94_PACKAGE_COMPLETENESS",
+      "group": "Co-ownership",
+      "severity": "BLOCKING_DATA_GAP",
+      "title": "Missing or incomplete latest approved balance sheet",
+      "explanation": "Important information check cannot be completed. Applicability/scope must be confirmed; this does not prohibit the transaction.",
+      "next_step": "Please provide the missing property-specific co-ownership information: Missing or incomplete latest approved balance sheet",
+      "sources": [
+        {
+          "label": "Syndic demo.pdf",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.940129Z"
+        },
+        {
+          "label": "Syndic demo.pdf",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.940732Z"
+        },
+        {
+          "label": "Belgian Civil Code Book 3",
+          "document_id": null,
+          "page": null,
+          "uri": "https://www.ejustice.just.fgov.be/eli/loi/2020/02/04/2020A20347/justel",
+          "retrieved_at": null
+        }
+      ],
+      "rule_version": "1.0.0"
+    },
+    {
+      "id": "fbcc301d-3000-4059-8740-12ea8e5cfbb6",
+      "code": "CO_PLANNED_WORK_REVIEW",
+      "group": "Co-ownership",
+      "severity": "REVIEW",
+      "title": "Approved roof work needs allocation/payment review",
+      "explanation": "Budget, explicit project funding and expense key must be verified; estimated exposure never decides buyer/seller payment responsibility.",
+      "next_step": "Confirm the applicable expense key and which party bears this cost under the transfer agreement and Article 3.94 timing rules.",
+      "sources": [
+        {
+          "label": "Basis deed demo.pdf",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.583992Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.759186Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.764182Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.759781Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.763531Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.758589Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.762886Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.760379Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.762203Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.760994Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.761593Z"
+        }
+      ],
+      "rule_version": "1.0.0"
     }
   ],
   "findings_summary": {
     "BLOCKING_DATA_GAP": 3,
-    "REVIEW": 1,
-    "WARNING": 2
+    "WARNING": 2,
+    "REVIEW": 1
   },
   "co_ownership": {
     "co_ownership_status": "DOCUMENTED",
@@ -1070,29 +1131,29 @@
         "context": "root",
         "lot": "A1",
         "effective_date": "2026-11-12",
-        "evidence_ids": ["a54987f0-3932-4900-865a-4e1a0289f892"]
+        "evidence_ids": ["976cd5be-8a8f-4721-85bb-9ca6e6f4c112"]
       },
       "attached_lots": ["Kelder K1"],
       "source_document_ids": [
-        "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
-        "2456c977-9491-4710-91da-023c44adb2c5",
-        "c0e79dad-41ee-43bb-a63e-da2a65088102"
+        "126a4705-b2ec-4284-b95f-e7f700f39c99",
+        "23ea9085-ee61-4550-83dc-878916bc2118",
+        "60f73de3-8a20-4a95-8c7c-19574b34ccd4"
       ],
       "evidence_ids": [
-        "0958de0e-91ae-42dc-ab21-5030234e0dac",
-        "27311dda-e218-42a3-862e-5916d0ed8cfe",
-        "467a9950-5a1b-4011-9c82-5087230b614f",
-        "686a3c02-553d-46b8-a1eb-f47269f4066c",
-        "750b285f-9054-4ef7-833f-487f76b51bc6",
-        "824ca1a6-c1b7-4f80-9153-b550bc1cb215",
-        "9663029b-8492-49c7-871e-f7db055e530c",
-        "98f88b72-9f57-4717-8a31-f70920f717ac",
-        "9f7f9bf6-34fb-4925-bdc6-c9cec42379f1",
-        "a54987f0-3932-4900-865a-4e1a0289f892",
-        "d275a896-6d1e-4b39-9e1a-e66c04a9bc2a",
-        "f15a6ab4-dd96-466e-be26-5c77f3be9b10",
-        "f2c1323c-2d3c-43b8-890d-c6336e53f0fd",
-        "fac59975-bb5b-407f-ac41-db37087aeb74"
+        "07727b56-f5d3-425a-81fd-6602a096d19c",
+        "0cb768c4-48be-4d65-af4d-1ad6bd891457",
+        "2ed9e24c-27db-4058-96cd-33cb74f49ac8",
+        "31edeb0f-a266-4c13-a8e4-78afd79012c4",
+        "32b56b98-36a6-4ec9-99e6-39ef0f578f8a",
+        "4b567eda-5b9b-45ce-b35b-511df7639939",
+        "562c1182-0d67-4e37-96e1-334517bbcca7",
+        "6439e13b-58e4-4410-a3f2-352602fbea3a",
+        "976cd5be-8a8f-4721-85bb-9ca6e6f4c112",
+        "9a3f6df7-8c63-40b6-9d44-ab583b35359b",
+        "9f8dd849-c947-457d-8bbc-023f5416de8f",
+        "b6c8c536-3497-434c-93bb-89b75502af28",
+        "ccd2eb19-e207-45ff-8090-6933a9148f62",
+        "e1cf6c76-cc69-42bb-a347-d58bacefb385"
       ]
     },
     "article_3_94_completeness": [
@@ -1100,45 +1161,45 @@
         "code": "WORKING_CAPITAL",
         "status": "PRESENT",
         "reason": "Explicit documentary information; absence is never zero/none.",
-        "evidence_ids": ["10ac6531-ef60-43cf-84d2-684305e246a6"],
+        "evidence_ids": ["ed9f478a-253a-4eb4-b3b7-7392553da657"],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
         "code": "RESERVE_CAPITAL",
         "status": "PRESENT",
         "reason": "Explicit documentary information; absence is never zero/none.",
-        "evidence_ids": ["28d0e697-5972-4bab-8449-eea77971ff41"],
+        "evidence_ids": ["be9f15f0-965c-460e-a939-9f70146b6cf2"],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
         "code": "SELLER_ARREARS",
         "status": "EXPLICIT_NONE",
         "reason": "Explicit documentary information; absence is never zero/none.",
-        "evidence_ids": ["68a5217f-ab1e-441a-b50c-b85dc1a4490c"],
+        "evidence_ids": ["fe0625be-6b4c-4ee8-bdd9-f6d591a11550"],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
         "code": "RESERVE_CAPITAL_CALLS",
         "status": "EXPLICIT_NONE",
         "reason": "Explicit documentary information; absence is never zero/none.",
-        "evidence_ids": ["f9aaa9a1-082a-4c4d-9f1a-503671096966"],
+        "evidence_ids": ["6d6f65fe-b453-4145-8192-ccd1fb77b6b3"],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
         "code": "PENDING_LITIGATION",
         "status": "EXPLICIT_NONE",
         "reason": "Explicit documentary information; absence is never zero/none.",
-        "evidence_ids": ["baea1883-284b-454b-9c6a-f37ea17b3328"],
+        "evidence_ids": ["e04163c0-0b0c-4465-b561-c506d92a5fbd"],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
@@ -1146,8 +1207,8 @@
         "status": "PRESENT",
         "reason": "Rolling explicit coverage of all relevant documents; a meeting date alone does not prove completeness.",
         "evidence_ids": [
-          "0338c466-a59d-4650-a249-f6c7e6881be6",
-          "1b5c224a-68e9-4e8c-9776-60e69444451f"
+          "730d8850-1797-47b8-8e0d-903bb97320ca",
+          "888e25f3-f3f2-4c0d-a872-19eb99661b99"
         ],
         "coverage": {
           "coverage_start": "2023-11-12",
@@ -1157,15 +1218,15 @@
               "start": "2023-11-12",
               "end": "2026-11-12",
               "evidence_ids": [
-                "0338c466-a59d-4650-a249-f6c7e6881be6",
-                "1b5c224a-68e9-4e8c-9776-60e69444451f"
+                "730d8850-1797-47b8-8e0d-903bb97320ca",
+                "888e25f3-f3f2-4c0d-a872-19eb99661b99"
               ]
             }
           ],
           "gaps": [],
           "basis": "Explicit documented coverage; no inference from one meeting date"
         },
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
@@ -1173,8 +1234,8 @@
         "status": "PRESENT",
         "reason": "Rolling explicit coverage of all relevant documents; a meeting date alone does not prove completeness.",
         "evidence_ids": [
-          "51ef467b-657d-4b26-ab08-a7605e2cbce1",
-          "9f2b63c7-ef3d-4937-bdfe-7d0fac4ddde7"
+          "368aa592-e19c-40e9-a941-4ce1203f4255",
+          "44b44bbc-2b98-4429-86d1-b21161912e8a"
         ],
         "coverage": {
           "coverage_start": "2024-11-12",
@@ -1184,15 +1245,15 @@
               "start": "2024-11-12",
               "end": "2026-11-12",
               "evidence_ids": [
-                "51ef467b-657d-4b26-ab08-a7605e2cbce1",
-                "9f2b63c7-ef3d-4937-bdfe-7d0fac4ddde7"
+                "368aa592-e19c-40e9-a941-4ce1203f4255",
+                "44b44bbc-2b98-4429-86d1-b21161912e8a"
               ]
             }
           ],
           "gaps": [],
           "basis": "Explicit documented coverage; no inference from one meeting date"
         },
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       },
       {
@@ -1200,11 +1261,11 @@
         "status": "PARTIAL",
         "reason": "An explicit reference alone is partial; an available balance copy with documented AGM approval is required for presence. Latestness remains documentary.",
         "evidence_ids": [
-          "18d6c5f6-3f89-4af1-a321-d7a72ad86cde",
-          "5b886260-1e4c-469f-9185-73e64c68153e"
+          "37077e49-0720-4db0-8ef4-26cca05b9468",
+          "a68870a7-6185-4f86-b4c0-77f62c1ace63"
         ],
         "coverage": null,
-        "legal_reference": "Belgian Civil Code 3.94 \u00a71",
+        "legal_reference": "Belgian Civil Code 3.94 §1",
         "rule_version": "1.0.0"
       }
     ],
@@ -1217,8 +1278,8 @@
       "effective_date": "2026-11-12",
       "context": "BUILDING",
       "lot": null,
-      "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
-      "evidence_ids": ["10ac6531-ef60-43cf-84d2-684305e246a6"]
+      "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
+      "evidence_ids": ["ed9f478a-253a-4eb4-b3b7-7392553da657"]
     },
     "current_reserve_capital": {
       "concept": "reserve_capital",
@@ -1229,8 +1290,8 @@
       "effective_date": "2026-11-12",
       "context": "BUILDING",
       "lot": null,
-      "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
-      "evidence_ids": ["28d0e697-5972-4bab-8449-eea77971ff41"]
+      "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
+      "evidence_ids": ["be9f15f0-965c-460e-a939-9f70146b6cf2"]
     },
     "planned_works": [
       {
@@ -1253,16 +1314,16 @@
         "capital_call_total": null,
         "expected_start": "2027-01-10",
         "evidence_ids": [
-          "04498dfa-2366-4194-b423-07d6ef9da184",
-          "06f1a7e2-1702-41ad-8106-c0b15db80984",
-          "1741a108-7ff0-4697-b05a-0baa59897011",
-          "2727f847-8c1c-433f-90d7-e48c5a999297",
-          "35109ad1-b239-4849-b2ca-da512d3267e3",
-          "378b0adc-1a5a-4c2a-a390-4f691b12adf1",
-          "517fc82e-9089-4d15-b322-75939b1ec123",
-          "6037e456-ede4-49e9-8b2e-72208889264d",
-          "763e9728-b5bf-4c89-8daa-92a46fb69228",
-          "f4328122-e21d-4782-91dc-b15e1a69da84"
+          "11abe33d-aa87-47ec-bd20-e9340ea26be8",
+          "17fc611c-91f1-4ad7-84cf-0f16ee1efdc9",
+          "243d7cfd-73c2-43a0-90b9-009f90acf2dc",
+          "37aa3fcf-f69c-439c-8df5-0ebb78691c48",
+          "4de66da3-2718-4866-b1b3-5d92fcb0eb72",
+          "695aedf5-c77a-4dd2-b056-8ff1ee66b496",
+          "6d2096cb-669e-4e0c-b3a6-076694fb5f20",
+          "6f9e493b-12b8-4e84-9f4a-a6419fca70c8",
+          "c14c0276-2529-47ce-b044-6c8c06da0c31",
+          "c6e1d67a-b483-4deb-9e11-9b3bb6fbd641"
         ]
       }
     ],
@@ -1292,7 +1353,7 @@
           "context": "root",
           "lot": "A1",
           "effective_date": "2026-11-12",
-          "evidence_ids": ["a54987f0-3932-4900-865a-4e1a0289f892"]
+          "evidence_ids": ["976cd5be-8a8f-4721-85bb-9ca6e6f4c112"]
         },
         "gross_proportional_amount": {
           "amount": "9000.00",
@@ -1307,21 +1368,21 @@
         "confidence": "DOCUMENTED_INPUTS",
         "assumptions": [
           "Mathematical proportional estimate, not the buyer's legally owed debt.",
-          "Notary must verify transfer timing, agreement and Article 3.94 \u00a72 allocation.",
+          "Notary must verify transfer timing, agreement and Article 3.94 §2 allocation.",
           "Only explicitly allocated project funding is deducted; general fund balances are not used."
         ],
         "source_evidence_ids": [
-          "04498dfa-2366-4194-b423-07d6ef9da184",
-          "06f1a7e2-1702-41ad-8106-c0b15db80984",
-          "1741a108-7ff0-4697-b05a-0baa59897011",
-          "2727f847-8c1c-433f-90d7-e48c5a999297",
-          "35109ad1-b239-4849-b2ca-da512d3267e3",
-          "378b0adc-1a5a-4c2a-a390-4f691b12adf1",
-          "517fc82e-9089-4d15-b322-75939b1ec123",
-          "6037e456-ede4-49e9-8b2e-72208889264d",
-          "763e9728-b5bf-4c89-8daa-92a46fb69228",
-          "a54987f0-3932-4900-865a-4e1a0289f892",
-          "f4328122-e21d-4782-91dc-b15e1a69da84"
+          "11abe33d-aa87-47ec-bd20-e9340ea26be8",
+          "17fc611c-91f1-4ad7-84cf-0f16ee1efdc9",
+          "243d7cfd-73c2-43a0-90b9-009f90acf2dc",
+          "37aa3fcf-f69c-439c-8df5-0ebb78691c48",
+          "4de66da3-2718-4866-b1b3-5d92fcb0eb72",
+          "695aedf5-c77a-4dd2-b056-8ff1ee66b496",
+          "6d2096cb-669e-4e0c-b3a6-076694fb5f20",
+          "6f9e493b-12b8-4e84-9f4a-a6419fca70c8",
+          "976cd5be-8a8f-4721-85bb-9ca6e6f4c112",
+          "c14c0276-2529-47ce-b044-6c8c06da0c31",
+          "c6e1d67a-b483-4deb-9e11-9b3bb6fbd641"
         ],
         "calculation_version": "proportional-exposure:1.0.0",
         "calculation_code": "PROJECT_PROPORTIONAL_EXPOSURE",
@@ -1334,7 +1395,7 @@
   },
   "questions": [
     {
-      "key": "a14446e1-ddf6-4413-8a5b-b9a2a0841d99",
+      "key": "51fdbffc-d3b8-4b98-b217-e944c2f7fee2",
       "target_role": "SELLER",
       "question_text": "Clarify with the seller: Soil Certificate evidence incomplete",
       "reason": "Viesett lacks reliable evidence for this check; this does not establish a legal transaction prohibition. An applicable bodemattest is needed before a qualifying ground transfer agreement, including non-risk ground; inheritance and statutory transfer definitions must be checked.",
@@ -1343,78 +1404,92 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "OVAM",
@@ -1426,136 +1501,150 @@
       ]
     },
     {
-      "key": "b9a4506a-07da-4ce4-b095-ceaf8ce9e3cb",
+      "key": "dc3b0c4c-bccb-4b29-8ae1-4a188b04971e",
       "target_role": "SELLER",
       "question_text": "Clarify with the seller: EPC E/F: renovation applicability requires attention",
       "reason": "For a qualifying transfer, the current baseline targets EPC D or better within six years. Absolute deadline unavailable: relevant deed/right-establishment date, exceptions or an inherited remaining period are not established.",
       "sources": [
         {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.081678Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084385Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         },
         {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.082543Z"
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083152Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083821Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.080697Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084947Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.243606Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.241365Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.244862Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.242270Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.240394Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.242947Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.244238Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "Vlaanderen / VEKA",
@@ -1567,7 +1656,7 @@
       ]
     },
     {
-      "key": "b4901f3c-f0eb-4f88-b14d-df8c6fbe191f",
+      "key": "f2bff8c0-bfe1-4442-8a7b-678008ba3212",
       "target_role": "SELLER",
       "question_text": "Clarify with the seller: Electrical inspection is non-conforming",
       "reason": "For the relevant negative sale inspection, the buyer generally remedies the installation and obtains a new inspection within 18 months of the authentic deed. Absolute deadline unavailable: authentic-deed date is missing.",
@@ -1576,141 +1665,155 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.228485Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.227864Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231682Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232840Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229933Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         },
         {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.230545Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229271Z"
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231088Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
-        },
-        {
-          "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232270Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.412859Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.413532Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.407761Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.409395Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.410200Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.410955Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.411627Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.408538Z"
+        },
+        {
+          "label": "Electrical demo.pdf",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.412247Z"
         },
         {
           "label": "FOD Economie / AREI",
@@ -1722,7 +1825,7 @@
       ]
     },
     {
-      "key": "2d1d396d-7473-47e1-a77e-13d5aec99ae1",
+      "key": "7a929177-bfd9-4211-a3ab-39f1cc5c9fb0",
       "target_role": "SELLER",
       "question_text": "Clarify with the seller: Soil certificate parcel coverage is incomplete",
       "reason": "The dossier does not demonstrate bodemattest coverage for every official parcel.",
@@ -1731,78 +1834,92 @@
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
-          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
-        },
-        {
-          "label": "Official Flemish register",
-          "document_id": null,
-          "page": null,
-          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
-        },
-        {
-          "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         },
         {
           "label": "Official Flemish register",
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
+        },
+        {
+          "label": "Official Flemish register",
+          "document_id": null,
+          "page": null,
+          "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        },
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         },
         {
           "label": "OVAM",
@@ -1821,17 +1938,17 @@
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.702814Z"
+          "retrieved_at": "2026-11-12T23:58:32.940732Z"
         },
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.703411Z"
+          "retrieved_at": "2026-11-12T23:58:32.940129Z"
         }
       ]
     },
@@ -1842,92 +1959,92 @@
       "reason": "Budget, explicit project funding and expense key must be verified; estimated exposure never decides buyer/seller payment responsibility.",
       "sources": [
         {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539704Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540878Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539116Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.536724Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540290Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537922Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.538515Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537314Z"
-        },
-        {
-          "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
-          "page": 1,
-          "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.541474Z"
-        },
-        {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.383330Z"
+          "retrieved_at": "2026-11-12T23:58:32.583992Z"
         },
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.542108Z"
+          "retrieved_at": "2026-11-12T23:58:32.760379Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.758589Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.763531Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.760994Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.761593Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.764182Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.759186Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.759781Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.762203Z"
+        },
+        {
+          "label": "AGM 2026 demo.pdf",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.762886Z"
         }
       ]
     }
   ],
   "evidence": [
     {
-      "id": "7d37504a-4c18-4f1d-a3ae-5e8baf2b3790",
-      "label": "address \u00b7 canonical",
+      "id": "46bad31a-0432-4f3e-a831-8dd5a95ecf9b",
+      "label": "address · canonical",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -1935,16 +2052,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "3f5a2590-b836-4329-bc1b-a3aeb25c7a7f",
-      "label": "address \u00b7 object id",
+      "id": "95839b08-3cea-4493-94df-6220afb20a5d",
+      "label": "address · object id",
       "value": "1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -1952,16 +2069,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "4d58ac75-bffe-4466-b9b6-c9728f927ce3",
-      "label": "address \u00b7 status",
+      "id": "10755da0-aa74-4fdc-aeb3-26854d5ee6fb",
+      "label": "address · status",
       "value": "inGebruik",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -1969,16 +2086,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "4a4e4998-c316-4cb9-ac0b-2bd69bd583cc",
-      "label": "address \u00b7 street name",
+      "id": "c773ae1f-a4fd-4685-b6cf-cc16c23f7c32",
+      "label": "address · street name",
       "value": "Teststraat",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -1986,16 +2103,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "f835d191-4051-4f67-be18-b859e013cff0",
-      "label": "address \u00b7 house number",
+      "id": "e705506d-349f-47ac-a8ac-c28634b8a99b",
+      "label": "address · house number",
       "value": "42",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -2003,16 +2120,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "4904ba21-ccb6-417b-88c8-cbf82da1a8dd",
-      "label": "address \u00b7 postal code",
+      "id": "85d8c6cb-7e82-4af1-b2ed-17ee02d8e96b",
+      "label": "address · postal code",
       "value": "9000",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -2020,16 +2137,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "9058954b-1179-4eea-8f25-89ad63d58420",
-      "label": "address \u00b7 municipality",
+      "id": "89dcc877-97c0-4e36-aa1e-3e95a5494fdf",
+      "label": "address · municipality",
       "value": "Gent",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -2037,16 +2154,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "4c99ae88-ff4d-4be0-bc82-6d7e60eea414",
-      "label": "address \u00b7 municipality code",
+      "id": "c0fa7e0a-2d8d-4754-8e25-226bc6044172",
+      "label": "address · municipality code",
       "value": "44021",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872398Z",
+      "date": "2026-11-12T23:58:32.023514Z",
       "effective_date": null,
       "sources": [
         {
@@ -2054,16 +2171,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/adres/1",
-          "retrieved_at": "2026-11-12T18:38:55.872398Z"
+          "retrieved_at": "2026-11-12T23:58:32.023514Z"
         }
       ]
     },
     {
-      "id": "0bd7fa84-3f65-4e11-b002-f093f45e8aff",
-      "label": "building unit \u00b7 object id",
+      "id": "1355b51a-2d15-4dda-b312-6e4fb86cb26e",
+      "label": "building unit · object id",
       "value": "10",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872752Z",
+      "date": "2026-11-12T23:58:32.023980Z",
       "effective_date": null,
       "sources": [
         {
@@ -2071,16 +2188,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         }
       ]
     },
     {
-      "id": "ce9cb33b-a8ad-4e40-b169-91d8cdf4c744",
-      "label": "building unit \u00b7 status",
+      "id": "46a461c0-ad4d-469e-9e18-6e20ad4d1bed",
+      "label": "building unit · status",
       "value": "gerealiseerd",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872752Z",
+      "date": "2026-11-12T23:58:32.023980Z",
       "effective_date": null,
       "sources": [
         {
@@ -2088,16 +2205,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         }
       ]
     },
     {
-      "id": "1df44fed-64db-4971-8f2d-3e2ab001ceea",
-      "label": "building \u00b7 object id",
+      "id": "81fae468-907b-4245-be3a-2f3d7d2ad5f3",
+      "label": "building · object id",
       "value": "100",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872875Z",
+      "date": "2026-11-12T23:58:32.024119Z",
       "effective_date": null,
       "sources": [
         {
@@ -2105,16 +2222,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         }
       ]
     },
     {
-      "id": "9938e15b-6381-41c2-a4c0-7b44888fba76",
-      "label": "building \u00b7 status",
+      "id": "87d514bb-88d5-4c57-b829-794a63111c3d",
+      "label": "building · status",
       "value": "gerealiseerd",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872875Z",
+      "date": "2026-11-12T23:58:32.024119Z",
       "effective_date": null,
       "sources": [
         {
@@ -2122,16 +2239,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouw/100",
-          "retrieved_at": "2026-11-12T18:38:55.872875Z"
+          "retrieved_at": "2026-11-12T23:58:32.024119Z"
         }
       ]
     },
     {
-      "id": "91eca213-0184-45ba-b93b-f1d2d3f62999",
-      "label": "building unit \u00b7 function",
+      "id": "9972d94b-28a5-4a7e-99d4-1a15e2a7ca1d",
+      "label": "building unit · function",
       "value": "nietGekend",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.872752Z",
+      "date": "2026-11-12T23:58:32.023980Z",
       "effective_date": null,
       "sources": [
         {
@@ -2139,16 +2256,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/gebouweenheid/10",
-          "retrieved_at": "2026-11-12T18:38:55.872752Z"
+          "retrieved_at": "2026-11-12T23:58:32.023980Z"
         }
       ]
     },
     {
-      "id": "568e114f-f6ae-4e41-9f95-93373ef20768",
-      "label": "parcel \u00b7 object id",
+      "id": "e9e0b8c7-ed3b-483f-bf1a-7c33a12c054e",
+      "label": "parcel · object id",
       "value": "11001B0001-00S000",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873189Z",
+      "date": "2026-11-12T23:58:32.024479Z",
       "effective_date": null,
       "sources": [
         {
@@ -2156,16 +2273,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         }
       ]
     },
     {
-      "id": "fce35a7c-d324-4ec9-8fb5-e6642585f15c",
-      "label": "parcel \u00b7 capakey",
+      "id": "3ec41a9c-5885-4489-ba08-b95c0a4c246d",
+      "label": "parcel · capakey",
       "value": "11001B0001/00S000",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873189Z",
+      "date": "2026-11-12T23:58:32.024479Z",
       "effective_date": null,
       "sources": [
         {
@@ -2173,16 +2290,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         }
       ]
     },
     {
-      "id": "0c7c8c4d-3db1-4485-9142-f9fd467c740a",
-      "label": "parcel \u00b7 status",
+      "id": "49167ae3-96ed-437d-9c5c-0ac448aa1545",
+      "label": "parcel · status",
       "value": "gerealiseerd",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873189Z",
+      "date": "2026-11-12T23:58:32.024479Z",
       "effective_date": null,
       "sources": [
         {
@@ -2190,16 +2307,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0001-00S000",
-          "retrieved_at": "2026-11-12T18:38:55.873189Z"
+          "retrieved_at": "2026-11-12T23:58:32.024479Z"
         }
       ]
     },
     {
-      "id": "525e786e-bd65-44f0-a2fc-4ec292b5b324",
-      "label": "parcel \u00b7 object id",
+      "id": "e0c34892-d395-4190-8e78-a8041bbf6d3a",
+      "label": "parcel · object id",
       "value": "11001B0009-00G004",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873271Z",
+      "date": "2026-11-12T23:58:32.024574Z",
       "effective_date": null,
       "sources": [
         {
@@ -2207,16 +2324,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
         }
       ]
     },
     {
-      "id": "ed5c78ed-cd3b-4bcb-a67c-a3b2b3c41126",
-      "label": "parcel \u00b7 capakey",
+      "id": "3142c4a3-7626-42a9-8c62-6267e914bf9e",
+      "label": "parcel · capakey",
       "value": "11001B0009/00G004",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873271Z",
+      "date": "2026-11-12T23:58:32.024574Z",
       "effective_date": null,
       "sources": [
         {
@@ -2224,16 +2341,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
         }
       ]
     },
     {
-      "id": "b83b214c-3412-4f13-a779-04ffec51692e",
-      "label": "parcel \u00b7 status",
+      "id": "8002b253-ca64-46d6-92b9-d65737f27446",
+      "label": "parcel · status",
       "value": "gerealiseerd",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.873271Z",
+      "date": "2026-11-12T23:58:32.024574Z",
       "effective_date": null,
       "sources": [
         {
@@ -2241,16 +2358,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://data.vlaanderen.be/id/perceel/11001B0009-00G004",
-          "retrieved_at": "2026-11-12T18:38:55.873271Z"
+          "retrieved_at": "2026-11-12T23:58:32.024574Z"
         }
       ]
     },
     {
-      "id": "7aedeb02-d154-4150-bafa-4b09360e28c0",
-      "label": "heritage \u00b7 object id",
+      "id": "e9a00b29-239a-4649-b54b-7ad6eeb536dd",
+      "label": "heritage · object id",
       "value": "1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2258,16 +2375,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "ba2116f0-b42b-4040-9577-1ea7802125a7",
-      "label": "heritage \u00b7 title",
+      "id": "0965a8b3-81f1-420b-8b53-a11f30da4b79",
+      "label": "heritage · title",
       "value": "Synthetic heritage 1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2275,16 +2392,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "d5b008a4-e11f-44e5-98ee-f636a089b768",
-      "label": "heritage \u00b7 category",
+      "id": "f57e360f-6674-4d8a-ba3a-17b177905695",
+      "label": "heritage · category",
       "value": "aanduidingsobjecten",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2292,16 +2409,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "33619f20-7113-4508-bc74-f870bcf6f09d",
-      "label": "heritage \u00b7 type uri",
+      "id": "2ed296f4-bddc-4c4b-bf7b-955fc7397b1d",
+      "label": "heritage · type uri",
       "value": "https://id.erfgoed.net/thesauri/aanduidingstypes/1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2309,16 +2426,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "532f5696-c8ab-4771-81b7-3faaf6844d99",
-      "label": "heritage \u00b7 type label",
+      "id": "dfa58312-d123-402f-bd11-a9ca56d18615",
+      "label": "heritage · type label",
       "value": "beschermd monument",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2326,16 +2443,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "b3ccf343-57c5-4e0a-8e78-613bd4432c82",
-      "label": "heritage \u00b7 classification",
+      "id": "e6e47317-6b79-4c00-bdaa-e2bef12f6c43",
+      "label": "heritage · classification",
       "value": "DESIGNATION",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2343,16 +2460,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "5d2defd5-d09d-4f65-b72b-10eb9e1168a4",
-      "label": "heritage \u00b7 match basis",
+      "id": "d60de580-d346-48f0-86c4-109ac7521c92",
+      "label": "heritage · match basis",
       "value": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908357Z",
+      "date": "2026-11-12T23:58:32.061663Z",
       "effective_date": null,
       "sources": [
         {
@@ -2360,16 +2477,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/1",
-          "retrieved_at": "2026-11-12T18:38:55.908357Z"
+          "retrieved_at": "2026-11-12T23:58:32.061663Z"
         }
       ]
     },
     {
-      "id": "26c7a94b-9a18-4525-860f-491efd04ea3f",
-      "label": "heritage \u00b7 object id",
+      "id": "12f6b4e1-f411-4cdc-953b-cf4dd2399b4f",
+      "label": "heritage · object id",
       "value": "2",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2377,16 +2494,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "771511fe-9538-4be7-b5a5-3881ac49d0f4",
-      "label": "heritage \u00b7 title",
+      "id": "b0ac5751-85d4-4815-a5f3-16669753afbb",
+      "label": "heritage · title",
       "value": "Synthetic heritage 2",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2394,16 +2511,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "357ab124-7043-44bc-bca8-37809fc77e01",
-      "label": "heritage \u00b7 category",
+      "id": "a551d35f-b857-421f-8ca3-5e6852b96aa5",
+      "label": "heritage · category",
       "value": "aanduidingsobjecten",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2411,16 +2528,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "888bd074-b04c-46d8-93f8-0ef0d89a2e44",
-      "label": "heritage \u00b7 type uri",
+      "id": "59536e3c-700a-4560-bd1d-505dc51452b2",
+      "label": "heritage · type uri",
       "value": "https://id.erfgoed.net/thesauri/aanduidingstypes/1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2428,16 +2545,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "caa08bf9-d5d1-4576-a747-854a34681b7d",
-      "label": "heritage \u00b7 type label",
+      "id": "b0013e7e-b57a-4c9e-9613-135dd12484d8",
+      "label": "heritage · type label",
       "value": "vastgesteld bouwkundig erfgoed",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2445,16 +2562,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "697bad01-1ed3-45ea-8b42-3bc5c8a60468",
-      "label": "heritage \u00b7 classification",
+      "id": "4eed21f0-1f60-4c4c-acc9-d5a8c69f906f",
+      "label": "heritage · classification",
       "value": "DESIGNATION",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2462,16 +2579,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "e5864f4f-85d3-44bf-9434-66ba95f0be5a",
-      "label": "heritage \u00b7 match basis",
+      "id": "2683b214-fb6c-4bd4-b66c-a4a6fccbf070",
+      "label": "heritage · match basis",
       "value": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908369Z",
+      "date": "2026-11-12T23:58:32.061677Z",
       "effective_date": null,
       "sources": [
         {
@@ -2479,16 +2596,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/aanduidingsobjecten/2",
-          "retrieved_at": "2026-11-12T18:38:55.908369Z"
+          "retrieved_at": "2026-11-12T23:58:32.061677Z"
         }
       ]
     },
     {
-      "id": "df8530e5-7372-43f6-a0e3-be3bbddee25e",
-      "label": "heritage \u00b7 object id",
+      "id": "8897c1e2-d48f-44aa-84ca-689e1c5df11b",
+      "label": "heritage · object id",
       "value": "3",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2496,16 +2613,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "b41eef70-d24b-433c-bcd0-f2cb68865218",
-      "label": "heritage \u00b7 title",
+      "id": "8defc3ee-2202-40aa-b989-f03cfaa9c947",
+      "label": "heritage · title",
       "value": "Synthetic heritage 3",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2513,16 +2630,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "ddd64cfc-ba87-4d34-a83e-5d096c8bd31f",
-      "label": "heritage \u00b7 category",
+      "id": "73df6383-11aa-4f4a-a0cf-a1c822f006a1",
+      "label": "heritage · category",
       "value": "erfgoedobjecten",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2530,16 +2647,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "02fc26a4-4588-4f85-9ef4-d626b9caefec",
-      "label": "heritage \u00b7 type uri",
+      "id": "cdcd372f-0d00-45db-b76d-add9bbee1ed0",
+      "label": "heritage · type uri",
       "value": "https://id.erfgoed.net/thesauri/inventaristypes/1",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2547,16 +2664,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "acdff9b2-1646-43b1-8231-0994a2346d70",
-      "label": "heritage \u00b7 type label",
+      "id": "74722818-7ec0-42c9-bf2e-6582f1d4cc7d",
+      "label": "heritage · type label",
       "value": "bouwkundig erfgoed",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2564,16 +2681,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "c9691364-5a4b-40f2-875a-12de1387d7ba",
-      "label": "heritage \u00b7 classification",
+      "id": "7c103926-0268-4c9b-bb33-0cd7cb516e0c",
+      "label": "heritage · classification",
       "value": "INVENTORY_ONLY",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2581,16 +2698,16 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "8473a716-b1a9-4dc4-a5f3-b72d5689cefc",
-      "label": "heritage \u00b7 match basis",
+      "id": "8a54b7eb-80ff-4b11-bd94-2cee872f6d08",
+      "label": "heritage · match basis",
       "value": "official building polygon intersection; EPSG:31370 to EPSG:4326; buffer=0",
       "authority": "OFFICIAL",
-      "date": "2026-11-12T18:38:55.908374Z",
+      "date": "2026-11-12T23:58:32.061682Z",
       "effective_date": null,
       "sources": [
         {
@@ -2598,1083 +2715,1129 @@
           "document_id": null,
           "page": null,
           "uri": "https://id.erfgoed.net/erfgoedobjecten/3",
-          "retrieved_at": "2026-11-12T18:38:55.908374Z"
+          "retrieved_at": "2026-11-12T23:58:32.061682Z"
         }
       ]
     },
     {
-      "id": "60233876-14e5-4139-b83a-ff81bedf8887",
-      "label": "epc \u00b7 address",
+      "id": "1a94ab5a-2312-4bb0-b51e-4ad494cded38",
+      "label": "epc · address",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.080697Z",
+      "date": "2026-11-12T23:58:32.240394Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.080697Z"
+          "retrieved_at": "2026-11-12T23:58:32.240394Z"
         }
       ]
     },
     {
-      "id": "a66a30e6-2b31-41f8-ab43-24bb5721e89a",
-      "label": "epc \u00b7 certificate id",
+      "id": "ece687ae-36d2-49e1-b1c7-462935e10bc5",
+      "label": "epc · certificate id",
       "value": "SYNTHETIC-EPC-2026",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.081678Z",
+      "date": "2026-11-12T23:58:32.241365Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.081678Z"
+          "retrieved_at": "2026-11-12T23:58:32.241365Z"
         }
       ]
     },
     {
-      "id": "f17c1538-1f35-4cad-baed-2f409babf20a",
-      "label": "epc \u00b7 issue date",
+      "id": "6f40a593-ed1e-4029-8c76-f03464a77e40",
+      "label": "epc · issue date",
       "value": "2026-01-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.082543Z",
+      "date": "2026-11-12T23:58:32.242270Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.082543Z"
+          "retrieved_at": "2026-11-12T23:58:32.242270Z"
         }
       ]
     },
     {
-      "id": "4caa1b0c-3678-4929-afbe-19372b406d61",
-      "label": "epc \u00b7 valid until",
+      "id": "42261fe3-b86e-46a5-bfad-fccc94ec6912",
+      "label": "epc · valid until",
       "value": "2036-01-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.083152Z",
+      "date": "2026-11-12T23:58:32.242947Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083152Z"
+          "retrieved_at": "2026-11-12T23:58:32.242947Z"
         }
       ]
     },
     {
-      "id": "c856a23b-eedd-42a8-9835-39d1f49e99de",
-      "label": "epc \u00b7 label",
+      "id": "c266c530-03fe-4272-bec9-2e7b1f13a6c5",
+      "label": "epc · label",
       "value": "E",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.083821Z",
+      "date": "2026-11-12T23:58:32.243606Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.083821Z"
+          "retrieved_at": "2026-11-12T23:58:32.243606Z"
         }
       ]
     },
     {
-      "id": "10446c67-4aaf-4cbd-b9e5-c4b4beacb4b4",
-      "label": "epc \u00b7 energy score",
+      "id": "98d94fdf-691e-4d0a-88b9-443048dc6e57",
+      "label": "epc · energy score",
       "value": "450.0",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.084385Z",
+      "date": "2026-11-12T23:58:32.244238Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084385Z"
+          "retrieved_at": "2026-11-12T23:58:32.244238Z"
         }
       ]
     },
     {
-      "id": "b53eb6dc-e49a-4e23-bf54-1e1fe46e22a1",
-      "label": "epc \u00b7 residential",
+      "id": "2d33f1b2-9d7f-454e-a1cd-b5086c6e071b",
+      "label": "epc · residential",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.084947Z",
+      "date": "2026-11-12T23:58:32.244862Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.084947Z"
+          "retrieved_at": "2026-11-12T23:58:32.244862Z"
         }
       ]
     },
     {
-      "id": "a0f85a6b-fef6-43d6-aa36-c1089673043d",
-      "label": "electrical \u00b7 address",
+      "id": "9c18d259-fc6d-4484-8d0d-ed0771df6762",
+      "label": "electrical · address",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.227864Z",
+      "date": "2026-11-12T23:58:32.407761Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.227864Z"
+          "retrieved_at": "2026-11-12T23:58:32.407761Z"
         }
       ]
     },
     {
-      "id": "acf7a123-3c73-4199-8de2-c8fc7725e6a2",
-      "label": "electrical \u00b7 certificate id",
+      "id": "83cf17f6-08c5-432b-911c-b395e2891e64",
+      "label": "electrical · certificate id",
       "value": "SYNTHETIC-ELEC-2026",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.228485Z",
+      "date": "2026-11-12T23:58:32.408538Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.228485Z"
+          "retrieved_at": "2026-11-12T23:58:32.408538Z"
         }
       ]
     },
     {
-      "id": "0e7241f2-e75e-4c04-83e6-2c811247cb0e",
-      "label": "electrical \u00b7 inspection body",
+      "id": "1d5b6b67-5300-4cf4-a9f2-43bfb642ba04",
+      "label": "electrical · inspection body",
       "value": "Synthetic inspection body",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.229271Z",
+      "date": "2026-11-12T23:58:32.409395Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229271Z"
+          "retrieved_at": "2026-11-12T23:58:32.409395Z"
         }
       ]
     },
     {
-      "id": "77d4a397-00e9-4cbc-ad32-e63aabf1a1af",
-      "label": "electrical \u00b7 inspection type",
+      "id": "59a43ef6-a864-4d2c-bc94-88058aa0fed3",
+      "label": "electrical · inspection type",
       "value": "verkoop",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.229933Z",
+      "date": "2026-11-12T23:58:32.410200Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.229933Z"
+          "retrieved_at": "2026-11-12T23:58:32.410200Z"
         }
       ]
     },
     {
-      "id": "d9ea4cd8-d845-4d6f-a85b-9a6288288efe",
-      "label": "electrical \u00b7 inspection date",
+      "id": "c730a586-48cc-4c7c-8534-a45452c50f3f",
+      "label": "electrical · inspection date",
       "value": "2026-01-11",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.230545Z",
+      "date": "2026-11-12T23:58:32.410955Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.230545Z"
+          "retrieved_at": "2026-11-12T23:58:32.410955Z"
         }
       ]
     },
     {
-      "id": "82fe5bc9-d1b0-4bc3-88ff-f899a31cd81f",
-      "label": "electrical \u00b7 conforming",
+      "id": "325dade0-2274-435d-8da0-14d024c88562",
+      "label": "electrical · conforming",
       "value": "False",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.231088Z",
+      "date": "2026-11-12T23:58:32.411627Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231088Z"
+          "retrieved_at": "2026-11-12T23:58:32.411627Z"
         }
       ]
     },
     {
-      "id": "3065c2d3-ed5f-4840-ba68-eae343372f0f",
-      "label": "electrical \u00b7 conclusion",
+      "id": "65e58e5b-b7c3-4f19-aae9-5031cdc6e20a",
+      "label": "electrical · conclusion",
       "value": "niet-conform",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.231682Z",
+      "date": "2026-11-12T23:58:32.412247Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.231682Z"
+          "retrieved_at": "2026-11-12T23:58:32.412247Z"
         }
       ]
     },
     {
-      "id": "1078b810-e01d-4266-942e-15b7207d82bd",
-      "label": "electrical \u00b7 violation",
+      "id": "3ec64cd5-496c-4ce1-b53b-c03475d73e8d",
+      "label": "electrical · violation",
       "value": "ontbrekende beschermingsgeleider",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.232270Z",
+      "date": "2026-11-12T23:58:32.412859Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232270Z"
+          "retrieved_at": "2026-11-12T23:58:32.412859Z"
         }
       ]
     },
     {
-      "id": "f5609dd2-3b00-4a6a-9e91-a5fea6758792",
-      "label": "electrical \u00b7 follow up",
+      "id": "d33bc50b-6649-4d02-b2b2-062808285de2",
+      "label": "electrical · follow up",
       "value": "hercontrole vereist",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.232840Z",
+      "date": "2026-11-12T23:58:32.413532Z",
       "effective_date": null,
       "sources": [
         {
           "label": "Electrical demo.pdf",
-          "document_id": "f9a47801-0f33-41df-a6a5-bf3e4fd54ea3",
+          "document_id": "708c7510-12e2-47ad-bbe5-3abde3998bc6",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.232840Z"
+          "retrieved_at": "2026-11-12T23:58:32.413532Z"
         }
       ]
     },
     {
-      "id": "824ca1a6-c1b7-4f80-9153-b550bc1cb215",
-      "label": "co \u00b7 association name",
+      "id": "2ed9e24c-27db-4058-96cd-33cb74f49ac8",
+      "label": "co · association name",
       "value": "VME Residentie Fictief",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.378703Z",
+      "date": "2026-11-12T23:58:32.579064Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.378703Z"
+          "retrieved_at": "2026-11-12T23:58:32.579064Z"
         }
       ]
     },
     {
-      "id": "0958de0e-91ae-42dc-ab21-5030234e0dac",
-      "label": "co \u00b7 enterprise number",
+      "id": "b6c8c536-3497-434c-93bb-89b75502af28",
+      "label": "co · enterprise number",
       "value": "0000000196",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.379395Z",
+      "date": "2026-11-12T23:58:32.579774Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.379395Z"
+          "retrieved_at": "2026-11-12T23:58:32.579774Z"
         }
       ]
     },
     {
-      "id": "fac59975-bb5b-407f-ac41-db37087aeb74",
-      "label": "co \u00b7 address",
+      "id": "562c1182-0d67-4e37-96e1-334517bbcca7",
+      "label": "co · address",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.380133Z",
+      "date": "2026-11-12T23:58:32.580560Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.380133Z"
+          "retrieved_at": "2026-11-12T23:58:32.580560Z"
         }
       ]
     },
     {
-      "id": "750b285f-9054-4ef7-833f-487f76b51bc6",
-      "label": "co \u00b7 lot",
+      "id": "e1cf6c76-cc69-42bb-a347-d58bacefb385",
+      "label": "co · lot",
       "value": "A1",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.380808Z",
+      "date": "2026-11-12T23:58:32.581348Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.380808Z"
+          "retrieved_at": "2026-11-12T23:58:32.581348Z"
         }
       ]
     },
     {
-      "id": "8811b572-1fb7-48a9-954f-28f7e0382cb7",
-      "label": "co \u00b7 reporting context",
+      "id": "5e7e9599-18b9-40d2-af41-91570bf4aac5",
+      "label": "co · reporting context",
       "value": "BUILDING",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.381481Z",
+      "date": "2026-11-12T23:58:32.582088Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.381481Z"
+          "retrieved_at": "2026-11-12T23:58:32.582088Z"
         }
       ]
     },
     {
-      "id": "2ae74b18-9866-4509-b946-fb0b6853c8b4",
-      "label": "co \u00b7 as of",
+      "id": "27470aa8-bd95-4cc3-9379-7d3563904ce1",
+      "label": "co · as of",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.382096Z",
+      "date": "2026-11-12T23:58:32.582727Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.382096Z"
+          "retrieved_at": "2026-11-12T23:58:32.582727Z"
         }
       ]
     },
     {
-      "id": "69dab5eb-9891-4ac5-9e2b-3a99e55e8fbb",
-      "label": "co \u00b7 private designation",
+      "id": "f4815134-ccdf-4e1f-9f8c-8bfe2cdcf7f6",
+      "label": "co · private designation",
       "value": "Appartement A1",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.382708Z",
+      "date": "2026-11-12T23:58:32.583348Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.382708Z"
+          "retrieved_at": "2026-11-12T23:58:32.583348Z"
         }
       ]
     },
     {
-      "id": "a54987f0-3932-4900-865a-4e1a0289f892",
-      "label": "co \u00b7 share",
+      "id": "976cd5be-8a8f-4721-85bb-9ca6e6f4c112",
+      "label": "co · share",
       "value": "75/1000",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.383330Z",
+      "date": "2026-11-12T23:58:32.583992Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.383330Z"
+          "retrieved_at": "2026-11-12T23:58:32.583992Z"
         }
       ]
     },
     {
-      "id": "9f7f9bf6-34fb-4925-bdc6-c9cec42379f1",
-      "label": "co \u00b7 attached lot",
+      "id": "07727b56-f5d3-425a-81fd-6602a096d19c",
+      "label": "co · attached lot",
       "value": "Kelder K1",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.384005Z",
+      "date": "2026-11-12T23:58:32.584660Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Basis deed demo.pdf",
-          "document_id": "09245a2b-3cd5-4366-8f93-3fdf201cccfd",
+          "document_id": "126a4705-b2ec-4284-b95f-e7f700f39c99",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.384005Z"
+          "retrieved_at": "2026-11-12T23:58:32.584660Z"
         }
       ]
     },
     {
-      "id": "467a9950-5a1b-4011-9c82-5087230b614f",
-      "label": "co \u00b7 association name",
+      "id": "9a3f6df7-8c63-40b6-9d44-ab583b35359b",
+      "label": "co · association name",
       "value": "VME Residentie Fictief",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.532644Z",
+      "date": "2026-11-12T23:58:32.754519Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.532644Z"
+          "retrieved_at": "2026-11-12T23:58:32.754519Z"
         }
       ]
     },
     {
-      "id": "98f88b72-9f57-4717-8a31-f70920f717ac",
-      "label": "co \u00b7 enterprise number",
+      "id": "31edeb0f-a266-4c13-a8e4-78afd79012c4",
+      "label": "co · enterprise number",
       "value": "0000000196",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.533373Z",
+      "date": "2026-11-12T23:58:32.755214Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.533373Z"
+          "retrieved_at": "2026-11-12T23:58:32.755214Z"
         }
       ]
     },
     {
-      "id": "f15a6ab4-dd96-466e-be26-5c77f3be9b10",
-      "label": "co \u00b7 address",
+      "id": "0cb768c4-48be-4d65-af4d-1ad6bd891457",
+      "label": "co · address",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.534132Z",
+      "date": "2026-11-12T23:58:32.755988Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.534132Z"
+          "retrieved_at": "2026-11-12T23:58:32.755988Z"
         }
       ]
     },
     {
-      "id": "27311dda-e218-42a3-862e-5916d0ed8cfe",
-      "label": "co \u00b7 lot",
+      "id": "4b567eda-5b9b-45ce-b35b-511df7639939",
+      "label": "co · lot",
       "value": "A1",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.534829Z",
+      "date": "2026-11-12T23:58:32.756709Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.534829Z"
+          "retrieved_at": "2026-11-12T23:58:32.756709Z"
         }
       ]
     },
     {
-      "id": "a9860641-a800-4e7c-aebf-3c2922022d3f",
-      "label": "co \u00b7 reporting context",
+      "id": "9d02ea8d-5a06-4267-8f0d-6e6c46673fec",
+      "label": "co · reporting context",
       "value": "BUILDING",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.535492Z",
+      "date": "2026-11-12T23:58:32.757344Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.535492Z"
+          "retrieved_at": "2026-11-12T23:58:32.757344Z"
         }
       ]
     },
     {
-      "id": "ecca3612-491e-458f-af8e-4ae31afa28e1",
-      "label": "co \u00b7 as of",
+      "id": "9aff89a3-7ea9-4627-806d-07e3bab50337",
+      "label": "co · as of",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.536106Z",
+      "date": "2026-11-12T23:58:32.757958Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.536106Z"
+          "retrieved_at": "2026-11-12T23:58:32.757958Z"
         }
       ]
     },
     {
-      "id": "2727f847-8c1c-433f-90d7-e48c5a999297",
-      "label": "co \u00b7 meeting date",
+      "id": "17fc611c-91f1-4ad7-84cf-0f16ee1efdc9",
+      "label": "co · meeting date",
       "value": "2026-03-01",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.536724Z",
+      "date": "2026-11-12T23:58:32.758589Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.536724Z"
+          "retrieved_at": "2026-11-12T23:58:32.758589Z"
         }
       ]
     },
     {
-      "id": "6037e456-ede4-49e9-8b2e-72208889264d",
-      "label": "co \u00b7 category",
+      "id": "6d2096cb-669e-4e0c-b3a6-076694fb5f20",
+      "label": "co · category",
       "value": "ROOF",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.537314Z",
+      "date": "2026-11-12T23:58:32.759186Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537314Z"
+          "retrieved_at": "2026-11-12T23:58:32.759186Z"
         }
       ]
     },
     {
-      "id": "378b0adc-1a5a-4c2a-a390-4f691b12adf1",
-      "label": "co \u00b7 project reference",
+      "id": "6f9e493b-12b8-4e84-9f4a-a6419fca70c8",
+      "label": "co · project reference",
       "value": "ROOF-2026",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.537922Z",
+      "date": "2026-11-12T23:58:32.759781Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.537922Z"
+          "retrieved_at": "2026-11-12T23:58:32.759781Z"
         }
       ]
     },
     {
-      "id": "517fc82e-9089-4d15-b322-75939b1ec123",
-      "label": "co \u00b7 decision status",
+      "id": "11abe33d-aa87-47ec-bd20-e9340ea26be8",
+      "label": "co · decision status",
       "value": "APPROVED",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.538515Z",
+      "date": "2026-11-12T23:58:32.760379Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.538515Z"
+          "retrieved_at": "2026-11-12T23:58:32.760379Z"
         }
       ]
     },
     {
-      "id": "1741a108-7ff0-4697-b05a-0baa59897011",
-      "label": "co \u00b7 budget",
+      "id": "37aa3fcf-f69c-439c-8df5-0ebb78691c48",
+      "label": "co · budget",
       "value": "120000.00",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.539116Z",
+      "date": "2026-11-12T23:58:32.760994Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539116Z"
+          "retrieved_at": "2026-11-12T23:58:32.760994Z"
         }
       ]
     },
     {
-      "id": "04498dfa-2366-4194-b423-07d6ef9da184",
-      "label": "co \u00b7 reserve allocation",
+      "id": "4de66da3-2718-4866-b1b3-5d92fcb0eb72",
+      "label": "co · reserve allocation",
       "value": "40000.00",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.539704Z",
+      "date": "2026-11-12T23:58:32.761593Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.539704Z"
+          "retrieved_at": "2026-11-12T23:58:32.761593Z"
         }
       ]
     },
     {
-      "id": "35109ad1-b239-4849-b2ca-da512d3267e3",
-      "label": "co \u00b7 funding source",
+      "id": "c14c0276-2529-47ce-b044-6c8c06da0c31",
+      "label": "co · funding source",
       "value": "RESERVE_CAPITAL",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.540290Z",
+      "date": "2026-11-12T23:58:32.762203Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540290Z"
+          "retrieved_at": "2026-11-12T23:58:32.762203Z"
         }
       ]
     },
     {
-      "id": "06f1a7e2-1702-41ad-8106-c0b15db80984",
-      "label": "co \u00b7 general share applies",
+      "id": "c6e1d67a-b483-4deb-9e11-9b3bb6fbd641",
+      "label": "co · general share applies",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.540878Z",
+      "date": "2026-11-12T23:58:32.762886Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.540878Z"
+          "retrieved_at": "2026-11-12T23:58:32.762886Z"
         }
       ]
     },
     {
-      "id": "763e9728-b5bf-4c89-8daa-92a46fb69228",
-      "label": "co \u00b7 vote result",
+      "id": "243d7cfd-73c2-43a0-90b9-009f90acf2dc",
+      "label": "co · vote result",
       "value": "4/5",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.541474Z",
+      "date": "2026-11-12T23:58:32.763531Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.541474Z"
+          "retrieved_at": "2026-11-12T23:58:32.763531Z"
         }
       ]
     },
     {
-      "id": "f4328122-e21d-4782-91dc-b15e1a69da84",
-      "label": "co \u00b7 expected start",
+      "id": "695aedf5-c77a-4dd2-b056-8ff1ee66b496",
+      "label": "co · expected start",
       "value": "2027-01-10",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.542108Z",
+      "date": "2026-11-12T23:58:32.764182Z",
       "effective_date": "2026-03-01",
       "sources": [
         {
           "label": "AGM 2026 demo.pdf",
-          "document_id": "2456c977-9491-4710-91da-023c44adb2c5",
+          "document_id": "23ea9085-ee61-4550-83dc-878916bc2118",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.542108Z"
+          "retrieved_at": "2026-11-12T23:58:32.764182Z"
         }
       ]
     },
     {
-      "id": "9663029b-8492-49c7-871e-f7db055e530c",
-      "label": "co \u00b7 association name",
+      "id": "32b56b98-36a6-4ec9-99e6-39ef0f578f8a",
+      "label": "co · association name",
       "value": "VME Residentie Fictief",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.693457Z",
+      "date": "2026-11-12T23:58:32.930733Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.693457Z"
+          "retrieved_at": "2026-11-12T23:58:32.930733Z"
         }
       ]
     },
     {
-      "id": "686a3c02-553d-46b8-a1eb-f47269f4066c",
-      "label": "co \u00b7 enterprise number",
+      "id": "ccd2eb19-e207-45ff-8090-6933a9148f62",
+      "label": "co · enterprise number",
       "value": "0000000196",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.694036Z",
+      "date": "2026-11-12T23:58:32.931363Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.694036Z"
+          "retrieved_at": "2026-11-12T23:58:32.931363Z"
         }
       ]
     },
     {
-      "id": "f2c1323c-2d3c-43b8-890d-c6336e53f0fd",
-      "label": "co \u00b7 address",
+      "id": "6439e13b-58e4-4410-a3f2-352602fbea3a",
+      "label": "co · address",
       "value": "Teststraat 42, 9000 Gent",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.694837Z",
+      "date": "2026-11-12T23:58:32.932050Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.694837Z"
+          "retrieved_at": "2026-11-12T23:58:32.932050Z"
         }
       ]
     },
     {
-      "id": "d275a896-6d1e-4b39-9e1a-e66c04a9bc2a",
-      "label": "co \u00b7 lot",
+      "id": "9f8dd849-c947-457d-8bbc-023f5416de8f",
+      "label": "co · lot",
       "value": "A1",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.695702Z",
+      "date": "2026-11-12T23:58:32.932680Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.695702Z"
+          "retrieved_at": "2026-11-12T23:58:32.932680Z"
         }
       ]
     },
     {
-      "id": "51cb3764-2b9b-444b-a1fc-322e4455894c",
-      "label": "co \u00b7 reporting context",
+      "id": "4b29809a-7062-4b3a-bd1c-01cc0fc89d63",
+      "label": "co · reporting context",
       "value": "BUILDING",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.696412Z",
+      "date": "2026-11-12T23:58:32.933292Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.696412Z"
+          "retrieved_at": "2026-11-12T23:58:32.933292Z"
         }
       ]
     },
     {
-      "id": "b8ccd8dd-d928-4d2a-a27f-bdf57ccaeba0",
-      "label": "co \u00b7 as of",
+      "id": "8cf62f3b-d302-4550-aa99-d05aa91cb108",
+      "label": "co · as of",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.697014Z",
+      "date": "2026-11-12T23:58:32.933918Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.697014Z"
+          "retrieved_at": "2026-11-12T23:58:32.933918Z"
         }
       ]
     },
     {
-      "id": "10ac6531-ef60-43cf-84d2-684305e246a6",
-      "label": "co \u00b7 working capital",
+      "id": "ed9f478a-253a-4eb4-b3b7-7392553da657",
+      "label": "co · working capital",
       "value": "12000.00",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.697659Z",
+      "date": "2026-11-12T23:58:32.934535Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.697659Z"
+          "retrieved_at": "2026-11-12T23:58:32.934535Z"
         }
       ]
     },
     {
-      "id": "28d0e697-5972-4bab-8449-eea77971ff41",
-      "label": "co \u00b7 reserve capital",
+      "id": "be9f15f0-965c-460e-a939-9f70146b6cf2",
+      "label": "co · reserve capital",
       "value": "50000.00",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.698221Z",
+      "date": "2026-11-12T23:58:32.935137Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.698221Z"
+          "retrieved_at": "2026-11-12T23:58:32.935137Z"
         }
       ]
     },
     {
-      "id": "68a5217f-ab1e-441a-b50c-b85dc1a4490c",
-      "label": "co \u00b7 seller arrears",
+      "id": "fe0625be-6b4c-4ee8-bdd9-f6d591a11550",
+      "label": "co · seller arrears",
       "value": "0.00",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.698760Z",
+      "date": "2026-11-12T23:58:32.935736Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.698760Z"
+          "retrieved_at": "2026-11-12T23:58:32.935736Z"
         }
       ]
     },
     {
-      "id": "f9aaa9a1-082a-4c4d-9f1a-503671096966",
-      "label": "co \u00b7 calls none",
+      "id": "6d6f65fe-b453-4145-8192-ccd1fb77b6b3",
+      "label": "co · calls none",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.699302Z",
+      "date": "2026-11-12T23:58:32.936331Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.699302Z"
+          "retrieved_at": "2026-11-12T23:58:32.936331Z"
         }
       ]
     },
     {
-      "id": "baea1883-284b-454b-9c6a-f37ea17b3328",
-      "label": "co \u00b7 litigation none",
+      "id": "e04163c0-0b0c-4465-b561-c506d92a5fbd",
+      "label": "co · litigation none",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.699874Z",
+      "date": "2026-11-12T23:58:32.936928Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.699874Z"
+          "retrieved_at": "2026-11-12T23:58:32.936928Z"
         }
       ]
     },
     {
-      "id": "1b5c224a-68e9-4e8c-9776-60e69444451f",
-      "label": "co \u00b7 minutes coverage start",
+      "id": "888e25f3-f3f2-4c0d-a872-19eb99661b99",
+      "label": "co · minutes coverage start",
       "value": "2023-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.700437Z",
+      "date": "2026-11-12T23:58:32.937581Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.700437Z"
+          "retrieved_at": "2026-11-12T23:58:32.937581Z"
         }
       ]
     },
     {
-      "id": "0338c466-a59d-4650-a249-f6c7e6881be6",
-      "label": "co \u00b7 minutes coverage end",
+      "id": "730d8850-1797-47b8-8e0d-903bb97320ca",
+      "label": "co · minutes coverage end",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.701058Z",
+      "date": "2026-11-12T23:58:32.938265Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.701058Z"
+          "retrieved_at": "2026-11-12T23:58:32.938265Z"
         }
       ]
     },
     {
-      "id": "9f2b63c7-ef3d-4937-bdfe-7d0fac4ddde7",
-      "label": "co \u00b7 charges coverage start",
+      "id": "44b44bbc-2b98-4429-86d1-b21161912e8a",
+      "label": "co · charges coverage start",
       "value": "2024-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.701680Z",
+      "date": "2026-11-12T23:58:32.938927Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.701680Z"
+          "retrieved_at": "2026-11-12T23:58:32.938927Z"
         }
       ]
     },
     {
-      "id": "51ef467b-657d-4b26-ab08-a7605e2cbce1",
-      "label": "co \u00b7 charges coverage end",
+      "id": "368aa592-e19c-40e9-a941-4ce1203f4255",
+      "label": "co · charges coverage end",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.702211Z",
+      "date": "2026-11-12T23:58:32.939533Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.702211Z"
+          "retrieved_at": "2026-11-12T23:58:32.939533Z"
         }
       ]
     },
     {
-      "id": "18d6c5f6-3f89-4af1-a321-d7a72ad86cde",
-      "label": "co \u00b7 balance reference",
+      "id": "a68870a7-6185-4f86-b4c0-77f62c1ace63",
+      "label": "co · balance reference",
       "value": "SYN-BAL-2025",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.702814Z",
+      "date": "2026-11-12T23:58:32.940129Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.702814Z"
+          "retrieved_at": "2026-11-12T23:58:32.940129Z"
         }
       ]
     },
     {
-      "id": "5b886260-1e4c-469f-9185-73e64c68153e",
-      "label": "co \u00b7 approved date",
+      "id": "37077e49-0720-4db0-8ef4-26cca05b9468",
+      "label": "co · approved date",
       "value": "2026-03-01",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.703411Z",
+      "date": "2026-11-12T23:58:32.940732Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.703411Z"
+          "retrieved_at": "2026-11-12T23:58:32.940732Z"
         }
       ]
     },
     {
-      "id": "d055f1ea-bbf8-4c38-9e2a-0a07cc8eef78",
-      "label": "co \u00b7 request date",
+      "id": "2e698b66-c614-4f5a-b5ac-3571410d013f",
+      "label": "co · request date",
       "value": "2026-11-01",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.704030Z",
+      "date": "2026-11-12T23:58:32.941327Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.704030Z"
+          "retrieved_at": "2026-11-12T23:58:32.941327Z"
         }
       ]
     },
     {
-      "id": "ade8e8b7-b401-4440-ac08-bc0ca6453533",
-      "label": "co \u00b7 response date",
+      "id": "93241834-fae9-40af-93bb-38e2f3458206",
+      "label": "co · response date",
       "value": "2026-11-12",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.704675Z",
+      "date": "2026-11-12T23:58:32.942064Z",
       "effective_date": "2026-11-12",
       "sources": [
         {
           "label": "Syndic demo.pdf",
-          "document_id": "c0e79dad-41ee-43bb-a63e-da2a65088102",
+          "document_id": "60f73de3-8a20-4a95-8c7c-19574b34ccd4",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.704675Z"
+          "retrieved_at": "2026-11-12T23:58:32.942064Z"
         }
       ]
     },
     {
-      "id": "7ae97fa5-cd67-45d5-9767-ef7b67f079a1",
-      "label": "transaction \u00b7 qualifying transfer",
+      "id": "6d91f37f-8581-4395-b70c-b5d7343a6c1b",
+      "label": "transaction · qualifying transfer",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.719434Z",
+      "date": "2026-11-12T23:58:32.960138Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719434Z"
+          "retrieved_at": "2026-11-12T23:58:32.960138Z"
         }
       ]
     },
     {
-      "id": "46f17f28-c448-4754-b3e9-75c6a2caa0fa",
-      "label": "transaction \u00b7 epc exemption",
+      "id": "7c5e5c2c-a9d0-4f94-9a4a-e9265a1cb064",
+      "label": "transaction · epc exemption",
       "value": "False",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.719453Z",
+      "date": "2026-11-12T23:58:32.960158Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719453Z"
+          "retrieved_at": "2026-11-12T23:58:32.960158Z"
         }
       ]
     },
     {
-      "id": "60e4936c-9e6d-4615-81da-954f771925a6",
-      "label": "transaction \u00b7 ground transfer",
+      "id": "77f4e0d3-a7a6-4a83-95eb-34ad26fb7eaf",
+      "label": "transaction · ground transfer",
       "value": "True",
       "authority": "DOCUMENTED",
-      "date": "2026-11-12T18:38:56.719463Z",
+      "date": "2026-11-12T23:58:32.960168Z",
       "effective_date": null,
       "sources": [
         {
           "label": "EPC demo.pdf",
-          "document_id": "be047e07-af09-48f0-bed2-2c9c850378bf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
           "page": 1,
           "uri": null,
-          "retrieved_at": "2026-11-12T18:38:56.719463Z"
+          "retrieved_at": "2026-11-12T23:58:32.960168Z"
+        }
+      ]
+    },
+    {
+      "id": "f17b5969-e7d0-4e62-9aad-0a5ae6b797fe",
+      "label": "transaction · renovation exemption",
+      "value": "False",
+      "authority": "DOCUMENTED",
+      "date": "2026-11-12T23:58:32.960177Z",
+      "effective_date": null,
+      "sources": [
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960177Z"
+        }
+      ]
+    },
+    {
+      "id": "92fecc92-da04-4fbe-aa20-f21d128a2457",
+      "label": "transaction · existing renovation obligation",
+      "value": "False",
+      "authority": "DOCUMENTED",
+      "date": "2026-11-12T23:58:32.960187Z",
+      "effective_date": null,
+      "sources": [
+        {
+          "label": "EPC demo.pdf",
+          "document_id": "1d15c85a-b974-4764-9a93-2f10997b928d",
+          "page": 1,
+          "uri": null,
+          "retrieved_at": "2026-11-12T23:58:32.960187Z"
         }
       ]
     }
   ],
-  "evidence_total": 103,
+  "evidence_total": 105,
   "truncated": false,
-  "last_updated": "2026-11-12T18:38:56.725788Z"
+  "last_updated": "2026-11-12T23:58:32.968003Z",
+  "evaluation_date": "2026-11-12",
+  "context_questions": [
+    {
+      "code": "KNOWN_DEED_DATE",
+      "question": "Do you know the date of the signed authentic deed for this transfer?",
+      "why_needed": "Only this transaction date is missing for a provisional EPC E/F timeline. Confirm it against the deed or with your notary.",
+      "answer_type": "DATE",
+      "affected_rule_codes": ["FL_EPC_RENOVATION"],
+      "source_preference": "Official or matched documentary information takes precedence. A buyer answer remains unverified."
+    }
+  ],
+  "context_answers": []
 }

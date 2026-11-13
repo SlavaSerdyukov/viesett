@@ -1,5 +1,9 @@
 # Viesett preliminary DPIA / risk assessment
 
+M6 scoped addition: HttpOnly browser sessions improve reload reliability but introduce ambient cookie authentication. Exact Origin plus per-session CSRF headers protect mutations; SameSite/Secure/host-prefix flags, short parent-bounded validity, rotation/revocation and owner checks reduce exposure. No raw bearer is persisted in JavaScript storage. Tests cover these controls; actual deployment/TLS/operator/retention review remains necessary.
+
+Real-document evaluation requires entitled, minimized material in a separate private environment. The offline harness has no network/provider/account client, uses the bounded local parser, and emits aggregates without source names/text/values. No authorized real corpus was available, so accuracy/OCR frequency and actual buyer comprehension remain unknown. This addition changes no basis or processor role and does not close prior public/private-beta legal or operational gates.
+
 **DRAFT - requires Belgian legal/privacy review before public beta.** Not a formal approved DPIA. Scope: local foundation, M2 owner-requested public-source lookups and M3 local PDF text/field extraction with deterministic regulatory evaluation. No OCR or external AI is required. Risk labels are qualitative engineering judgements; validate against actual scale, users, sources, processor contracts and deployment before beta.
 
 Assets: private property PDFs, third-party personal information, property evidence integrity, credentials, policy records and deletion/export state. Actors: buyer, incidental third parties, operator, attackers and future infrastructure/AI processors. Data flows and controls: [architecture](../architecture.md). Necessity and basis remain purpose-specific: [matrix](legal-basis-matrix.md).

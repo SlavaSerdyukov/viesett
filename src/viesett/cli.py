@@ -17,9 +17,13 @@ async def run(command: str, settings: Settings) -> None:
     engine = create_engine(settings)
     try:
         async with session_factory(engine)() as db:
-            if command == "create-account":
-                if settings.environment == "production":
+            if command in {"create-account", "create-private-access"}:
+                if command == "create-account" and settings.environment == "production":
                     raise RuntimeError("Development account provisioning is disabled in production")
+                if command == "create-private-access" and not settings.private_beta:
+                    raise RuntimeError(
+                        "Private access provisioning requires the reviewed private-beta profile"
+                    )
                 account, token = await provision_account(db, settings.token_lifetime_hours)
                 # Explicit, one-time credential issuance to the terminal, never application logs.
                 print(json.dumps({"account_id": str(account.id), "token": token}))
@@ -36,7 +40,9 @@ async def run(command: str, settings: Settings) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="viesett")
-    parser.add_argument("command", choices=["create-account", "purge", "live-sources"])
+    parser.add_argument(
+        "command", choices=["create-account", "create-private-access", "purge", "live-sources"]
+    )
     args = parser.parse_args()
     asyncio.run(run(args.command, Settings()))
 

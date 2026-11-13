@@ -1,8 +1,27 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { request, setToken } from "./api";
+import { request, setToken, configureBrowserSessions, setCsrf } from "./api";
 afterEach(() => {
   setToken(null);
+  configureBrowserSessions(false);
+  setCsrf(null);
   vi.unstubAllGlobals();
+});
+it("uses cookies and a CSRF header for private browser mutations, never for public preview", async () => {
+  const fetch = vi
+    .fn()
+    .mockImplementation(async () => new Response("{}", { status: 200 }));
+  vi.stubGlobal("fetch", fetch);
+  configureBrowserSessions(true);
+  setCsrf("synthetic-csrf");
+  await request("/workspaces", { method: "POST", body: "{}" });
+  expect(fetch.mock.calls[0][1]).toMatchObject({
+    credentials: "same-origin",
+    headers: { "X-CSRF-Token": "synthetic-csrf" },
+  });
+  expect(fetch.mock.calls[0][1].headers.Authorization).toBeUndefined();
+  await request("/property-preview", { method: "POST", body: "{}" }, false);
+  expect(fetch.mock.calls[1][1].credentials).toBe("omit");
+  expect(fetch.mock.calls[1][1].headers["X-CSRF-Token"]).toBeUndefined();
 });
 it("keeps bearer access in a header and does not expose server error bodies", async () => {
   const storage = { setItem: vi.fn() };

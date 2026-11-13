@@ -17,6 +17,8 @@ from viesett.db.coownership_models import (
 )
 from viesett.db.intelligence_models import DocumentAnalysis
 from viesett.db.models import EvidenceItem, Finding, PropertyDocument, utcnow
+from viesett.db.product_models import DemoWorkspace
+from viesett.demo_data import DEMO_EVALUATION_DATE
 from viesett.domain.coownership import (
     CO_EVALUATION_VERSION,
     CO_KINDS,
@@ -37,6 +39,8 @@ async def refresh_coownership(
     db: AsyncSession, user: UUID, workspace_id: UUID, evaluation_date: date | None = None
 ) -> CoSnapshot:
     await owned_workspace(db, user, workspace_id, lock=True)
+    if evaluation_date is None and await db.get(DemoWorkspace, workspace_id) is not None:
+        evaluation_date = DEMO_EVALUATION_DATE
     when = evaluation_date or current_evaluation_date()
     property = await snapshot(db, workspace_id, user)
     sources = list(

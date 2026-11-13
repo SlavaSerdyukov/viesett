@@ -103,8 +103,8 @@ class GrarClient:
             await self.http.get_json(
                 "/v2/adressen/zoeken",
                 {
-                    "query": query,
-                    "resultType": "Address",
+                    "q": query,
+                    "resultaatType": "adressen",
                     "status": "inGebruik",
                     "limit": "6",
                 },

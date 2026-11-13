@@ -7,6 +7,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
+from viesett.api.browser_routes import BrowserSessionResponse
 from viesett.domain.product import (
     DossierSnapshotResponse,
     PreviewResponse,
@@ -50,6 +51,7 @@ def ts(schema: dict[str, Any]) -> str:
 def main() -> None:
     definitions = {}
     models: list[type[BaseModel]] = [
+        BrowserSessionResponse,
         DossierSnapshotResponse,
         PreviewResponse,
         SessionResponse,

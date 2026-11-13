@@ -10,10 +10,12 @@ Use an empty, dedicated development database and a separate private directory. E
 
 ```sh
 export PYTHONPATH="$PWD/src"
-export VIESETT_DATABASE_URL="postgresql+asyncpg:///viesett_m5_demo_final?host=$PWD/.local&port=55483"
-export VIESETT_STORAGE_ROOT="$PWD/.local/m5-demo-final-objects"
+export VIESETT_DATABASE_URL="postgresql+asyncpg:///viesett_m6_demo?host=$PWD/.local&port=55483"
+export VIESETT_STORAGE_ROOT="$PWD/.local/m6-demo-objects"
 export VIESETT_DEMO_MODE=true
 export VIESETT_ALLOW_DEVELOPMENT_WEB_SESSIONS=true
+export VIESETT_BROWSER_SESSIONS_ENABLED=true
+export VIESETT_BROWSER_COOKIE_SECURE=false
 export VIESETT_ALLOW_DEVELOPMENT_SAFETY=true
 export VIESETT_WEB_ORIGINS='["http://127.0.0.1:5173","http://localhost:5173"]'
 export VIESETT_SOURCE_MIN_INTERVAL=0
@@ -26,7 +28,7 @@ In another terminal, `npm --prefix web run dev -- --port 5173`. Vite proxies `/a
 
 For development with actual reviewed providers, leave `VIESETT_DEMO_MODE` false and use separately configured provider settings. The preview and private APIs retain existing source safety/legal/deployment limitations. No real customer documents were used for M5 verification.
 
-The optional browser bootstrap issues a random one-hour bearer token only with explicit development opt-in, loopback peer, configured Origin and strict limiter. Production forbids the flags. For an existing dossier, enter its original operator-provisioned token; a new evaluation session is a different account. Credentials remain in page memory and disappear on reload. Public signup, recovery/email verification and final production browser sessions remain deferred. Do not put tokens in Vite environment variables or localStorage.
+The optional browser bootstrap issues a random one-hour bearer token only with explicit development opt-in, loopback peer, configured Origin and strict limiter. Production forbids the flags. For an existing dossier, enter its original operator-provisioned token; a new evaluation session is a different account. With browser sessions enabled, access is exchanged for a short-lived HttpOnly cookie and survives reload. The original bearer is not persisted in JavaScript storage. Logout revokes the server session. The explicit non-production Secure=false flag is only for loopback HTTP; private beta requires HTTPS/Secure. With browser sessions disabled, the prior in-memory bearer bridge remains available for compatibility. Public signup, recovery/email verification remain deferred. See [M6 sessions](../private-beta/sessions.md); never put tokens in Vite variables or browser storage.
 
 ## Checks
 
@@ -41,6 +43,9 @@ npm --prefix web run build
 
 `contracts.ts` is generated from response Pydantic schemas; regenerate with `scripts/generate_web_contract.py` after intentional contract changes. It is excluded from hand formatting. The committed UI fixture is a source-safe fictional DTO, not a customer export, credential or bundled runtime dataset.
 
-For browser tests, install Chromium once (`cd web && npx playwright install chromium`), provide a dedicated migrated database, then `npm --prefix web run e2e`. The test config uses synthetic providers, private local storage, a single worker and desktop/tablet/mobile Chromium projects. Session credentials are reused only in test-worker memory to exercise the existing-token bridge without weakening the development session limiter. Traces are disabled; screenshots contain fictional data only. The in-app Browser plugin was unavailable locally, so verification uses the requested Playwright E2E surface plus screenshot inspection; no manual in-app execution is claimed.
+For browser tests, install Chromium once (`cd web && npx playwright install chromium`), provide a dedicated migrated database, then `npm --prefix web run e2e`. The test config uses synthetic providers, private local storage, a single worker and desktop/tablet/mobile Chromium projects plus critical Firefox/WebKit projects. Session credentials are reused only in test-worker memory to exercise the existing-token bridge without weakening the development session limiter. Traces are disabled; screenshots contain fictional data only. M6 verifies Chromium and WebKit locally. Firefox exits before page creation with a host profile error, including in two alternate temporary directories; its test remains enabled in CI. See [browser verification](m6-browser-print.md) for exact supported-matrix commands and limits. No manual in-app browser execution is claimed.
 
 Vitest uses one thread worker for deterministic local behavior; the default fork setup stalled on this host's Node 25 runtime. Full Chromium resolved a host-specific headless-shell actionability/rendering stall. These choices remain ordinary supported test configurations, without forced clicks or skipped safety checks.
+
+
+M6 private real-data operation uses the [separate fail-closed profile](../private-beta/deployment.md), not the demo launch above. Create the dedicated demo database before migration; the application never creates databases automatically.

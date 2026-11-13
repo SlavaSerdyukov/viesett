@@ -10,6 +10,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from viesett.db.intelligence_models import DocumentAnalysis, DueDiligenceEvaluation
 from viesett.db.models import EvidenceItem, Finding, PropertyDocument, utcnow
+from viesett.db.product_models import DemoWorkspace
+from viesett.demo_data import DEMO_EVALUATION_DATE
 from viesett.document_intelligence.association import associate
 from viesett.domain.coownership import CO_KINDS
 from viesett.domain.intelligence import (
@@ -36,6 +38,8 @@ async def refresh_due_diligence(
     db: AsyncSession, user: UUID, workspace_id: UUID, evaluation_date: date | None = None
 ) -> EvaluationOut:
     await owned_workspace(db, user, workspace_id, lock=True)
+    if evaluation_date is None and await db.get(DemoWorkspace, workspace_id) is not None:
+        evaluation_date = DEMO_EVALUATION_DATE
     when = evaluation_date or current_evaluation_date()
     identity = await snapshot(db, workspace_id, user)
     documents = list(
@@ -118,6 +122,7 @@ async def refresh_due_diligence(
     # Regulatory predicates accept explicit trusted facts, never inferred AI or
     # document-type guesses. Future ingestion can supply these stable keys.
     facts: dict[str, Fact] = {}
+    blocked_context_keys: list[str] = []
     matched_docs = {
         d.id
         for d in inputs
@@ -139,7 +144,19 @@ async def refresh_due_diligence(
                 or (e.authority == Authority.DOCUMENTED and e.document_id in matched_docs)
             )
         ]
+        if not candidates and key == "transaction.authentic_deed_date":
+            candidates = [
+                e
+                for e in evidence
+                if e.key == key
+                and e.authority == Authority.UNVERIFIED
+                and e.source_locator.get("method") == "user-transaction-context:1.0.0"
+                and e.source_locator.get("identity_revision") == identity.identity_revision
+                and not identity.stale
+            ]
         values = {json.dumps(e.typed_value, sort_keys=True) for e in candidates}
+        if len(values) > 1:
+            blocked_context_keys.append(key)
         if len(values) == 1:
             raw = candidates[0].typed_value.get("value")
             if key.endswith("_date"):
@@ -150,7 +167,7 @@ async def refresh_due_diligence(
                 except ValueError:
                     continue
             if isinstance(raw, (str, int, float, bool)):
-                facts[key] = Fact(raw, tuple(e.id for e in candidates))
+                facts[key] = Fact(raw, tuple(e.id for e in candidates), candidates[0].authority)
     context = RuleContext(
         when,
         tuple(inputs),
@@ -164,9 +181,15 @@ async def refresh_due_diligence(
         "resolution_status": identity.resolution_status,
         "parcels": [p for p in sorted(context.parcels)],
         "facts": {
-            key: {"value": f.value, "evidence_ids": [str(i) for i in f.evidence_ids]}
+            key: {
+                "value": f.value,
+                "evidence_ids": [str(i) for i in f.evidence_ids],
+                "authority": f.authority.value,
+            }
             for key, f in facts.items()
         },
+        "context_input_policy": "user-transaction-context:1.0.0",
+        "blocked_context_keys": [key for key in blocked_context_keys],
         "documents": [
             {
                 "id": str(d.id),

@@ -1,4 +1,5 @@
 import hashlib
+from datetime import date
 from typing import Annotated
 from urllib.parse import unquote
 from uuid import UUID
@@ -7,6 +8,7 @@ from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel
 
 from viesett.api.dependencies import Db, UserId, runtime
+from viesett.domain.base import Schema
 from viesett.domain.product import (
     DossierSnapshotResponse,
     PreviewResponse,
@@ -20,6 +22,7 @@ from viesett.services.ownership import owned_workspace
 from viesett.services.product_actions import create_dossier, intake, seed_demo
 from viesett.services.product_preview import property_preview
 from viesett.services.public_enrichment import refresh_enrichment
+from viesett.services.transaction_context import clear_answer, record_answer
 
 router = APIRouter(prefix="/api/v1")
 
@@ -31,6 +34,7 @@ async def config(request: Request) -> WebConfigResponse:
         development_session=settings.allow_development_web_sessions,
         demo=settings.demo_mode,
         max_upload_bytes=settings.max_upload_bytes,
+        browser_sessions=settings.browser_sessions_enabled,
     )
 
 
@@ -121,3 +125,25 @@ async def demo(request: Request, db: Db, user: UserId) -> DossierSnapshotRespons
         raise HTTPException(404, "Not found")
     wid = await seed_demo(db, user, runtime(request))
     return await dossier(db, user, wid)
+
+
+class ContextAnswerRequest(Schema):
+    value: date
+
+
+@router.post(
+    "/workspaces/{workspace_id}/context/KNOWN_DEED_DATE", response_model=DossierSnapshotResponse
+)
+async def context_answer(
+    workspace_id: UUID, data: ContextAnswerRequest, db: Db, user: UserId
+) -> DossierSnapshotResponse:
+    await record_answer(db, user, workspace_id, data.value)
+    return await dossier(db, user, workspace_id)
+
+
+@router.delete(
+    "/workspaces/{workspace_id}/context/KNOWN_DEED_DATE", response_model=DossierSnapshotResponse
+)
+async def context_clear(workspace_id: UUID, db: Db, user: UserId) -> DossierSnapshotResponse:
+    await clear_answer(db, user, workspace_id)
+    return await dossier(db, user, workspace_id)

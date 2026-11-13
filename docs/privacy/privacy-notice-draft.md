@@ -1,5 +1,9 @@
 # Viesett Privacy Notice — working draft
 
+M6 adds an essential private browser session: a short-lived HttpOnly cookie, server-side session-secret hash/account/token linkage, expiry/revocation and a synchronizer token. The original private access token is exchanged without browser persistent storage. Local PDF viewing and user-directed print remain within the requested dossier purpose; no new processor, email, analytics or training purpose is introduced. Authorized-document compatibility evaluation stays local and reports only aggregates. See the [session design](../private-beta/sessions.md) and [real-material procedure](../private-beta/evaluation-guide.md).
+
+This remains a draft clarification. Stored M4 policy texts/acknowledgements are preserved; they are not represented as a finalized M6 cookie/private-beta notice. Before actual real-data beta, review/publish the appropriate notice/version, session metadata retention, roles, transparency and operational procedures. No legal basis is changed or approved by this addition.
+
 **DRAFT - requires Belgian legal review before public launch.** Requires Belgian legal/privacy review before public beta. Version: 2026-11-12-m4. Prior notice versions and acknowledgement records remain preserved. This document is not approved by Belgian counsel and is not a claim of GDPR compliance.
 
 Controller: **[legal entity and registered address to be designated]**. Privacy contact: **[contact channel to be designated before beta]**. Representative/DPO details, if applicable: **[assessment pending]**. Do not publish this placeholder as a completed notice.

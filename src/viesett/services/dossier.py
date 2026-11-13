@@ -31,6 +31,7 @@ from viesett.services.due_diligence import refresh_due_diligence
 from viesett.services.evidence import list_findings
 from viesett.services.ownership import owned_workspace
 from viesett.services.property_snapshot import snapshot
+from viesett.services.transaction_context import answers, missing_questions
 
 GROUPS = [
     ("EPC", "Energy"),
@@ -250,6 +251,8 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
                 if document
                 else "Official Flemish register"
                 if e.authority == "OFFICIAL"
+                else "Buyer-provided transaction detail — unverified"
+                if e.authority == "UNVERIFIED"
                 else "Derived information",
                 document_id=document.id if document else None,
                 page=page,
@@ -257,7 +260,15 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
                 retrieved_at=e.source_retrieved_at or e.observed_at,
             )
             values[source.model_dump_json()] = source
-        return list(values.values())
+        return sorted(
+            values.values(),
+            key=lambda source: (
+                str(source.document_id or ""),
+                source.page or 0,
+                source.uri or "",
+                source.label,
+            ),
+        )
 
     summaries = []
     for d in docs:
@@ -301,6 +312,7 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
         summaries.append(
             DocumentSummaryResponse(
                 id=d.id,
+                processing_since=r.created_at if r else d.created_at,
                 filename=d.original_filename,
                 kind=r.effective_classification.value if r else d.document_kind.value,
                 status=state,
@@ -434,6 +446,9 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
         ],
         evidence_total=count,
         truncated=truncated or count > 500 or len(raw_findings) > 200,
+        evaluation_date=due.evaluation_date,
+        context_questions=missing_questions(due),
+        context_answers=await answers(db, workspace_id, prop.identity_revision),
         last_updated=max(
             [workspace.updated_at, due.created_at]
             + [d.created_at for d in docs]

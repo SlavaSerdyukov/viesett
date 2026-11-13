@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlsplit
 
 from pydantic import AliasChoices, Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -29,6 +30,17 @@ class Settings(BaseSettings):
     allow_development_web_sessions: bool = False
     demo_mode: bool = False
     preview_rate_limit_per_minute: int = Field(default=5, ge=1, le=30)
+    browser_sessions_enabled: bool = False
+    browser_cookie_secure: bool = True
+    browser_session_hours: int = Field(default=8, ge=1, le=24)
+    private_beta: bool = False
+    application_workers: int = Field(
+        default=1,
+        ge=1,
+        validation_alias=AliasChoices(
+            "VIESETT_APPLICATION_WORKERS", "WEB_CONCURRENCY", "application_workers"
+        ),
+    )
     token_lifetime_hours: int = Field(default=24, ge=1, le=168)
     grar_api_key: SecretStr | None = Field(
         default=None,
@@ -65,7 +77,45 @@ class Settings(BaseSettings):
             for origin in self.web_origins
         ):
             raise ValueError("Explicit web origins without a trailing slash are required")
+        for origin in self.web_origins:
+            parsed = urlsplit(origin)
+            if (
+                not parsed.hostname
+                or parsed.username
+                or parsed.password
+                or parsed.path
+                or parsed.query
+                or parsed.fragment
+                or "*" in origin
+            ):
+                raise ValueError("A web origin must contain only scheme, host and optional port")
+        if self.browser_sessions_enabled and not self.web_origins:
+            raise ValueError("Browser sessions require explicit web origins")
+        if self.private_beta and (
+            self.environment != "production"
+            or not self.browser_sessions_enabled
+            or not self.browser_cookie_secure
+            or self.demo_mode
+            or self.allow_development_web_sessions
+            or self.allow_development_safety
+            or self.application_workers != 1
+            or not self.allowed_hosts
+            or not self.storage_root.is_absolute()
+            or self.storage_root == PROJECT_ROOT
+            or self.storage_root.is_relative_to(PROJECT_ROOT / "web")
+            or bool(set(self.allowed_hosts) & {"localhost", "127.0.0.1", "testserver", "*"})
+            or self.storage_root == PROJECT_ROOT / ".local" / "objects"
+            or (self.official_sources_enabled and not self.official_sources_reviewed)
+        ):
+            raise ValueError("Private beta requires reviewed production settings and one worker")
         if self.environment == "production":
+            if self.browser_sessions_enabled and (
+                not self.browser_cookie_secure
+                or any(not o.startswith("https://") for o in self.web_origins)
+            ):
+                raise ValueError(
+                    "Production browser sessions require HTTPS origins and Secure cookies"
+                )
             if self.allow_development_web_sessions or self.demo_mode:
                 raise ValueError(
                     "Development web sessions and demo mode are forbidden in production"

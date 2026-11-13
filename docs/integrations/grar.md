@@ -1,21 +1,21 @@
 # GRAR / Basisregisters Vlaanderen v2
 
-Provider: Digitaal Vlaanderen. Purpose: establish official Flemish property identity. Reviewed: 2026-11-11. Public anonymous read API; optional `x-api-key` for an assigned plan. Only v2 read APIs are used, without v1, feeds or extract endpoints.
+Provider: Digitaal Vlaanderen. Purpose: establish official Flemish property identity. Current deployed-contract review: 2026-11-13, [M6 review and actual live result](source-review-2026-11-12-m6.md). Public anonymous read API; optional `x-api-key` for an assigned plan. Only v2 read APIs are used, without v1, feeds or extract endpoints.
 
 ## Contract and search
 
-The official [free-text use case](https://vlaamseoverheid.atlassian.net/wiki/spaces/AGB/pages/7844659375) identifies the address/street-name fuzzy search service. Its current public controller and filter contract confirm:
+The official [free-text use case](https://vlaamseoverheid.atlassian.net/wiki/spaces/AGB/pages/7844659375) identifies the address/street-name fuzzy search service. The current official OpenAPI HTTP contract, audited and live-tested in M6, requires:
 
 ```text
 GET https://api.basisregisters.vlaanderen.be/v2/adressen/zoeken
-    ?query=<unstructured address>&resultType=Address&status=inGebruik&limit=6
+    ?q=<unstructured address>&resultaatType=adressen&status=inGebruik&limit=6
 ```
 
-Primary implementation references, reviewed at commit `ac14b5ef2a5145ade86079c85d19e0d10c144eba`:
+Historical M2 implementation references, reviewed at commit `ac14b5ef2a5145ade86079c85d19e0d10c144eba` (their internal parameter names were not sufficient proof of the deployed HTTP binding; the M6 official contract supersedes that earlier assumption):
 
 - [AddressController](https://github.com/Informatievlaanderen/address-registry/blob/ac14b5ef2a5145ade86079c85d19e0d10c144eba/src/AddressRegistry.Api.Oslo/Address/V2/AddressController.cs).
 - [Search filter](https://github.com/Informatievlaanderen/address-registry/blob/ac14b5ef2a5145ade86079c85d19e0d10c144eba/src/AddressRegistry.Api.Oslo/Address/V2/Search/AddressSearchRequest.cs) and [search response](https://github.com/Informatievlaanderen/address-registry/blob/ac14b5ef2a5145ade86079c85d19e0d10c144eba/src/AddressRegistry.Api.Oslo/Address/V2/Search/AddressSearchResponse.cs).
-- [Official API reference](https://docs.basisregisters.vlaanderen.be/docs/api-documentation.html); its JavaScript documentation shell was reachable through research, but direct specification retrieval/live API access was unavailable in this environment.
+- [Official API reference](https://docs.basisregisters.vlaanderen.be/docs/api-documentation.html); direct schema retrieval and one complete GRAR request chain succeeded in M6. See the focused review for scope and remaining limits.
 
 Input preprocessing only normalizes NFC and whitespace. No address components or bus numbers are guessed. The official search performs fuzzy matching. Search results are followed to normalized detail objects, and only current `inGebruik` addresses are usable. The decoder supports the public response's camel/Pascal member casing for search. It validates official ID namespaces and reconstructs fixed detail URLs, rather than trusting arbitrary detail links.
 

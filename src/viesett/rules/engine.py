@@ -13,7 +13,7 @@ from viesett.domain.intelligence import (
     Requirement,
     RuleMetadata,
 )
-from viesett.domain.types import Severity
+from viesett.domain.types import Authority, Severity
 from viesett.rules.catalog import CATALOG, effective
 
 
@@ -21,6 +21,7 @@ from viesett.rules.catalog import CATALOG, effective
 class Fact:
     value: str | int | float | bool
     evidence_ids: tuple[UUID, ...]
+    authority: Authority = Authority.DOCUMENTED
 
 
 @dataclass(frozen=True)
@@ -44,9 +45,13 @@ class RuleContext:
     parcels: frozenset[str] = frozenset()
     facts: dict[str, Fact] = field(default_factory=dict)
 
-    def value(self, key: str) -> str | int | float | bool | None:
+    def value(self, key: str, *, allow_unverified: bool = False) -> str | int | float | bool | None:
         fact = self.facts.get(key)
-        return fact.value if fact else None
+        return (
+            fact.value
+            if fact and (allow_unverified or fact.authority != Authority.UNVERIFIED)
+            else None
+        )
 
 
 @dataclass(frozen=True)
@@ -92,7 +97,13 @@ def evaluate(context: RuleContext) -> RuleResult:
         if not effective(metadata, when):
             return
         ids = {eid for doc in documents or [] for eid in doc.evidence_ids}
-        ids.update(eid for fact in context.facts.values() for eid in fact.evidence_ids)
+        ids.update(
+            eid
+            for key, fact in context.facts.items()
+            if fact.authority != Authority.UNVERIFIED
+            or (code == "FL_EPC_RENOVATION" and key == "transaction.authentic_deed_date")
+            for eid in fact.evidence_ids
+        )
         findings.append(RuleFinding(code, severity, summary, details, metadata, tuple(sorted(ids))))
 
     def requirement(
@@ -338,7 +349,7 @@ def evaluate(context: RuleContext) -> RuleResult:
             )
             if transfer is True:
                 severity = Severity.WARNING
-            deed = context.value("transaction.authentic_deed_date")
+            deed = context.value("transaction.authentic_deed_date", allow_unverified=True)
             if (
                 deed
                 and date.fromisoformat(str(deed)) <= when
@@ -347,7 +358,13 @@ def evaluate(context: RuleContext) -> RuleResult:
                 and context.value("transaction.existing_renovation_obligation") is False
             ):
                 details += (
-                    " Indicative deadline: "
+                    (
+                        " Provisional deadline using an unverified buyer-provided deed date "
+                        "(confirm with your notary): "
+                        if context.facts["transaction.authentic_deed_date"].authority
+                        == Authority.UNVERIFIED
+                        else " Indicative deadline: "
+                    )
                     + add_months(date.fromisoformat(str(deed)), 72).isoformat()
                     + "."
                 )

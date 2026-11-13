@@ -63,6 +63,7 @@ class Account(Identity, Base):
 
 class ApiToken(Identity, Base):
     __tablename__ = "api_tokens"
+    __table_args__ = (UniqueConstraint("id", "user_id"),)
     user_id: Mapped[UUID] = mapped_column(ForeignKey("accounts.id", ondelete="CASCADE"), index=True)
     token_hash: Mapped[str] = mapped_column(String(64), unique=True)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
@@ -128,6 +129,11 @@ class EvidenceItem(Identity, Base):
             "confidence IS NULL OR (confidence >= 0 AND confidence <= 1)", name="confidence_range"
         ),
         CheckConstraint("source_type != 'AI' OR authority = 'INFERRED'", name="ai_inferred"),
+        CheckConstraint(
+            "authority != 'UNVERIFIED' OR (source_type = 'MANUAL' "
+            "AND document_id IS NULL AND provider IS NULL)",
+            name="user_context_unverified",
+        ),
         ForeignKeyConstraint(
             ["supersedes_evidence_id", "workspace_id"],
             ["evidence_items.id", "evidence_items.workspace_id"],

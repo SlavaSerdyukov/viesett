@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowUpRight, Upload, FileText } from "lucide-react";
@@ -17,7 +17,8 @@ import type {
   DocumentSummaryResponse,
   DossierSnapshotResponse as Dossier,
 } from "../contracts";
-import { date, kind, label } from "../copy";
+import { date, kind } from "../copy";
+import { Requirements } from "../Requirements";
 export function Documents({
   data,
   maxBytes,
@@ -25,6 +26,7 @@ export function Documents({
   data: Dossier;
   maxBytes: number;
 }) {
+  const uploadedHeading = useRef<HTMLHeadingElement>(null);
   const access = useAccess(),
     client = useQueryClient(),
     [busy, setBusy] = useState(false),
@@ -59,9 +61,10 @@ export function Documents({
         setError(e);
       } finally {
         setBusy(false);
-        void client.invalidateQueries({
+        await client.invalidateQueries({
           queryKey: ["dossier", data.workspace.id],
         });
+        uploadedHeading.current?.focus();
       }
     });
   }
@@ -78,6 +81,7 @@ export function Documents({
       setError(e);
     } finally {
       setBusy(false);
+      uploadedHeading.current?.focus();
     }
   }
   const requested = [
@@ -155,31 +159,9 @@ export function Documents({
             Generate request <ArrowUpRight size={15} />
           </button>
         </div>
-        {data.requirements.map((r, i) => (
-          <div className="checklist-row" key={i}>
-            <div>
-              <strong>
-                {kind(r.kind)}
-                {r.variant && r.variant !== "UNSPECIFIED"
-                  ? ` · ${label(r.variant)}`
-                  : ""}
-              </strong>
-              <p>
-                {r.applicability === "CONDITIONAL"
-                  ? "Conditional — applicability needs confirmation. "
-                  : ""}
-                {r.reason}
-              </p>
-            </div>
-            <Badge
-              status={
-                r.applicability === "REQUIRED" ? r.presence : r.applicability
-              }
-            />
-          </div>
-        ))}
+        <Requirements items={data.requirements} />
       </section>
-      <h2 className="group-title">
+      <h2 className="group-title" tabIndex={-1} ref={uploadedHeading}>
         Uploaded documents{" "}
         <span className="muted">{data.documents.length}</span>
       </h2>
