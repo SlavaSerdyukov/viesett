@@ -37,3 +37,9 @@ uv run python -m viesett.tools.check_grar_contract --schema /private/local/schem
 ```
 
 Live CLI commands refuse CI. Normal tests inject MockTransport and block network HTTP. Normal product errors retain safe existing categories; developer diagnostics distinguish DNS/connect/TLS/read/status/contract failures without exception text. No current GRAR key was printed, requested from another project or placed in a browser bundle. Historical M2 report/migrations remain unchanged; this review supersedes its obsolete request description. M2 heritage/flood/legal/source limitations otherwise remain.
+
+## Continuation check — 2026-11-14
+
+The same official documentation still reports API version 2026-10-29 / shell 8.17.4. Actual opt-in smoke again returned **LIVE_SUCCESS / RESOLVED**, selected unit, one parcel, no missing relationships. One parcel-detail request returned HTTP_429; the bounded existing retry then succeeded. This is evidence to retain provider-limit handling, not a sustained-load or quota test. No additional customer/example query was introduced.
+
+Live OpenAPI expectations again returned **SUCCESS**, no failed checks. New retrieval hash: `4a0970d12e9d7dc89131adcfb3d71d5b01f35b0dc41fafa82edf5e5c8e2e012c`. The selected expectations remain unchanged; timestamp-bearing provider examples make whole-document hashes variable. Both final tool stderr streams are empty. The first raw-venv invocation lacked the src-layout PYTHONPATH and failed before networking; the corrected documented environment was used for these results. Current evidence: `.local/m6-continuation-2026-11-14/live-grar.json` and `live-contract.json`.

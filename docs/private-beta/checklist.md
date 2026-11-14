@@ -20,4 +20,4 @@ This checklist records work to verify for the actual deployment. M6 local tests 
 - [ ] Establish incident detection, containment, access suspension, notification assessment and a tested recovery/contact procedure.
 - [ ] Run the [buyer evaluation tasks](evaluation-guide.md); keep observation notes outside the product and report misunderstandings rather than inferring trust from automated tests.
 
-Known M6 boundaries: no deployed/hosted beta validation, no real authorized corpus or buyer study, Firefox unable to launch on this local host, and prior production/legal review gates still open. No M7 feature work is implied by this list.
+Known M6 boundaries: no deployed real-data beta validation, no real authorized corpus or buyer study, Firefox unable to launch on this local host, and prior production/legal review gates still open. Linux hosted CI now verifies Firefox plus all eight configured browser tests at `1928f9e`; it does not check the real deployment boxes above. No M7 feature work is implied by this list.

@@ -2,7 +2,9 @@
 
 The default Playwright configuration includes Chromium desktop/tablet/mobile plus critical Firefox and WebKit projects. It uses one worker, no retry/forced click, synthetic local providers/PDFs, an isolated database/root and opt-in development bootstrap. Traces are off and test credentials remain only in worker memory. Mobile ambiguity uses an explicit normalized UI fixture; private creation still independently validates its IDs through the local provider adapter.
 
-Locally, Chromium and WebKit critical journeys pass. Firefox's installed engine exits **before page creation** with “Could not find profile folder.” The failure repeats with the default directory, a project-local directory and canonical `/private/tmp`. No security preference or failing product behavior was bypassed. Its project remains enabled in CI; this host provides no Firefox product-success claim. A Linux/other supported-host run is still needed.
+Locally, Chromium and WebKit critical journeys pass. Firefox's installed engine exits **before page creation** with “Could not find profile folder.” The failure repeats with the default directory, a project-local directory and canonical `/private/tmp`. No security preference or failing product behavior was bypassed. Its project remains enabled in CI; this host provides no Firefox product-success claim. At the first local verification, a Linux/other supported-host run was still needed.
+
+Continuation verified **2026-11-14**: that supported-host check now exists. [GitHub Actions run 43530283363](https://github.com/SlavaSerdyukov/viesett/actions/runs/43530283363), exact commit `1928f9e`, passes all **eight** configured tests on Linux, including Firefox and WebKit critical journeys. Its logs were read, not inferred from a badge. This closes the cross-browser verification gap while retaining the separate local macOS launch limitation; it does not certify native embedded-PDF pixels or physical devices.
 
 ```sh
 # Full configured matrix on a host supporting all engines:

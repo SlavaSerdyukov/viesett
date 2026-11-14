@@ -1,159 +1,144 @@
 # Viesett Milestone 6 verification
 
-2026-11-13, Europe/Brussels. Scope: **0.6.0 — Private Beta Hardening + Live Source Verification**. [Implementation report: all 40 requested topics](docs/implementation-report-m6.md). README unchanged; no commit/push/deploy or next feature milestone.
+**Consolidated 2026-11-14**, 0.6.0 — Private Beta Hardening + Live Source Verification. [Single implementation report, 39 continuation topics](docs/implementation-report-m6.md) · [Original-scope audit/statuses](docs/private-beta/m6-scope-audit.md).
 
-| Evidence class | Actual result |
+## Final evidence and chronology
+
+| Evidence | Actual result / date |
 | --- | --- |
-| Automated backend | Seven gates pass; **469 tests, 92.57% combined branch-aware coverage, 59.23s** |
-| Automated frontend | Frozen install/type/lint/format/contract/build pass; **41 tests, three files, 4.56s** |
-| Automated supported browsers | **Seven passed, 19.4s**; Chromium desktop/tablet/mobile and WebKit critical flow |
-| Local Firefox | **LAUNCH_BLOCKED** before page creation; no Firefox product-success claim |
-| Migrations | All **41** chain/sentinel/guard/downgrade/empty-head/check commands pass |
-| Live official source | GRAR **LIVE_SUCCESS / RESOLVED**; official OpenAPI expectation check **SUCCESS** |
-| Manual review | Current official contract/code, payload/configuration and all ten rasterized synthetic print pages |
-| Required real material unavailable | **Real corpus evaluation not performed**; no buyer study, real-device/printer or human screen-reader test |
-| Deployment / hosted CI | Not performed; production/privacy/processor and actual environment gates remain |
+| Entry | Clean main at `1928f9eeac8c9c281ac7e8723450a724362c0169`; full diff/index empty; application files exactly match completed hotfix fingerprints |
+| Local backend baseline retained | **474 passed, 92.60% combined branch-aware coverage, 78.88s**, completed hotfix November 13; no source/test/config changes since |
+| Local frontend retained | **41 tests / three files, 4.56s**; frozen/type/lint/format/contract/build pass |
+| Local supported browser matrix retained | **Seven passed, 19.4s**, Chromium desktop/tablet/mobile and WebKit; local Firefox cannot launch before page creation |
+| Hosted exact-commit verification inspected November 14 | **SUCCESS**: 474 / 92.60% / 99.71s; 41 frontend; **eight browser tests, 47.1s**, including Linux Firefox/WebKit; migration/quality chain all successful |
+| Actual live checks November 14 | GRAR **LIVE_SUCCESS / RESOLVED**, one safely retried HTTP_429; official OpenAPI expectations **SUCCESS**, final stderr empty |
+| Fresh local checks November 14 | Production build, empty-head migration/check, post-hotfix HTTP/UI measurements, NO_CORPUS invocation, scope/integrity review |
+| Manual evidence retained | Official contract/code/config/payload review; ten synthetic print pages rasterized/inspected November 13 |
+| Not evaluated / operator gates | No real authorized corpus, buyer study, physical-device/printer/human AT or deployed real-data environment |
 
-## Entry state and baseline
+The original pre-M6 M5 baseline was **408 passed, one failed, 93.85%, 46.14s** (`60 != 80` date drift). The first M6 run was 469 / 92.57%; the later completed hotfix added five tests and is the baseline above. Standalone M5-only hotfix: **414 / 93.88%, 64.59s**. These dated results are retained, not presented as current failures or new continuation work. [Historical hotfix explanation](docs/implementation-report-demo-date-hotfix.md).
 
-Entry `git status --short` and full diff were empty. Branch `main`, HEAD `9928d81` (`M5 product API + wed ux`); recent `d9c75c2`, `531a042`. M5 verification, M2 adapter, preview/authentication, existing tests and Playwright configuration inspected before application changes. No destructive Git command was used.
+No new application feature was missing in the scope audit. This continuation updates verification/documentation and closes supported-host browser/performance evidence gaps. No hotfix replacement, duplicated date handling, new migration, README edit, commit/push/deploy or M7. The original `== 80` test and `tests/test_demo_dates.py` remain unchanged. Existing marker-based service defaults preserve the fixed fictional date/current normal date/explicit override policy.
 
-Before M6, six of seven backend gates passed. Pytest: **408 passed, one failed, 93.85%, 46.14s**. `test_demo_uses_real_pipelines_and_is_persistently_labelled` expected 80% but got 60% after the synthetic sample's rolling date advanced. M6 gives marked demos an explicit 2026-11-12 evaluation date; the existing assertion remains and passes. Actual real dossiers keep their current evaluation date. Baseline logs: `.local/verification-m6-baseline/{1..7}.log`, `results.json`.
+## Genuine hosted CI
 
-Baseline frontend frozen install/type/lint/format/generated contract/build pass, **30 tests, 3.51s**, build 941ms. Unchanged baseline Chromium desktop/tablet/mobile E2E: **six passed, 15.5s**. The initial launch environment needed absolute PYTHONPATH, not an application test bypass. Logs: `.local/verification-m6-web-baseline/`.
+[GitHub Actions run 43530283363](https://github.com/SlavaSerdyukov/viesett/actions/runs/43530283363), event **push**, branch main, exact SHA **1928f9eeac8c9c281ac7e8723450a724362c0169**, job **verify / 132245976014**, conclusion **success**. Started 2026-11-13 23:52:24 UTC, finished 23:58:18 UTC: **2026-11-14 00:52–00:58 Europe/Brussels**.
 
-## Environment and command conventions
+Run metadata, every job step and decoded logs were read through the connected GitHub GET tools. Selected content-free log evidence is saved in `.local/m6-continuation-2026-11-14/hosted-evidence.json`. The generic workflow-run collection was used; unlike the old commit wrapper it includes push runs. No inference from an empty PR-only result, badge or local green.
 
-Python **3.12.14**, local PostgreSQL **15.15**, project uv environment and Node/npm; hosted CI targets Python 3.12, PostgreSQL 16 and Node 24. Local task PostgreSQL used Unix socket `.local`, port 55483, no TCP listener. Distinct synthetic databases: `viesett_m6_baseline`, `viesett_m6_web`, `viesett_m6_migrations`, `viesett_m6_performance`. No other project's `.env`, customer data or AI credential used.
-
-Shell login disabled. Project-local caches/bootstrap were used because the initial sandbox had cache/network restrictions. Initial npm offline/cache attempt failed; the authorized install populated `.local/npm-cache`, and the final frozen install succeeds offline. No install-script approval was bypassed. Loopback/browser/official network checks used the environment's approved execution path.
-
-Backend runner `.local/verification/run_m6_gates.py` executes the following commands with project `.venv/bin`/`.bootstrap/bin` on PATH, `PYTHONPATH` set to absolute `src`, `UV_CACHE_DIR=.uv-cache`, `UV_PYTHON_DOWNLOADS=never`, and both database variables pointing to the isolated baseline database:
-
-```sh
-uv sync --frozen
-ruff check .
-ruff format --check .
-mypy
-alembic upgrade head
-alembic check
-pytest
+```text
+Required test coverage of 85% reached. Total coverage: 92.60%
+474 passed in 99.71s
+Test Files 3 passed (3)
+Tests 41 passed (41)
+[7/8] [firefox] ... address → private dossier → PDF → finding → question → source → print
+[8/8] [webkit] ... address → private dossier → PDF → finding → question → source → print
+8 passed (47.1s)
 ```
 
-All exit **0**. Logs `.local/verification-m6/{1..7}.log`, `results.json`, `runner.log`. Mypy: **135 source files**. The 409 previous cases remain plus 60 M6 cases. Threshold **85%**, branch collection and SQLAlchemy thread/greenlet remain; no production omissions/exclusions or threshold reductions. CLI-only networking/reporting paths remain partly uncovered, reflected in the honest total.
+All quality/migration/install/frontend/browser steps succeed. Python 3.12, PostgreSQL 16, Node 24, hosted Ubuntu. Tests use synthetic data/transports; live tools remain excluded/refuse CI. Dependency/browser installation uses network normally; test execution requires no government API, AI credential or external OCR. This is an existing run; no rerun/commit/push was performed. Local documentation changes from this continuation have not triggered hosted CI; application/tests/config match the successful commit.
 
-Additional explicit CI/offline diagnostic/contract check:
+## Retained local gates and environment
+
+Python **3.12.14**, PostgreSQL **15.15**; task-local Unix socket `.local`, port 55483 with no TCP listener. Existing source fingerprints, including frontend and migrations, exactly match the final hotfix snapshot. Consequently no redundant full local suite was run after inspecting the current exact-commit hosted run. Existing local commands/results remain applicable:
 
 ```sh
-CI=true .venv/bin/pytest tests/test_grar_m6.py --no-cov -q
+uv sync --frozen --offline
+uv run --no-sync ruff check .
+uv run --no-sync ruff format --check .
+uv run --no-sync mypy
+uv run --no-sync alembic upgrade head
+uv run --no-sync alembic check
+uv run --no-sync pytest
 ```
 
-**16 passed, 0.08s**, `.local/m6-ci-offline-contract-tests.log`. MockTransport only; synthetic success is never labeled LIVE_SUCCESS. Normal tests reject live HTTP; live CLIs refuse CI. Dependency/browser installation may download packages; test execution does not require provider HTTP, credentials, paid models or external OCR.
+All seven exit zero, mypy **136 files**, **474 passed / 92.60%**, `.local/demo-date-hotfix/current-gates/{1..7}.log`, `results.json`. Threshold **85%**, branches/thread/greenlet unchanged, no exclusions/test removal/xfail. Original 409 cases + 60 M6 + five date regressions retained. The scoped M5-only environment/patch is historical reference, not a new branch or duplicate implementation.
 
-## Frontend gates and bundle
-
-From `web`, with `npm_config_cache=../.local/npm-cache` for installation:
+Frontend local commands/results preserved at `.local/verification-m6-web/`:
 
 ```sh
+# web; project-local cache used for frozen install
 npm ci --offline --no-audit --no-fund
 npm run typecheck
 npm run lint
 npm run format:check
 npm test
 npm run build
-```
-
-From repository root:
-
-```sh
+# repository root
 .venv/bin/python scripts/generate_web_contract.py --check
 ```
 
-All pass; final **41 tests, three files, 4.56s**. Logs `.local/verification-m6-web/{install,typecheck,lint,format,tests,build}.log` and final contract log. Final Vite build **929ms**, 1,817 modules:
+Type/lint/format/contract pass; **41 tests / three files, 4.56s**. Current source unchanged and hosted steps independently pass. Runtime npm audit at first M6 verification: zero advisories; install reported nine moderate development advisories. No force upgrade or all-dependency-clean claim, and no new audit was inferred.
 
-| Asset | Uncompressed | gzip |
-| --- | --- | --- |
-| HTML | 0.59KB | 0.36KB |
-| CSS | 20.67KB | 5.32KB |
-| JS | 356.13KB | 111.23KB |
+Fresh local `npm run build` on November 14 passes in **7.30s**, 1,817 modules; hosted build 1.50s. Actual unchanged assets: HTML **0.59KB / 0.36KB gzip**, CSS **20.67KB / 5.32KB gzip**, JS **356.13KB / 111.23KB gzip**. Current build log `.local/m6-continuation-2026-11-14/build.log`. Test-fixture IDs/tokens remain excluded from production imports/bundle.
 
-Runtime `npm audit --omit=dev --json`: **zero vulnerabilities**, `.local/m6-runtime-audit.json`. Installation reported **nine moderate development advisories**; no force upgrade or all-dependency-clean claim. No test-fixture account/access constants are included in production entry imports/bundle.
+## Browser, PDF, print and accessibility
 
-## Browser, accessibility and PDF checks
-
-Actual final command from `web`:
+Earlier local supported command, from web:
 
 ```sh
 VIESETT_DATABASE_URL='postgresql+asyncpg:///viesett_m6_web?host=/Users/slavaserdukov/Desktop/dev/viesett/.local&port=55483' PLAYWRIGHT_BROWSERS_PATH=../.local/playwright npm run e2e -- --project desktop --project tablet --project mobile --project webkit
 ```
 
-**Seven passed, 19.4s**, `.local/verification-m6-web/e2e-supported.log`: two each Chromium desktop (1440px), tablet (900px touch), mobile (Pixel 7 emulation), one WebKit critical journey. Private token exchange/HttpOnly cookie/reload, address/choice, dossier, optional context, upload, finding, question/copy, page citation, authorized Blob viewer/fallback/reload, notary/print, logout and server 401 covered. Traces/retries/forced clicks disabled. Unit tests additionally assert Blob revocation and session expiry/reconnect/CSRF/cache behavior.
+**Seven passed, 19.4s**, `.local/verification-m6-web/e2e-supported.log`. Local Firefox previously failed before page creation with “Could not find profile folder,” under default/repo-local/canonical `/private/tmp` roots. Logs `.local/m6-e2e-first.log`, `.local/m6-firefox.log`, `.local/m6-firefox-private-tmp.log`; no bypass/forced click. That host-specific result is preserved. **Hosted Linux now passes all eight configured projects/tests including Firefox**; the supported-host requirement is closed without pretending local macOS worked.
 
-All eight configured tests were attempted during M6. Product focus/copy failures discovered in the expanded run were corrected and rerun. Firefox exits before creating a page with **“Could not find profile folder.”** Default/project-local/canonical `/private/tmp` roots reproduce it. Logs `.local/m6-e2e-first.log`, `.local/m6-firefox.log`, `.local/m6-firefox-private-tmp.log`. It remains enabled in CI; full local default matrix is **not all green**. Repeat Firefox on a supported host. No native Firefox PDF verification or security-option bypass is claimed.
+Actual journeys verify private exchange/cookie flags/reload, address/choice, dossier, optional context, upload/focus, finding/question/copy, page citation, private Blob viewer/fallback/reload, print/notary and server logout/401. Two Chromium journeys each at desktop/tablet/mobile, plus Firefox/WebKit critical flow. Unit tests assert revoke/abort/session expiry/CSRF/cache behavior. No retries/traces. Surrounding viewer behavior is tested, not native PDF pixels/coordinate highlighting or physical mobile rendering.
 
-Axe WCAG2 A/AA-tag checks pass on desktop Start, Overview, Documents, Findings, Co-ownership, Questions, Evidence, Print, plus sample Overview tablet/mobile. Explicit keyboard/focus coverage includes dialogs, selection, upload/classification, citation/copy/delete, session reconnect and logout. Automated checks and emulated dimensions are not physical-device testing or human assistive-technology certification.
+Axe A/AA-tag checks cover Start, Overview, Documents, Findings, Co-ownership, Questions, Evidence, Print on desktop plus responsive sample Overview. Keyboard/focus tests cover dialogs/navigation/selection/upload/classification/delete/citation/copy/reconnect/logout. No human assistive-technology certification or real buyer comprehension claim.
 
-The final desktop sample produced:
-
-```text
-web/test-results/journey-sample-co-ownershi-a6ad5-s-and-responsive-navigation-desktop/sample-notary.pdf
-```
-
-Copied to private `.local/verification-m6-print/sample-notary.pdf`, **ten A4 pages**. Poppler unavailable; local macOS CoreGraphics renders were used:
+Retained manual print QA from **November 13**: ten-page synthetic A4 PDF at `.local/verification-m6-print/sample-notary.pdf`, generated by the desktop Playwright sample. Poppler was unavailable, so CoreGraphics rasterization was used:
 
 ```sh
 swift -module-cache-path .local/swift-cache .local/render_m6_pdf.swift .local/verification-m6-print/sample-notary.pdf .local/verification-m6-print/pages-final
 ```
 
-All ten PNGs were visually inspected after the final change; text assertions confirm source/check/version details, provisional unverified deadline, assumptions/responsibility, one professional-review footer and no print controls. Fixed disclosure contents missing from print, focus outline leakage, source spacing, long Article 3.94 pagination and hidden deferred-check heading. Cards/rows/readable references retained. Some whitespace follows indivisible cards; no pixel-identical output, real printer/native PDF pixel or server-rendering claim. Aggregate results: `.local/verification-m6-print/results.json`, `render-final.log`. [Browser/print limits](docs/frontend/m6-browser-print.md).
+All ten raster pages inspected; aggregate assertions in `results.json`: source/check/version details, provisional unverified date, responsibility/assumptions, visible deferred heading, one professional footer, controls omitted. Existing print fixes retained; current hosted test regenerates the sample and tests print media. No new manual raster inspection, real printer study or server PDF feature is claimed in this continuation. [Browser/print limits](docs/frontend/m6-browser-print.md).
 
-## Actual official-source checks
+## Renewed official-source verification — November 14
 
-Reviewed [official API documentation](https://docs.basisregisters.vlaanderen.be/docs/api-documentation.html) (2026-10-29, shell 8.17.4) and its [OpenAPI 3.0.4](https://docs.basisregisters.vlaanderen.be/docs/v2/docs.json?culture=en-GB), retrieved **2026-11-13**. [Pinned source review](docs/integrations/source-review-2026-11-12-m6.md) explains the requested filename/date difference.
-
-The obsolete entry request was actually present: `query`, `resultType=Address`. Now:
+Inspected actual adapter and current [official v2 reference](https://docs.basisregisters.vlaanderen.be/docs/api-documentation.html), API 2026-10-29 / shell 8.17.4, plus its linked OpenAPI 3.0.4 through the live checker. [Dated review](docs/integrations/source-review-2026-11-12-m6.md) retains both retrieval dates; filename follows the original requested name.
 
 ```text
-GET /v2/adressen/zoeken?q=…&resultaatType=adressen&status=inGebruik&limit=6
+GET https://api.basisregisters.vlaanderen.be/v2/adressen/zoeken?q=…&resultaatType=adressen&status=inGebruik&limit=6
 ```
 
-Current optional key header, result field and detail/navigation metadata are regression-tested independently of domain normalization. Historical M2 reports remain unchanged. No other source/legal coverage is implied.
+M5 entry actually used `query`/`resultType=Address`; both old code and M2 report were stale. Existing M6 corrected code/fixtures; historical M2 report remains unchanged. Generated provider requests, optional key/header and current `resultaten` shape are tested independently of domain normalization; validation/SSRF/ambiguity bounds retained.
 
-Actual opt-in commands, run outside CI without printing a key or provider body:
+Actual renewed opt-in commands (correct src-layout environment):
 
 ```sh
-VIESETT_RUN_LIVE_SOURCE_TESTS=1 uv run python -m viesett.tools.verify_grar
-uv run python -m viesett.tools.check_grar_contract --live
+PYTHONPATH=src VIESETT_RUN_LIVE_SOURCE_TESTS=1 .venv/bin/python -m viesett.tools.verify_grar
+PYTHONPATH=src .venv/bin/python -m viesett.tools.check_grar_contract --live
 ```
 
-Live smoke: **LIVE_SUCCESS / RESOLVED**, fixed harmless existing public example `Dahliastraat 97, 9000 Gent`. DNS/TLS/search/address detail/unit list/detail/building/parcel list/detail/normalization succeeded, one selected unit, one parcel, no missing relations. Final `.local/m6-live-grar.json` contains only categories/counts/booleans; stderr empty. Query text/IDs are stripped from stage labels. No customer address or history is used. One chain is not a reliability/heritage/accuracy/quota guarantee.
+Smoke **LIVE_SUCCESS / RESOLVED**, harmless fixed existing public example `Dahliastraat 97, 9000 Gent`. DNS/verified TLS/search/detail/unit/building/parcel/normalization succeed: selected unit, one parcel, no missing relations. One parcel detail HTTP_429 safely retried to success. Drift **SUCCESS**, no failed expectations; schema SHA-256 **4a0970d12e9d7dc89131adcfb3d71d5b01f35b0dc41fafa82edf5e5c8e2e012c**. Whole hash differs from November 13; provider examples are volatile, and a whole-hash difference alone does not establish semantic drift. Selected expectations remain unchanged and never auto-edit code.
 
-Drift: **SUCCESS**, no failed expectations; `.local/m6-live-contract.json`, stderr empty. Retrieved whole-schema SHA-256 `98addb524772085552877c7c4255c2e0f14b48a01898b19bfd4e4c5ee2b01a35`. Provider-generated example timestamps can change it without semantic drift; committed selected metadata excludes those examples. Tool checks expectations and never rewrites behavior. Offline usage: `python -m viesett.tools.check_grar_contract --schema /private/local/schema.json`.
+Current content-free `.local/m6-continuation-2026-11-14/{live-grar,live-contract}.json`, final stderr empty. Initial raw-venv invocation lacked PYTHONPATH and failed before networking; initial environment logs are saved separately, not classified as provider failure. No customer address/history/key/body output or third-party paid service. Earlier November-13 live successes remain historical. A successful chain/retry is not uptime, load/quota, heritage or general compatibility verification.
 
-## Corpus and performance
+## Corpus and post-hotfix performance
 
-Actual `uv run python -m viesett.tools.evaluate_corpus`: **NO_CORPUS, documents=0, real_corpus_evaluation=NOT_PERFORMED**, `.local/m6-corpus-status.json`. **Real corpus evaluation not performed.** Synthetic four-input tests validate reporting; OCR_REQUIRED 1/4 is not a real frequency. Real classification/value accuracy, layout coverage, association and OCR frequency are unknown. Harness has aggregate-only output and no network/provider/AI/database access; optional private normalized anchor permits bounded association/M3 rule-impact evaluation. Full M4 impact remains a dossier-workflow exercise. [Compatibility/manifest/privacy limits](docs/private-beta/document-compatibility.md).
+Actual November-14 `PYTHONPATH=src .venv/bin/python -m viesett.tools.evaluate_corpus`: **NO_CORPUS**, documents=0, `real_corpus_evaluation=NOT_PERFORMED`, final stderr empty. **Real corpus evaluation not performed**; real classification/value accuracy/association/OCR frequency unknown. Synthetic four-input OCR_REQUIRED 1/4 tests the counter, not real compatibility. [Manifest/privacy/impact limits](docs/private-beta/document-compatibility.md).
 
-Actual local HTTP/production-assets measurements, Python 3.12/PG15/loopback/one worker/synthetic providers with artificial gap disabled:
+Fresh synthetic `viesett_m6_continuation` database/private object root, one local demo backend, production-assets Vite preview and Chromium. All outbound providers are synthetic, artificial gap disabled. Actual HTTP/session/upload/parser/evaluation pipeline measured after the completed hotfix:
 
 | Measurement | Samples | Result | Range |
 | --- | --- | --- | --- |
-| Five-document dossier GET | 5 | Median 18.38ms | 17.89–39.78ms |
-| Production-assets Start ready | 3 | Median 73.97ms | 73.22–136.21ms |
-| Authenticated reload→Overview | 3 | Median 102.35ms | 94.80–102.78ms |
-| Synthetic 1,004-byte text PDF upload→analyzed | 1 | 204.79ms | Single observation |
-| Deterministic cross-document refresh, no public refresh | 1 | 17.90ms | Single observation |
-| Seed five synthetic pipeline documents | 1 | 977.92ms | Single observation |
+| Five-document dossier GET | 5 | Median **118.12ms** | 93.67–753.21ms |
+| Production-assets Start ready | 3 | Median **544.51ms** | 277.01–962.49ms |
+| Authenticated reload→Overview | 3 | Median **476.54ms** | 425.93–491.17ms |
+| 1,004-byte text PDF upload→analyzed | 1 | **1,287.69ms** | Single observation |
+| Deterministic refresh, public_sources=false | 1 | **93.02ms** | Single observation |
+| Seed five synthetic documents | 1 | **5,005.48ms** | Single observation |
 
-Dossier **89,872 bytes**, five documents, 105 current facts. Normal DTO excludes histories, raw text/upstream/PDF/evaluation archives and duplicate finding/question collections. Helpers `.local/verification/measure_m6.py`, `measure_m6_ui.mjs`; results `.local/verification-m6-performance/{backend,frontend}.json`. Browser performance used production assets before the final small print-only heading fix; final bundle sizes above reflect that fix. Not an SLA, live-source latency distribution or real-corpus performance claim. [Method](docs/private-beta/performance.md).
+Payload **89,872 bytes**, five documents, 105 facts, unchanged. Normal DTO excludes raw text/PDF/provider/evaluation archives/history/duplicate result collections. New measurement helpers write aggregate-only logs and do not modify the checked-in DTO fixture. `.local/m6-continuation-2026-11-14/{backend,frontend}.json`, `measure_backend.py`, `measure_ui.mjs`. Earlier timing observations under `.local/verification-m6-performance/` predate the hotfix and are not a controlled comparison. No cause/SLA/optimization need is inferred from these small samples. [Detailed method](docs/private-beta/performance.md).
 
-Polling reviewed: shared query key, active-operation intervals only, bounded backoff/failure/time stop and no background/unmounted interval storm. Existing Query lifecycle owns observers; no WebSocket added.
+Polling code/tests reviewed without changes: shared query key, active-only bounded interval/backoff/failure/time cutoff, analysis-start anchor, hidden/unmounted observer behavior, on-demand PDFs, no WebSocket.
 
-## Additive migration verification
+## Migration history retained
 
-New `c82e16a7b603` follows unchanged `f51e9bf1a005`. Session table/compound owner-parent FK, authority CHECK and MANUAL-only UNVERIFIED constraint. No old notice/ack rewrite. Original README and M1–M5 migration bytes compared against HEAD, not inferred from tests.
+**c82e16a7b603** remains the sole M6 migration after **f51e9bf1a005**. Sessions/compound ownership/UNVERIFIED constraints and downgrade guards reviewed; no migration/history edit. November-14 fresh empty database `alembic upgrade head` and `alembic check` pass (logs `migration.log`, `alembic-check.log` in continuation folder).
 
-All **41 commands below exit 0**, using isolated `viesett_m6_migrations`; runner `.local/verification/run_m6_migrations.py`, logs `.local/verification-m6-migrations/{1..41}.log`, `results.json`, `.local/m6-migrations-runner.log`. Guard commands deliberately provoke and assert expected downgrade refusals; they succeed only when data is protected. Cleanup commands remove only the scripts' synthetic sentinels. Older milestone metadata checks are superseded by current-head `alembic check`, while all prior chain/data checks remain.
+Prior **41 local commands all exit zero**, `.local/verification-m6-migrations/{1..41}.log`, `results.json`, with synthetic-only sentinels. Current exact-commit hosted step metadata/logs independently confirm the full chain/guards, including empty-head/check and preservation. No repeated destructive schema exercise was necessary on the same unchanged source:
 
 ```sh
 alembic upgrade 5e1e917449ce
@@ -199,14 +184,14 @@ alembic upgrade head
 alembic check
 ```
 
-This includes empty→head, M1→M6, M5 data/notices/ack preservation, each M6 guard, M6→M5 preservation after synthetic cleanup, full downgrade and final empty upgrade/check. Real session/context history must be intentionally handled before downgrade.
+Guard helpers intentionally assert downgrade refusal when protected M4/M5/M6 data exists. Cleanup removes only synthetic sentinel data; live session/context history must be deliberately handled before a real downgrade. Original README and five old migrations are byte-compared against M5; M6 migration/hotfix application files match entry.
 
-## Integrity, operations and remaining gates
+## Integrity, scope, operations and cleanup
 
-Final `git diff --check`, generated-contract check, report-topic/link validation and README/old-migration byte checks pass. Final source hashes and aggregate integrity results live under `.local/verification-m6/`. Task-local corpus/cache/build/test files remain gitignored; no new real PDF, credential, `.local`, `node_modules` or `dist` file is a Git candidate. The checked-in metadata fixture is selected public provider schema; the frontend fixture remains synthetic.
+[Scope audit](docs/private-beta/m6-scope-audit.md) maps every major original requirement to COMPLETE / PARTIAL / NOT_STARTED / NOT_APPLICABLE / BLOCKED_BY_ENVIRONMENT at entry and completion. All requested implementation/verification deliverables are COMPLETE. Actual deployment/buyer study remain NOT_STARTED and real-material metrics are unavailable; local Firefox launch is BLOCKED_BY_ENVIRONMENT while hosted engine coverage passes.
 
-The beta profile is implemented/tested, not deployed. It rejects demo/dev/unsafe flags, requires Secure cookies/exact HTTPS origins/private absolute storage and one worker. DB advisory lock is a session-affine startup guard; process manager remains one worker and DB recovery requires worker restart. Existing production malware/sensitive-content adapter and processor/legal gates are intentionally retained. Operator TLS/backups/retention/incident/revocation and notice/cookie review remain open. [Deployment](docs/private-beta/deployment.md), [checklist](docs/private-beta/checklist.md), [evaluation guide](docs/private-beta/evaluation-guide.md).
+Final hashes/integrity/cleanup results are under `.local/m6-continuation-2026-11-14/`. No source/test/frontend/config/schema change, new customer PDF/secret/build/private file Git candidate, README edit, commit/push/deploy. `git diff --check`, report numbering/link validation, unchanged hotfix/migration/source checks and production-bundle test-constant exclusions pass. Docs are the only final changes.
 
-Temporary task-owned backend/frontend/performance services were stopped after use; the task PostgreSQL instance is stopped at final cleanup with its synthetic files retained. Cleanup outcome is recorded in `.local/verification-m6/cleanup.json`. No shared/user service was terminated or data discarded.
+Task-owned local backend/frontend/PostgreSQL stopped after measurement; synthetic files/databases retained, no shared/user service terminated. No other project's .env or credential used. No new PDF generation/research database/analytics/AI/OCR/email/new legal rules.
 
-M6 is local/uncommitted; no M6 hosted CI was triggered/claimed. CI installs all three browsers and retains deterministic, credential-free tests; no live source tool in CI. Firefox supported-host run, real authorized corpus, buyer observations and deployment/privacy/production gates remain explicit. No live AI/OCR SaaS/email/analytics/new rules or automatic M7 begun.
+M6 prepares controlled evaluation infrastructure; it does not launch a real-data service. Production safety adapters/processors/TLS/storage/backups/retention/privacy/legal/incident gates and intended-network smoke remain before real documents. [Deployment](docs/private-beta/deployment.md), [checklist](docs/private-beta/checklist.md), [evaluation guide](docs/private-beta/evaluation-guide.md). Choose subsequent changes from actual buyers, entitled documents and source reliability, not an automatic next milestone.
