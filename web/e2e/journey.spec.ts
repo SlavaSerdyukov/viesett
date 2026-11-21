@@ -1,5 +1,7 @@
 import { test, expect, type Locator, type Page } from "@playwright/test";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
+import { writeFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import fixture from "../src/test-fixture.json" with { type: "json" };
 // Test-only credentials remain in worker memory, never in artifacts or storage.
@@ -13,6 +15,17 @@ async function accessible(page: Page) {
     .withTags(["wcag2a", "wcag2aa"])
     .analyze();
   expect(result.violations).toEqual([]);
+}
+async function humanSourcesOnly(page: Page) {
+  await expect(page.locator(".technical-source, .source-details")).toHaveCount(
+    0,
+  );
+  expect(await page.locator("body").textContent()).not.toMatch(
+    /Technical source|Raw source|API endpoint|GRAR API URI|https:\/\/api\.basisregisters\.vlaanderen\.be/,
+  );
+  await expect(
+    page.locator('a[href^="https://api.basisregisters.vlaanderen.be/"]'),
+  ).toHaveCount(0);
 }
 
 test("address → private dossier → PDF → finding → question → source → print", async ({
@@ -140,13 +153,46 @@ test("address → private dossier → PDF → finding → question → source �
   await expect(
     page.getByRole("heading", { name: "Energy", exact: true }),
   ).toBeVisible();
+  await humanSourcesOnly(page);
   await activate(page.getByRole("link", { name: "Questions", exact: true }));
   await activate(page.getByRole("button", { name: "Copy all questions" }));
   await expect(
     page.getByText(/Copied|Select the text to copy/).first(),
   ).toBeVisible();
+  await humanSourcesOnly(page);
+  await activate(page.getByRole("link", { name: "Evidence", exact: true }));
+  await expect(
+    page.getByRole("heading", { name: "Official records" }),
+  ).toBeVisible();
+  await expect(page.locator(".source-details[open]")).toHaveCount(0);
+  const reference = page
+    .locator(".evidence-row")
+    .filter({ hasText: "Address registry reference" });
+  await expect(
+    reference.getByText("Provider object ID: 1", { exact: true }),
+  ).toBeHidden();
+  await activate(reference.getByText("Source details", { exact: true }));
+  await expect(
+    reference.getByText("Provider object ID: 1", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    reference.getByText("Provider: Digitaal Vlaanderen"),
+  ).toBeVisible();
+  expect(await page.locator("body").textContent()).not.toContain(
+    "https://api.basisregisters.vlaanderen.be/",
+  );
+  await page.emulateMedia({ media: "print" });
+  await expect(reference.locator(".source-details")).toBeHidden();
+  await page.emulateMedia({ media: "screen" });
+  if (testInfo.project.name === "desktop") {
+    await accessible(page);
+    await reference.screenshot({
+      path: testInfo.outputPath("evidence-source-details.png"),
+    });
+  }
   await activate(page.getByRole("link", { name: /^Findings/ }));
   await activate(page.getByText("Sources & check details").first());
+  await humanSourcesOnly(page);
   await activate(page.getByRole("link", { name: /epc.pdf · page 1/i }).first());
   await expect(page.getByText("Target page 1", { exact: true })).toBeVisible();
   await expect(page.locator("iframe")).toHaveAttribute(
@@ -169,14 +215,16 @@ test("address → private dossier → PDF → finding → question → source �
   await activate(page.getByRole("link", { name: "Back to documents" }));
   await activate(page.getByRole("link", { name: "Prepare for notary" }));
   await expect(
-    page.getByRole("heading", { name: "Source list" }),
+    page.getByRole("heading", { name: "Source appendix" }),
   ).toBeVisible();
+  await humanSourcesOnly(page);
   expect(
     await page.evaluate(() => localStorage.length + sessionStorage.length),
   ).toBe(0);
   expect(external).toEqual([]);
   await page.emulateMedia({ media: "print" });
   await expect(page.locator(".print-controls")).toBeHidden();
+  await expect(page.locator(".print-help")).toBeHidden();
   await page.screenshot({
     path: testInfo.outputPath("notary-handoff.png"),
     fullPage: true,
@@ -252,20 +300,97 @@ test("sample co-ownership shows funding assumptions and responsive navigation", 
   }
   await activate(page.getByRole("link", { name: "Prepare for notary" }));
   await expect(
-    page.getByRole("heading", { name: "Source list" }),
+    page.getByRole("heading", { name: "Source appendix" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Notary handoff", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Questions for the notary" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Ask the seller" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Article 3.94 information" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Document checklist" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText("Legal payment responsibility: Not determined"),
+  ).toBeVisible();
+  await humanSourcesOnly(page);
+  await expect(page.locator(".print-help")).toContainText(
+    "Headers and footers",
+  );
+  await expect(
+    page.locator(
+      '.citations a[href^="https://api.basisregisters.vlaanderen.be/"]',
+    ),
+  ).toHaveCount(0);
   if (testInfo.project.name === "desktop") {
     await accessible(page);
     await page.emulateMedia({ media: "print" });
-    await expect(
-      page.getByText("Not required now / not yet applicable", { exact: true }),
-    ).toBeVisible();
-    await page.pdf({
-      path: testInfo.outputPath("sample-notary.pdf"),
+    await expect(page.locator(".print-help")).toBeHidden();
+    const notaryPath = testInfo.outputPath("sample-notary.pdf");
+    const notaryPdf = await page.pdf({
+      path: notaryPath,
       format: "A4",
       printBackground: true,
       preferCSSPageSize: true,
     });
+    await page.screenshot({
+      path: testInfo.outputPath("notary-handoff.png"),
+      fullPage: true,
+    });
+    await page.emulateMedia({ media: "screen" });
+    await activate(
+      page.getByRole("link", { name: "Print full dossier", exact: true }),
+    );
+    await expect(
+      page.getByRole("heading", { name: "Article 3.94 information" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Document checklist" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Ask the seller" }),
+    ).toBeVisible();
+    await humanSourcesOnly(page);
+    await page.emulateMedia({ media: "print" });
+    await expect(page.locator(".print-help")).toBeHidden();
+    const fullPath = testInfo.outputPath("sample-full-dossier.pdf");
+    const fullPdf = await page.pdf({
+      path: fullPath,
+      format: "A4",
+      printBackground: true,
+      preferCSSPageSize: true,
+    });
+    const counts = JSON.parse(
+      execFileSync(
+        path.resolve("../.venv/bin/python"),
+        [
+          "-c",
+          "import json,sys; from pypdf import PdfReader; readers=[PdfReader(p) for p in sys.argv[1:]]; texts=['\\n'.join(page.extract_text() for page in r.pages) for r in readers]; assert all(not any(term in t for term in ['https://api.basisregisters.vlaanderen.be/', 'Technical source', 'Source details', 'Headers and footers']) for t in texts); assert 'Address object:' not in texts[0]; print(json.dumps([len(r.pages) for r in readers]))",
+          notaryPath,
+          fullPath,
+        ],
+        { encoding: "utf8" },
+      ),
+    ) as number[];
+    expect(counts[0]).toBeLessThanOrEqual(5);
+    expect(counts[0]).toBeLessThan(counts[1]);
+    expect(notaryPdf.length).toBeLessThan(fullPdf.length);
+    writeFileSync(
+      testInfo.outputPath("print-metrics.json"),
+      JSON.stringify({
+        notary_pages: counts[0],
+        full_pages: counts[1],
+        notary_bytes: notaryPdf.length,
+        full_bytes: fullPdf.length,
+      }),
+    );
     await page.emulateMedia({ media: "screen" });
   }
   await activate(page.getByRole("link", { name: "Back to dossier" }));
@@ -282,4 +407,80 @@ test("sample co-ownership shows funding assumptions and responsive navigation", 
     path: testInfo.outputPath("overview-final.png"),
     fullPage: false,
   });
+});
+
+test("search catalog and delete a whole dossier @desktop", async ({ page }) => {
+  await page.goto("/");
+  const input = page.getByLabel("Enter the property address");
+  await input.fill("Teststraat 42 Gent");
+  await input.press("Enter");
+  await expect(
+    page.getByRole("heading", {
+      name: "Teststraat 42, 9000 Gent",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await input.fill("Unrelated fictional street 999");
+  await input.press("Enter");
+  await expect(
+    page.getByRole("heading", { name: "Address not in the demo" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Create buyer dossier" }),
+  ).toHaveCount(0);
+  await input.fill("Teststraat 42 bus 1, 9000 Gent");
+  await input.press("Enter");
+  await expect(
+    page.getByRole("heading", {
+      name: "Teststraat 42 bus 1, 9000 Gent",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Create buyer dossier" }).click();
+  if (evaluationToken) {
+    await page.getByLabel("Access token").fill(evaluationToken);
+    await page.getByRole("button", { name: "Connect", exact: true }).click();
+  } else
+    await page
+      .getByRole("button", { name: "Start private evaluation" })
+      .click();
+  await expect(
+    page.getByRole("heading", { name: "Dossier completeness" }),
+  ).toBeVisible();
+  const dossierPath = new URL(page.url()).pathname;
+  const wid = dossierPath.split("/")[2];
+  const remove = page.getByRole("button", { name: /^Delete dossier for/ });
+  for (const width of [900, 393, 1440]) {
+    await page.setViewportSize({ width, height: 1050 });
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    await remove.click();
+    await page.getByRole("button", { name: "Keep dossier" }).click();
+    await expect(remove).toBeFocused();
+  }
+  await remove.click();
+  const deleted = page.waitForResponse(
+    (r) =>
+      r.request().method() === "DELETE" &&
+      new URL(r.url()).pathname === `/api/v1/workspaces/${wid}`,
+  );
+  await page
+    .getByRole("button", { name: "Delete dossier permanently" })
+    .click();
+  expect((await deleted).status()).toBe(204);
+  await expect(
+    page.getByRole("button", { name: "Check property" }),
+  ).toBeVisible();
+  await expect(page.locator(`a[href^="/workspaces/${wid}/"]`)).toHaveCount(0);
+  await page.reload();
+  const list = await page.request.get("/api/v1/workspaces");
+  expect((await list.json()).some((w: { id: string }) => w.id === wid)).toBe(
+    false,
+  );
+  expect(
+    (await page.request.get(`/api/v1/workspaces/${wid}/dossier`)).status(),
+  ).toBe(404);
 });

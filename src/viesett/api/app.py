@@ -44,7 +44,7 @@ def create_app(
     if config.demo_mode and source_transport is None:
         from viesett.demo_data import DemoOfficialService
 
-        source_transport = httpx.MockTransport(DemoOfficialService().handler)
+        source_transport = httpx.MockTransport(DemoOfficialService(match_queries=True).handler)
     engine = create_engine(config)
     safety = pipeline or SafetyPipeline(
         DevelopmentScanner() if config.allow_development_safety else UnavailableScanner(),

@@ -246,6 +246,11 @@ it("links a citation to a private document at the requested page", () => {
         {
           document_id: "d",
           label: "EPC.pdf",
+          kind: "DOCUMENT",
+          human_url: null,
+          technical_uri: null,
+          provider: null,
+          source_identifier: null,
           page: 3,
           uri: null,
           retrieved_at: null,
@@ -402,7 +407,9 @@ it("prepares an honest print dossier and a browser print action", () => {
   expect(
     screen.getByRole("button", { name: "Print / Save as PDF" }),
   ).toBeVisible();
-  expect(screen.getByRole("heading", { name: "Source list" })).toBeVisible();
+  expect(
+    screen.getByRole("heading", { name: "Source appendix" }),
+  ).toBeVisible();
   expect(screen.getByText(new RegExp(fixture.findings[0].code))).toBeVisible();
   expect(screen.getByText(/Legally significant decisions/)).toBeVisible();
 });

@@ -106,6 +106,8 @@ export const api = {
   restore: () => request<BrowserSessionResponse>("/browser-session"),
   logout: () => request<void>("/browser-session/logout", { method: "POST" }),
   workspaces: () => request<WorkspaceOut[]>("/workspaces"),
+  removeDossier: (id: string) =>
+    request<void>(`/workspaces/${id}`, { method: "DELETE" }),
   create: (selection: Selection) =>
     request<Dossier>("/dossiers", {
       method: "POST",

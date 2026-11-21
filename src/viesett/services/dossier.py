@@ -31,6 +31,7 @@ from viesett.services.due_diligence import refresh_due_diligence
 from viesett.services.evidence import list_findings
 from viesett.services.ownership import owned_workspace
 from viesett.services.property_snapshot import snapshot
+from viesett.services.source_presentation import present_citation
 from viesett.services.transaction_context import answers, missing_questions
 
 GROUPS = [
@@ -246,18 +247,31 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
             document = source_documents.get(e.document_id) if e.document_id else None
             raw_page = e.source_locator.get("page")
             page = int(raw_page) if isinstance(raw_page, int) and raw_page > 0 else None
-            source = CitationResponse(
-                label=document.original_filename
-                if document
-                else "Official Flemish register"
-                if e.authority == "OFFICIAL"
-                else "Buyer-provided transaction detail — unverified"
-                if e.authority == "UNVERIFIED"
-                else "Derived information",
-                document_id=document.id if document else None,
-                page=page,
-                uri=None if document else e.source_uri,
-                retrieved_at=e.source_retrieved_at or e.observed_at,
+            source = present_citation(
+                CitationResponse(
+                    label=document.original_filename
+                    if document
+                    else "Official Flemish register"
+                    if e.authority == "OFFICIAL"
+                    else "Buyer-provided transaction detail — unverified"
+                    if e.authority == "UNVERIFIED"
+                    else "Derived information",
+                    document_id=document.id if document else None,
+                    page=page,
+                    uri=None if document else e.source_uri,
+                    provider=e.provider,
+                    source_identifier=e.fact_identifier,
+                    kind="DOCUMENT"
+                    if document
+                    else "OFFICIAL_REGISTER"
+                    if e.authority == "OFFICIAL"
+                    else "USER_CONTEXT"
+                    if e.authority == "UNVERIFIED"
+                    else "DERIVED"
+                    if e.authority == "INFERRED"
+                    else "PUBLIC_INFORMATION",
+                    retrieved_at=e.source_retrieved_at or e.observed_at,
+                )
             )
             values[source.model_dump_json()] = source
         return sorted(
@@ -347,9 +361,12 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
         sources = citations(f.evidence_ids)
         if f.provenance.official_source_reference:
             sources.append(
-                CitationResponse(
-                    label=f.provenance.official_source_name or "Reviewed rule source",
-                    uri=f.provenance.official_source_reference,
+                present_citation(
+                    CitationResponse(
+                        label=f.provenance.official_source_name or "Reviewed rule source",
+                        uri=f.provenance.official_source_reference,
+                        kind="RULE_AUTHORITY",
+                    )
                 )
             )
         findings.append(
@@ -435,6 +452,7 @@ async def dossier(db: AsyncSession, user: UUID, workspace_id: UUID) -> DossierSn
         evidence=[
             EvidenceResponse(
                 id=e.id,
+                key=e.key,
                 label=fact_label(e.key),
                 value=str(e.typed_value.get("value", "")),
                 authority=e.authority,

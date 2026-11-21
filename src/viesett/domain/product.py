@@ -55,6 +55,18 @@ class PreviewResponse(Schema):
 
 class CitationResponse(Schema):
     label: str
+    kind: Literal[
+        "DOCUMENT",
+        "OFFICIAL_REGISTER",
+        "RULE_AUTHORITY",
+        "PUBLIC_INFORMATION",
+        "USER_CONTEXT",
+        "DERIVED",
+    ] = "PUBLIC_INFORMATION"
+    human_url: str | None = None
+    technical_uri: str | None = None
+    provider: str | None = None
+    source_identifier: str | None = None
     document_id: UUID | None = None
     page: int | None = None
     uri: str | None = None
@@ -63,6 +75,7 @@ class CitationResponse(Schema):
 
 class EvidenceResponse(Schema):
     id: UUID
+    key: str
     label: str
     value: str
     authority: Authority

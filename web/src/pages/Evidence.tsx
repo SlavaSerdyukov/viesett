@@ -2,6 +2,7 @@ import { Citations, Empty, PageIntro } from "../components";
 import { Exposure } from "./CoOwnership";
 import type { DossierSnapshotResponse as Dossier } from "../contracts";
 import { date } from "../copy";
+import { EvidenceSourceDetails, referenceFact } from "../EvidenceSourceDetails";
 export function Evidence({ data }: { data: Dossier }) {
   return (
     <>
@@ -26,9 +27,10 @@ export function Evidence({ data }: { data: Dossier }) {
               {rows.map((e) => (
                 <div className="evidence-row" key={e.id}>
                   <div>
-                    <strong>{e.label}</strong>
-                    <p>{e.value}</p>
+                    <strong>{referenceFact(e)?.title ?? e.label}</strong>
+                    {!referenceFact(e) && <p>{e.value}</p>}
                     <Citations sources={e.sources} wid={data.workspace.id} />
+                    <EvidenceSourceDetails evidence={e} />
                   </div>
                   <span className="small muted">
                     {e.effective_date ? "Source date" : "Recorded"}{" "}

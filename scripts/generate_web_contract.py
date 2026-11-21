@@ -15,6 +15,7 @@ from viesett.domain.product import (
     WebConfigResponse,
 )
 from viesett.domain.schemas import PolicyOut, WorkspaceOut
+from viesett.services.source_presentation import SOURCE_CATALOG
 
 
 def ts(schema: dict[str, Any]) -> str:
@@ -72,6 +73,9 @@ def main() -> None:
             for name, schema in sorted(definitions.items())
         )
         + "\n"
+    )
+    value += (
+        "export const SOURCE_CATALOG = " + json.dumps(SOURCE_CATALOG, indent=2) + " as const;\n"
     )
     path = Path("web/src/contracts.ts")
     if "--check" in sys.argv:

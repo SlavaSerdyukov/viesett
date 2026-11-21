@@ -4,7 +4,8 @@ import { Completeness, PropertyFacts } from "../components";
 import { Exposure } from "./CoOwnership";
 import { TransactionContext } from "../TransactionContext";
 import type { DossierSnapshotResponse as Dossier } from "../contracts";
-import { kind, label, safeUri, componentLabel } from "../copy";
+import { kind, label, componentLabel } from "../copy";
+import { humanSourceUrl, providerSource } from "../sources";
 export function Overview({ data }: { data: Dossier }) {
   const missing = data.requirements.filter(
     (r) => r.applicability === "REQUIRED" && r.presence !== "PRESENT",
@@ -115,7 +116,7 @@ export function Overview({ data }: { data: Dossier }) {
         {data.property.sources.map((s) => (
           <a
             className="small source-credit"
-            href={safeUri(s.source_reference)}
+            href={humanSourceUrl(providerSource(s.provider)?.human_url)}
             key={s.provider}
             target="_blank"
             rel="noreferrer"

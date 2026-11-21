@@ -8,7 +8,6 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import {
   Check,
-  FileText,
   House,
   LoaderCircle,
   FolderOpen,
@@ -16,11 +15,12 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import type {
-  CitationResponse,
   CompletenessResponse,
   DossierSnapshotResponse as Dossier,
 } from "./contracts";
-import { label, date, safeUri } from "./copy";
+import { label, date } from "./copy";
+import { SOURCE_CATALOG } from "./contracts";
+export { Citations } from "./SourceCitations";
 export function RouteFocus() {
   const { pathname } = useLocation();
   const previous = useRef(pathname);
@@ -107,7 +107,14 @@ export function Modal({
     };
   }, []);
   return (
-    <dialog ref={ref} aria-labelledby="dialog-title" onCancel={close}>
+    <dialog
+      ref={ref}
+      aria-labelledby="dialog-title"
+      onCancel={(event) => {
+        event.preventDefault();
+        close();
+      }}
+    >
       <button
         className="icon-button dialog-close"
         aria-label="Close dialog"
@@ -188,45 +195,6 @@ export function CopyButton({
   );
 }
 
-export function Citations({
-  sources,
-  wid,
-}: {
-  sources: CitationResponse[];
-  wid: string;
-}) {
-  return (
-    <div className="citations">
-      {Array.from(
-        new Map(
-          sources.map((s) => [
-            JSON.stringify([s.document_id, s.page, s.uri]),
-            s,
-          ]),
-        ).values(),
-      ).map((s, i) =>
-        s.document_id ? (
-          <Link
-            key={i}
-            to={`/workspaces/${wid}/documents/${s.document_id}?page=${s.page ?? 1}`}
-          >
-            <FileText size={13} />
-            {s.label}
-            {s.page ? ` · page ${s.page}` : ""}
-          </Link>
-        ) : safeUri(s.uri) ? (
-          <a key={i} href={safeUri(s.uri)} target="_blank" rel="noreferrer">
-            {s.label}
-            <ArrowUpRight size={12} />
-          </a>
-        ) : (
-          <span key={i}>{s.label}</span>
-        ),
-      )}
-    </div>
-  );
-}
-
 export function Completeness({ value }: { value: CompletenessResponse }) {
   return (
     <section className="completeness panel">
@@ -285,7 +253,7 @@ export function PropertyFacts({ property }: { property: Dossier["property"] }) {
         <dd>
           Official automatic score unavailable{" "}
           <a
-            href={safeUri(property.flood.official_reference)}
+            href={SOURCE_CATALOG.FLOOD.human_url}
             target="_blank"
             rel="noreferrer"
           >

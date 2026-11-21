@@ -83,6 +83,7 @@ def heritage(official_id: int, category: str, label: str) -> dict[str, JsonValue
 
 @dataclass
 class DemoOfficialService:
+    match_queries: bool = False
     search_ids: list[str] = field(default_factory=lambda: ["1"])
     units_by_address: dict[str, list[str]] = field(
         default_factory=lambda: {"1": ["10"], "2": ["20"]}
@@ -156,6 +157,18 @@ class DemoOfficialService:
         if path == "/v2/adressen/zoeken":
             assert request.url.params["resultaatType"] == "adressen"
             assert request.url.params["status"] == "inGebruik"
+            ids = self.search_ids
+            if self.match_queries:
+                # Finite fictional catalog, not an address parser or live lookup.
+                normalized = " ".join(query.replace(",", " ").split())
+                aliases = {"teststraat": ["1", "2"]}
+                for official_id, base in [
+                    ("1", "teststraat 42"),
+                    ("2", "teststraat 42 bus 1"),
+                ]:
+                    for suffix in ["", " gent", " 9000 gent"]:
+                        aliases[base + suffix] = [official_id]
+                ids = aliases.get(normalized, [])
             return httpx.Response(
                 200,
                 json={
@@ -166,7 +179,7 @@ class DemoOfficialService:
                             "detail": HOST + f"/v2/adressen/{i}",
                             "result": f"Synthetic address {i}",
                         }
-                        for i in self.search_ids
+                        for i in ids
                     ]
                 },
             )

@@ -26,7 +26,9 @@ import { Evidence } from "./Evidence";
 import { PreviewCard } from "./Start";
 import type { PreviewResponse } from "../contracts";
 import { PrintDossier } from "./Print";
+import { NotaryHandoff } from "./Notary";
 import { processingInterval } from "../polling";
+import { DeleteDossier } from "../DeleteDossier";
 const sections = [
   ["overview", "Overview", House],
   ["documents", "Documents", FileText],
@@ -126,6 +128,7 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
     );
   const data = q.data;
   if (section === "print") return <PrintDossier data={data} />;
+  if (section === "notary") return <NotaryHandoff data={data} />;
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -159,9 +162,12 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
             <ChevronRight size={13} />
             Property review
           </span>
-          <Link className="text-button" to={`/workspaces/${id}/print`}>
+          <Link className="text-button" to={`/workspaces/${id}/notary`}>
             <Printer size={16} />
             Prepare for notary
+          </Link>
+          <Link className="text-button" to={`/workspaces/${id}/print`}>
+            Print full dossier
           </Link>
           <button
             className="text-button mobile-logout"
@@ -298,6 +304,10 @@ export function DossierPage({ maxBytes }: { maxBytes: number }) {
           <footer className="dossier-footer">
             <span>Source-backed information. A clearer next step.</span>
             <span>Private dossier · Viesett</span>
+            <DeleteDossier
+              id={id}
+              address={data.property.address ?? "Unresolved property"}
+            />
           </footer>
         </main>
       </div>

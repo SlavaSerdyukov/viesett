@@ -23,13 +23,18 @@ export default defineConfig({
     },
     {
       name: "tablet",
+      grepInvert: /@desktop/,
       use: {
         channel: "chromium",
         viewport: { width: 900, height: 1100 },
         hasTouch: true,
       },
     },
-    { name: "mobile", use: { ...devices["Pixel 7"], channel: "chromium" } },
+    {
+      name: "mobile",
+      grepInvert: /@desktop/,
+      use: { ...devices["Pixel 7"], channel: "chromium" },
+    },
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
@@ -60,6 +65,7 @@ export default defineConfig({
         VIESETT_SOURCE_MIN_INTERVAL: "0",
         VIESETT_SOURCE_RETRY_BASE: "0",
         VIESETT_RATE_LIMIT_PER_MINUTE: "1000",
+        VIESETT_PREVIEW_RATE_LIMIT_PER_MINUTE: "30",
       },
     },
     {

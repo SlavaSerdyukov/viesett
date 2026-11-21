@@ -5,7 +5,7 @@ export type AsbestosVariant = "PRIVATE_UNIT" | "COMMON_PARTS" | "COMMONLY_USED_P
 export type Authority = "OFFICIAL" | "DOCUMENTED" | "INFERRED" | "UNVERIFIED";
 export type BrowserSessionResponse = { "authenticated": boolean; "csrf_token": string; "expires_at": string; };
 export type CapitalCall = { "reference": string | null; "project_reference": string | null; "total": Money | null; "lot_specific_amount": Money | null; "lot": string | null; "due_date": string | null; "effective_date": string | null; "purpose": string | null; "fund_type": "WORKING_CAPITAL" | "RESERVE_CAPITAL" | "EXTRAORDINARY" | "UNKNOWN"; "covers_full_project": boolean; "evidence_ids": (string)[]; };
-export type CitationResponse = { "label": string; "document_id": string | null; "page": number | null; "uri": string | null; "retrieved_at": string | null; };
+export type CitationResponse = { "label": string; "kind": "DOCUMENT" | "OFFICIAL_REGISTER" | "RULE_AUTHORITY" | "PUBLIC_INFORMATION" | "USER_CONTEXT" | "DERIVED"; "human_url": string | null; "technical_uri": string | null; "provider": string | null; "source_identifier": string | null; "document_id": string | null; "page": number | null; "uri": string | null; "retrieved_at": string | null; };
 export type CoOwnershipIdentity = { "association_name": string | null; "enterprise_number": string | null; "building_address": string | null; "syndic_name": string | null; "syndic_enterprise_number": string | null; "lot_identifier": string | null; "private_unit_designation": string | null; "ownership_share": Share | null; "attached_lots": (string)[]; "source_document_ids": (string)[]; "evidence_ids": (string)[]; };
 export type CoOwnershipSummaryResponse = { "co_ownership_status": string; "identity": CoOwnershipIdentity | null; "article_3_94_completeness": (PackageComponent)[]; "current_working_capital": MoneyObservation | null; "current_reserve_capital": MoneyObservation | null; "planned_works": (PlannedWork)[]; "capital_calls": (CapitalCall)[]; "pending_litigation": (Litigation)[]; "financial_exposure_estimates": (Exposure)[]; };
 export type CompletenessResponse = { "state": "COMPLETE" | "INCOMPLETE" | "BLOCKED_BY_MISSING_DATA" | "IN_PROGRESS"; "completed_count": number; "applicable_count": number; "percentage": number | null; "conditional_count": number; "basis": string; };
@@ -16,7 +16,7 @@ export type DecisionStatus = "PROPOSED" | "APPROVED" | "REJECTED" | "POSTPONED" 
 export type DocumentSummaryResponse = { "id": string; "filename": string; "kind": string; "status": string; "association": string; "created_at": string; "processing_since": string | null; "analysis_id": string | null; "summary": (string)[]; "can_view": boolean; "can_retry": boolean; "supported_kinds": (AnalysisKind)[]; };
 export type DossierSnapshotResponse = { "schema_version": string; "workspace": WorkspaceOut; "is_demo": boolean; "property": PropertyView; "completeness": CompletenessResponse; "requirements": (Requirement)[]; "documents": (DocumentSummaryResponse)[]; "findings": (FindingResponse)[]; "findings_summary": Record<string, number>; "co_ownership": CoOwnershipSummaryResponse | null; "questions": (QuestionResponse)[]; "evidence": (EvidenceResponse)[]; "evidence_total": number; "truncated": boolean; "last_updated": string; "evaluation_date": string | null; "context_questions": (MissingContextQuestion)[]; "context_answers": (ContextAnswerResponse)[]; };
 export type EnrichmentStatus = "IN_PROGRESS" | "SUCCESS" | "NOT_APPLICABLE" | "SOURCE_UNAVAILABLE" | "MANUAL_OFFICIAL_LOOKUP_REQUIRED" | "INVALID_SOURCE_RESPONSE";
-export type EvidenceResponse = { "id": string; "label": string; "value": string; "authority": Authority; "date": string | null; "effective_date": string | null; "sources": (CitationResponse)[]; };
+export type EvidenceResponse = { "id": string; "key": string; "label": string; "value": string; "authority": Authority; "date": string | null; "effective_date": string | null; "sources": (CitationResponse)[]; };
 export type Exposure = { "planned_work_key": string; "status": "CALCULATED" | "UNKNOWN_ALLOCATION" | "INSUFFICIENT_BUDGET" | "CONFLICTING_INPUTS"; "gross_project_cost": Money | null; "explicit_project_funding": Money | null; "remaining_financing_basis": Money | null; "share": Share | null; "gross_proportional_amount": Money | null; "estimated_proportional_amount": Money | null; "exact_numerator": number | null; "exact_denominator": number | null; "confidence": "DOCUMENTED_INPUTS" | "INSUFFICIENT_INPUTS"; "assumptions": (string)[]; "source_evidence_ids": (string)[]; "calculation_version": string; "calculation_code": string; "category": "FINANCIAL_DERIVATION"; "reviewed_at": string; "authority": Authority; "legal_payment_responsibility": "UNDETERMINED"; };
 export type FindingResponse = { "id": string; "code": string; "group": string; "severity": Severity; "title": string; "explanation": string; "next_step": string; "sources": (CitationResponse)[]; "rule_version": string | null; };
 export type FloodResult = { "status": "MANUAL_OFFICIAL_LOOKUP_REQUIRED" | "SOURCE_UNAVAILABLE" | "NOT_APPLICABLE"; "p_score": null; "g_score": null; "official_reference": string; "parcel_references": Record<string, string>; };
@@ -48,3 +48,77 @@ export type WebConfigResponse = { "development_session": boolean; "demo": boolea
 export type WorkCategory = "ROOF" | "FACADE" | "LIFT" | "HEATING" | "INSULATION" | "WINDOWS" | "STRUCTURAL" | "ELECTRICAL_COMMON" | "FIRE_SAFETY" | "OTHER";
 export type WorkspaceOut = { "is_demo": boolean; "id": string; "owner_user_id": string; "status": WorkspaceStatus; "canonical_address": string | null; "region": Region; "created_at": string; "updated_at": string; "archived_at": string | null; };
 export type WorkspaceStatus = "ACTIVE" | "ARCHIVED";
+export const SOURCE_CATALOG = {
+  "GRAR": {
+    "label": "Official Flemish Address Register",
+    "kind": "OFFICIAL_REGISTER",
+    "provider": "GRAR",
+    "human_url": "https://www.vlaanderen.be/datavindplaats/catalogus/gebouwen-en-adressenregister"
+  },
+  "HERITAGE": {
+    "label": "Heritage inventory \u2014 Onroerend Erfgoed",
+    "kind": "OFFICIAL_REGISTER",
+    "provider": "HERITAGE",
+    "human_url": "https://inventaris.onroerenderfgoed.be/"
+  },
+  "FLOOD": {
+    "label": "Waterinfo \u2014 Flood information",
+    "kind": "PUBLIC_INFORMATION",
+    "provider": "FLOOD",
+    "human_url": "https://waterinfo.vlaanderen.be/informatieplicht"
+  },
+  "EPC": {
+    "label": "Vlaanderen / VEKA \u2014 EPC",
+    "kind": "RULE_AUTHORITY",
+    "provider": "VEKA",
+    "human_url": "https://www.vlaanderen.be/bouwen-wonen-en-energie/energieprestatiecertificaat-epc-bij-overdracht-of-verhuur-van-een-wooneenheid"
+  },
+  "RENOVATION": {
+    "label": "Vlaanderen / VEKA \u2014 Renovation obligation",
+    "kind": "RULE_AUTHORITY",
+    "provider": "VEKA",
+    "human_url": "https://www.vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen"
+  },
+  "ASBESTOS": {
+    "label": "OVAM \u2014 Asbestos certificate",
+    "kind": "RULE_AUTHORITY",
+    "provider": "OVAM",
+    "human_url": "https://ovam.vlaanderen.be/heb-ik-een-asbestattest-nodig"
+  },
+  "COMMON_ASBESTOS": {
+    "label": "OVAM \u2014 Common-parts certificate",
+    "kind": "RULE_AUTHORITY",
+    "provider": "OVAM",
+    "human_url": "https://ovam.vlaanderen.be/w/asbestattest-gemene-delen-tegen-31/12/2026"
+  },
+  "ASBESTOS_VALIDITY": {
+    "label": "OVAM \u2014 Certificate validity",
+    "kind": "RULE_AUTHORITY",
+    "provider": "OVAM",
+    "human_url": "https://ovam.vlaanderen.be/veelgestelde-vragen-over-het-asbestattest"
+  },
+  "SOIL": {
+    "label": "OVAM \u2014 Soil certificate",
+    "kind": "RULE_AUTHORITY",
+    "provider": "OVAM",
+    "human_url": "https://ovam.vlaanderen.be/welke-gegevens-staan-op-het-bodemattest"
+  },
+  "ELECTRICAL": {
+    "label": "FOD Economie / AREI \u2014 Electrical inspection",
+    "kind": "RULE_AUTHORITY",
+    "provider": "FOD_ECONOMIE",
+    "human_url": "https://economie.fgov.be/nl/themas/energie/bronnen-en-dragers-van-energie/elektriciteit/veiligheid-en-controle-van/controle-van-huishoudelijke/soorten-controles-van"
+  },
+  "CIVIL_CODE": {
+    "label": "Belgian Civil Code \u2014 Book 3",
+    "kind": "RULE_AUTHORITY",
+    "provider": "JUSTEL",
+    "human_url": "https://www.ejustice.just.fgov.be/eli/loi/2020/02/04/2020A20347/justel"
+  },
+  "HERITAGE_TERMS": {
+    "label": "Heritage reuse conditions",
+    "kind": "PUBLIC_INFORMATION",
+    "provider": "HERITAGE",
+    "human_url": "https://inventaris.onroerenderfgoed.be/hergebruik"
+  }
+} as const;

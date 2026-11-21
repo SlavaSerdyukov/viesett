@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowRight,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { api, type Selection } from "../api";
 import { useAccess } from "../access";
+import { DeleteDossier } from "../DeleteDossier";
 import { Brand, Busy, ErrorMessage, Badge, PropertyFacts } from "../components";
 import type {
   PreviewResponse,
@@ -24,6 +25,13 @@ export function Start({ demo }: { demo: boolean }) {
     [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>(null);
   const queryClient = useQueryClient();
+  const previewRequest = useRef(0);
+  const title = useRef<HTMLHeadingElement>(null);
+  const location = useLocation();
+  const dossierDeleted = location.state?.dossierDeleted === true;
+  useLayoutEffect(() => {
+    if (dossierDeleted) title.current?.focus();
+  }, [dossierDeleted, location.key]);
   const access = useAccess(),
     navigate = useNavigate();
   const saved = useQuery({
@@ -33,14 +41,16 @@ export function Start({ demo }: { demo: boolean }) {
   });
   async function check(e?: FormEvent) {
     e?.preventDefault();
+    const request = ++previewRequest.current;
     setBusy(true);
     setError(null);
     try {
-      setPreview(await api.preview(selection));
+      const result = await api.preview(selection);
+      if (request === previewRequest.current) setPreview(result);
     } catch (e) {
-      setError(e);
+      if (request === previewRequest.current) setError(e);
     } finally {
-      setBusy(false);
+      if (request === previewRequest.current) setBusy(false);
     }
   }
   function open(data: Dossier) {
@@ -69,7 +79,7 @@ export function Start({ demo }: { demo: boolean }) {
         <div className="eyebrow">
           <span className="small-line" /> Buyer-side property due diligence
         </div>
-        <h1>
+        <h1 ref={title} tabIndex={-1}>
           Check a property
           <br />
           before you buy<span className="brand-dot">.</span>
@@ -79,6 +89,7 @@ export function Start({ demo }: { demo: boolean }) {
           <br />
           Understand what to ask next.
         </p>
+        {dossierDeleted && <p role="status">Dossier deleted.</p>}
         <form className="address-form" onSubmit={check}>
           <label htmlFor="address">Enter the property address</label>
           <div className="address-control">
@@ -89,8 +100,11 @@ export function Start({ demo }: { demo: boolean }) {
               placeholder="Street, house number, city"
               value={selection.query}
               onChange={(e) => {
+                previewRequest.current += 1;
                 setSelection({ query: e.target.value });
                 setPreview(null);
+                setError(null);
+                setBusy(false);
               }}
               minLength={3}
               maxLength={500}
@@ -104,7 +118,7 @@ export function Start({ demo }: { demo: boolean }) {
         </form>
         <p className="small muted">
           {demo
-            ? "Fictional local records. No query is sent to an external register."
+            ? "Demo addresses: Teststraat 42, 9000 Gent and Teststraat 42 bus 1, 9000 Gent. Real addresses are not looked up in this mode."
             : "Address queries are checked with official public sources. Preview history is not saved."}
         </p>
         <ErrorMessage error={error} />
@@ -141,16 +155,20 @@ export function Start({ demo }: { demo: boolean }) {
           <section className="saved">
             <h2>Your dossiers</h2>
             {saved.data.map((w) => (
-              <Link
-                key={w.id}
-                to={`/workspaces/${w.id}/overview`}
-                className="saved-row"
-              >
-                <FolderOpen size={18} />
-                <span>{w.canonical_address ?? "Property to be resolved"}</span>
-                {w.is_demo && <small className="badge">Demo data</small>}
-                <ChevronRight size={17} />
-              </Link>
+              <div key={w.id} className="saved-item">
+                <Link to={`/workspaces/${w.id}/overview`} className="saved-row">
+                  <FolderOpen size={18} />
+                  <span>
+                    {w.canonical_address ?? "Property to be resolved"}
+                  </span>
+                  {w.is_demo && <small className="badge">Demo data</small>}
+                  <ChevronRight size={17} />
+                </Link>
+                <DeleteDossier
+                  id={w.id}
+                  address={w.canonical_address ?? "Unresolved property"}
+                />
+              </div>
             ))}
           </section>
         )}
@@ -239,10 +257,13 @@ export function PreviewCard({
         </>
       ) : preview.status === "NOT_FOUND" ? (
         <>
-          <h2>Property not found</h2>
+          <h2>
+            {preview.is_demo ? "Address not in the demo" : "Property not found"}
+          </h2>
           <p>
-            No matching official address was returned. Check the spelling or try
-            a more complete address.
+            {preview.is_demo
+              ? "This local demo contains Teststraat 42 and Teststraat 42 bus 1 in Gent. No lookup of real properties was made."
+              : "No matching official address was returned. Check the spelling or try a more complete address."}
           </p>
         </>
       ) : preview.status === "NEEDS_SELECTION" ? (
